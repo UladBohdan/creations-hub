@@ -1,0 +1,31 @@
+%h1{:style => "margin: 10px;"} MAIN PAGE
+.container
+  .row
+    .col-md-8
+      - @creations.each do |creation|
+        .panel.panel-default
+          .panel-heading
+            %h3{:class => "panel-title"}
+              by
+              %b= User.where(id: creation.user_id).first.name
+          .panel-body
+            Title:
+            %b= creation.title
+
+    .col-md-4
+      .panel.panel-default
+        .panel-heading
+          %h3{:class => "panel-title"}Most rated
+        .panel-body
+          something
+
+      .panel.panel-default
+        .panel-heading
+          %h3{:class => "panel-title"}Most recent
+        .panel-body
+          something
+
+      .panel.panel-default
+        .panel-heading
+          %h3{:class => "panel-title"}Tag cloud
+        .panel-body

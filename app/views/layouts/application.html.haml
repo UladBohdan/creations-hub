@@ -1,0 +1,41 @@
+!!! 5
+%html
+  %head
+    %title Creations Hub
+    = stylesheet_link_tag     'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag  'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body{"ng-app" => "CreationsHub"}
+    %nav{:class => "navbar navbar-default", "ng-controller" => "NavBarCtrl"}
+      .container-fluid
+        -#  Brand and toggle get grouped for better mobile display
+        .navbar-header
+          .button{:type => "button",
+                  :class => "navbar-toggle collaped",
+                  "data-toggle" => "collapse",
+                  "data-target" => "#bs-example-navbar-collapse-1",
+                  "aria-expanded" => "false",
+                  "ng-click" => "isCollapsed = !isCollapsed"}
+            %span{:class => "sr-only"}Toggle navigation
+            %span{:class => "icon-bar"}
+            %span{:class => "icon-bar"}
+            %span{:class => "icon-bar"}
+          %a{:class => "navbar-brand", :href => "/"}
+            %span{:class => "logo-text"}Creations Hub
+
+        -# Collect the nav links, forms, and other content for toggling
+        %div{:class => "collapse navbar-collapse",
+              :id => "bs-example-navbar-collapse-1",
+              "uib-collapse" => "isCollapsed"}
+          %ul{:class => "nav navbar-nav"}
+          %form{:class => "navbar-form navbar-left", :role => "search"}
+            .form-group
+              %input{:type => "text", :class => "form-control", :placeholder => "Search"}
+            %button{:type => "submit", :class => "btn btn-default"}Search on site!
+
+          %ul{:class => "nav navbar-nav navbar-right"}
+            %li
+              %a{:href => "/login", :style => "font-weight: bold;"}Sign in
+
+    = yield
