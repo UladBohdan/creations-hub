@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+angular.module('CreationsHub', ['ui.bootstrap'])
+    .controller('NavBarCtrl', ['$scope',
+        function ($scope) {
+
+            $scope.isCollapsed = true;
+
+        }
+    ])
