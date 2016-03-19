@@ -22,13 +22,19 @@
         .panel-heading
           %h3{:class => "panel-title"}Most rated
         .panel-body
-          something
+          - @most_rated.each do |creation|
+            %p
+              = creation.title
+              - creation.rating.times do
+                = image_tag "star.png"
 
       .panel.panel-default
         .panel-heading
           %h3{:class => "panel-title"}Most recent
         .panel-body
-          something
+          - @most_recent.each do |creation|
+            %p #{creation.title} (#{creation.created_at})
+
 
       .panel.panel-default
         .panel-heading

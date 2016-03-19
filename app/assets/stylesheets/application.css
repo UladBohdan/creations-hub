@@ -18,3 +18,7 @@
     font-weight: bold;
     color: darkred;
 }
+
+.profile-image {
+    border-radius: 3px;
+}
