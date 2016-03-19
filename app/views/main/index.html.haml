@@ -1,3 +1,8 @@
+.btn-group{:role => "group", :style => "margin-left: 50px;"}
+  - Category.each_translation do |category|
+    %button{:type => "button", :class => "btn btn-default"}#{category}
+%p category filter - on client by AngularJS
+
 %h1{:style => "margin: 10px;"} MAIN PAGE
 .container
   .row

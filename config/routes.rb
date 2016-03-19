@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   root 'main#index'
 
   get 'user/:id' => 'user#show'
+  get 'creation/new' => 'creation#new'
   get 'creation/:id' => 'creation#show'
+
+  devise_for :users
 
   devise_scope :user do
     get '/login' => 'devise/sessions#new'

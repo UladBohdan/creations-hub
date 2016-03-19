@@ -4,6 +4,7 @@
     %title Creations Hub
     = stylesheet_link_tag     'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag  'application', 'data-turbolinks-track' => true
+    = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
   %body{"ng-app" => "CreationsHub"}
@@ -31,7 +32,8 @@
           %ul{:class => "nav navbar-nav"}
           - if user_signed_in?
             %form{:class => "navbar-form navbar-left"}
-              %button{:type => "button", :class => "btn btn-success"}Create!
+              %a{:href => "/creation/new"}
+                %button{:type => "button", :class => "btn btn-success"}Create!
           %form{:class => "navbar-form navbar-left", :role => "search"}
             .form-group
               %input{:type => "text", :class => "form-control", :placeholder => "Search"}
