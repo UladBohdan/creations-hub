@@ -30,7 +30,7 @@
               :id => "bs-example-navbar-collapse-1",
               "uib-collapse" => "isCollapsed"}
           %ul{:class => "nav navbar-nav"}
-          - if user_signed_in?
+          - if can? :new, Creation
             %form{:class => "navbar-form navbar-left"}
               %a{:href => "/creation/new"}
                 %button{:type => "button", :class => "btn btn-success"}Create!
