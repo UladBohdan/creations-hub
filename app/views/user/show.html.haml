@@ -1,1 +1,20 @@
-%h1{:style => "margin: 10px;"} USER PAGE
+.container
+  .row
+    .col-md-3
+      .page-header
+        %h1
+          = @user.name
+          - if @user.id == current_user.id
+            %small (you)
+      %h3 Image
+      %h3 Badges
+      %h3 info
+
+    .col-md-9
+      - @user_creations.each do |creation|
+        .panel.panel-default
+          .panel-heading
+            %h3{:class => "panel-title"}
+              %b= creation.title
+          .panel-body
+            ololo creation text ololo

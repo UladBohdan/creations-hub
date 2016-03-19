@@ -4,8 +4,4 @@ class MainController < ApplicationController
     @creations = Creation.get_some_creations
   end
 
-  def login
-
-  end
-
 end
