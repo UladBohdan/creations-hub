@@ -11,28 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319152018) do
+ActiveRecord::Schema.define(version: 20160319165346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "chapters", force: :cascade do |t|
-    t.string   "title"
+    t.string   "title",       default: "New Chapter"
     t.text     "text"
     t.integer  "creation_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "chapters", ["creation_id"], name: "index_chapters_on_creation_id", using: :btree
 
   create_table "creations", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "rating"
-    t.integer  "category"
+    t.string   "title",      default: "New creation", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "rating",     default: 0
+    t.integer  "group"
   end
 
   add_index "creations", ["user_id"], name: "index_creations_on_user_id", using: :btree
