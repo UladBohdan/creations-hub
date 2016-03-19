@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+=begin
 User.create! [
     {:id => 1, :name => "User 1"},
     {:id => 2, :name => "User 2"}
@@ -17,3 +18,5 @@ Creation.create! [
     {:id => 3, :user_id => 2, :title => "Test creation 3"},
     {:id => 4, :user_id => 2, :title => "Test creation 4"},
                  ]
+
+=end
