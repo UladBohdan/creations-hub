@@ -28,9 +28,9 @@
                 %h3{:class => "panel-title"}
                   %b= creation.title
                   - creation.rating.times do
-                    = image_tag "star.png"
+                    %i{:class => "fa fa-star", :style => "color: gold"}
               .panel-body
-                Category: #{creation.group}
+                -# Category: #{creation.group}
                 %br/
                 OVERVIEW, CHAPTERS
                 %br/
@@ -45,9 +45,9 @@
                 %h3{:class => "panel-title"}
                   %b= creation.title
                   - creation.rating.times do
-                    = image_tag "star.png"
+                    %i{:class => "fa fa-star", :style => "color: gold"}
               .panel-body
-                Category: #{creation.group}
+                -# Category: #{creation.group}
                 %br/
                 OVERVIEW, CHAPTERS
                 %br/

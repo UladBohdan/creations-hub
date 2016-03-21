@@ -1,13 +1,31 @@
-%h1{:style => "margin: 10px;"} CREATION PAGE
-%h1{:style => "margin: 10px;"} current creation: #{@creation.id}
-%h1{:style => "margin: 10px;"} @creation.title
-%h1{:style => "margin: 10px;"} FUNCTIONS: view, edit (also just created)
+.container
+  .row
+    .col-md-3
+      %h2= @creation.title
+      - @creation.rating.times do
+        %i{:class => "fa fa-star", :style => "color: gold"}
+      %p
+        Categories:
+        = @creation.category
+      %p
+        Created at:
+        = @creation.created_at
+      %p
+        Last modified at:
+        = @creation.updated_at
+      .panel.panel-default
+        .panel-heading
+          About author
+        .panel-body
+          lol lol something about author
 
-%br
-%br
-%h1{:style => "margin: 10px;"} THE MOST COMPLICATED PAGE
+    .col-md-9
 
-%br
-
-%h1{:style => "margin: 10px;"} Category #{@creation.group}
-%h1{:style => "margin: 10px;"} Rating #{@creation.rating}
+      .btn-group{:role => "group"}
+        - @chapters.each do |chapter|
+          %button{:type => "button", :class => "btn btn-default"}= chapter.title
+      %br
+      %br
+      .panel.panel-default
+        .panel-body
+          text here

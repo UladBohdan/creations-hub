@@ -7,6 +7,7 @@ class CreationController < ApplicationController
 
   def show
     @creation = Creation.where(id: params[:id]).first
+    @chapters = Chapter.where(creation_id: @creation.id)
   end
 
 end

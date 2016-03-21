@@ -7,6 +7,8 @@ class Creation < ActiveRecord::Base
   belongs_to :user
   has_many :chapters
 
+  validates :user_id, :title, presence: true
+
   def self.get_some_creations
     Creation.all
   end

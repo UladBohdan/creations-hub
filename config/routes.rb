@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'user/:id' => 'user#show'
   get 'creation/new' => 'creation#new'
   get 'creation/:id' => 'creation#show'
+  get 'admin' => 'main#admin'
 
   devise_for :users
 

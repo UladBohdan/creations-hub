@@ -30,10 +30,13 @@
               :id => "bs-example-navbar-collapse-1",
               "uib-collapse" => "isCollapsed"}
           %ul{:class => "nav navbar-nav"}
-          - if can? :new, Creation
-            %form{:class => "navbar-form navbar-left"}
-              %a{:href => "/creation/new"}
+          %form{:class => "navbar-form navbar-left"}
+            - if can? :new, Creation
+              %a{:href => creation_new_path}
                 %button{:type => "button", :class => "btn btn-success"}Create!
+            - if can? :manage, :all
+              %a{:href => admin_path}
+                %button{:type => "button", :class => "btn btn-success"}Admin panel
           %form{:class => "navbar-form navbar-left", :role => "search"}
             .form-group
               %input{:type => "text", :class => "form-control", :placeholder => "Search"}

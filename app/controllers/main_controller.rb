@@ -6,4 +6,8 @@ class MainController < ApplicationController
     @most_recent = Creation.all.order(created_at: :desc).limit(5)
   end
 
+  def admin
+
+  end
+
 end
