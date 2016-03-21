@@ -1,31 +1,50 @@
 .container
   .row
-    .col-md-3
-      %h2= @creation.title
+    .col-md-4
+      .page-header
+        %h1= @creation.title
       - @creation.rating.times do
-        %i{:class => "fa fa-star", :style => "color: gold"}
-      %p
+        %i{:class => "fa fa-star", :style => "color: gold; font-size: x-large;"}
+      %br
+      %br
+      - if can? :read, @creation
+        %a{:href => "/creation/#{@creation.id}/read"}
+          %button{:type => "button", :class => "btn btn-primary"} Read
+      - if can? :edit, @creation
+        %a{:href => "/creation/#{@creation.id}/edit"}
+          %button{:type => "button", :class => "btn btn-primary"} Edit
+      %br/
+      %br/
+      %h4
         Categories:
         = @creation.category
-      %p
+      %h4
         Created at:
         = @creation.created_at
-      %p
+      %h4
         Last modified at:
         = @creation.updated_at
-      .panel.panel-default
+      %br/
+      .panel.panel-primary
         .panel-heading
-          About author
+          About author:
         .panel-body
-          lol lol something about author
+          %h3= @author.name
 
-    .col-md-9
-
-      .btn-group{:role => "group"}
+    .col-md-8
+      %h4 Chapters overview:
+      %ul{:class => "nav nav-tabs"}
         - @chapters.each do |chapter|
-          %button{:type => "button", :class => "btn btn-default"}= chapter.title
-      %br
-      %br
-      .panel.panel-default
-        .panel-body
-          text here
+          %li{:role => "presentation"}
+            %a{:href => "#"}= chapter.title
+      %br/
+      .panel{:style => "height: 200px;"}
+        ololo
+
+      %h4 Comments below:
+      - @comments.each do |comment|
+        .panel.panel-primary
+          .panel-heading
+            #{comment.user_id} wrote at #{comment.created_at} :
+          .panel-body
+            %h5 = comment.text

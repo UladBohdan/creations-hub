@@ -5,11 +5,13 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'main#index'
+  get 'admin' => 'main#admin'
 
   get 'user/:id' => 'user#show'
   get 'creation/new' => 'creation#new'
   get 'creation/:id' => 'creation#show'
-  get 'admin' => 'main#admin'
+  get 'creation/:id/edit' => 'creation#edit'
+  get 'creation/:id/read' => 'creation#read'
 
   devise_for :users
 
