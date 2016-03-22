@@ -1,8 +1,9 @@
 class CreationController < ApplicationController
 
   def new
-    current_user.creations << Creation.new
-    redirect_to "/creation/#{current_user.creations.last.id}"
+    new_creation = Creation.new
+    current_user.creations << new_creation
+    redirect_to creation_edit_url(new_creation)
   end
 
   def show
@@ -10,10 +11,12 @@ class CreationController < ApplicationController
     @chapters = Chapter.where(creation_id: @creation.id)
     @author = User.where(id: @creation.user_id).first
     @comments = Comment.where(creation_id: @creation.id)
+    @new_comment = Comment.new
   end
 
   def edit
-
+    @creation = Creation.where(id: params[:id]).first
+    @chapters = Chapter.where(creation_id: @creation.id)
   end
 
   def read

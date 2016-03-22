@@ -10,7 +10,7 @@ class Creation < ActiveRecord::Base
   validates :user_id, :title, presence: true
 
   def self.get_some_creations
-    Creation.all
+    Creation.all.limit(5)
   end
 
 end

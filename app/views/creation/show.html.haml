@@ -41,10 +41,15 @@
       .panel{:style => "height: 200px;"}
         ololo
 
-      %h4 Comments below:
+      %h4 Opinions:
       - @comments.each do |comment|
         .panel.panel-primary
           .panel-heading
             #{comment.user_id} wrote at #{comment.created_at} :
           .panel-body
             %h5= comment.text
+
+      %h4 You may leave your own opinion:
+      -# form_for @new_comment do |f|
+      = text_area :text, placeholder: "Your comment", class: "form-control"
+      = button_tag "Post", class: "btn btn-primary", style: "margin: 10px;"

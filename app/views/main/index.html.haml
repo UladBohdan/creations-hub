@@ -10,6 +10,8 @@
           .panel-body
             Title:
             %b= creation.title
+            - creation.rating.times do
+              %i{:class => "fa fa-star", :style => "color: gold"}
 
     .col-md-4
       %h1{:style => "margin: 10px;"} MAIN PAGE
@@ -18,29 +20,17 @@
         .panel-heading
           %h3{:class => "panel-title"}Filters and sort settings
         .panel-body
+          %h4 Category:
           .btn-group{:role => "group"}
             - Category.each_translation do |category|
               %button{:type => "button", :class => "btn btn-default"}#{category}
-
-      .panel.panel-default
-        .panel-heading
-          %h3{:class => "panel-title"}Most rated
-        .panel-body
-          - @most_rated.each do |creation|
-            %p
-              = creation.title
-              - creation.rating.times do
-                %i{:class => "fa fa-star", :style => "color: gold"}
-
-      .panel.panel-default
-        .panel-heading
-          %h3{:class => "panel-title"}Most recent
-        .panel-body
-          - @most_recent.each do |creation|
-            %p #{creation.title} (#{creation.created_at})
-
+          %h4 Sort:
+          .btn-group{:role => "group"}
+            %button{:type => "button", :class => "btn btn-default"}most recent
+            %button{:type => "button", :class => "btn btn-default"}most rated
 
       .panel.panel-default
         .panel-heading
           %h3{:class => "panel-title"}Tag cloud
         .panel-body
+          TAGS TAGS TAGS
