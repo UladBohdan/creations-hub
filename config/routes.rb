@@ -7,11 +7,16 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'admin' => 'main#admin'
 
-  get 'user/:id' => 'user#show'
-  get 'creation/new' => 'creation#new'
-  get 'creation/:id' => 'creation#show'
-  get 'creation/:id/edit' => 'creation#edit'
-  get 'creation/:id/read' => 'creation#read'
+  get 'user/:id' => 'user#show', as: :user
+  get 'creation/new' => 'creation#new', as: :creation_new
+  get 'creation/:id' => 'creation#show', as: :creation
+  get 'creation/:id/edit' => 'creation#edit', as: :creation_edit
+  get 'creation/:id/read' => 'creation#read', as: :creation_read
+  patch 'creation/:id/update' => 'creation#update', as: :creation_update
+
+  #resources :comment
+  #resources :user
+  #resources :creation
 
   devise_for :users
 

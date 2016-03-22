@@ -7,7 +7,7 @@ class CreationController < ApplicationController
   end
 
   def show
-    @creation = Creation.where(id: params[:id]).first
+    @creation = Creation.get_creation params[:id]
     @chapters = Chapter.where(creation_id: @creation.id)
     @author = User.where(id: @creation.user_id).first
     @comments = Comment.where(creation_id: @creation.id)
@@ -19,8 +19,12 @@ class CreationController < ApplicationController
     @chapters = Chapter.where(creation_id: @creation.id)
   end
 
-  def read
+  def update
 
+  end
+
+  def read
+    @chapter = Creation.where(id: params[:id]).first.chapters.first
   end
 
 end

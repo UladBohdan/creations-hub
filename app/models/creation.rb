@@ -9,8 +9,16 @@ class Creation < ActiveRecord::Base
 
   validates :user_id, :title, presence: true
 
-  def self.get_some_creations
-    Creation.all.limit(5)
+  class << self
+
+    def get_creation(id)
+      Creation.where(id: id).first
+    end
+
+    def get_some_creations
+      Creation.all.limit(5)
+    end
+
   end
 
 end

@@ -7,12 +7,12 @@
         %i{:class => "fa fa-star", :style => "color: gold; font-size: x-large;"}
       %br
       %br
-      - if can? :read, @creation
-        %a{:href => "/creation/#{@creation.id}/read"}
-          %button{:type => "button", :class => "btn btn-primary"} Read
+      - if can?(:read, @creation) && @chapters.any?
+        = link_to creation_read_url(@creation), target: "_blank" do
+          = button_tag("Read", :type => "button", :class => "btn btn-primary")
       - if can? :edit, @creation
-        %a{:href => "/creation/#{@creation.id}/edit"}
-          %button{:type => "button", :class => "btn btn-primary"} Edit
+        = link_to creation_edit_url(@creation) do
+          = button_tag("Edit", :type => "button", :class => "btn btn-primary")
       %br/
       %br/
       %h4
