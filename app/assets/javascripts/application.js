@@ -23,3 +23,5 @@ angular.module('CreationsHub', ['ui.bootstrap'])
 
         }
     ])
+
+    .controller('ProfileImageCtrl', ['$scope', ])

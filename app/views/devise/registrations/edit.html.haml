@@ -9,6 +9,8 @@
             = devise_error_messages!
             %br
             = f.text_field :name, autofocus: true, placeholder: "Your name", class: "form-control"
+            %br/
+            %input{:type => "file", :placeholder => "Upload an image", :class => "form-control"}
             %br
             = f.email_field :email, placeholder: "Email", class: "form-control"
             - if devise_mapping.confirmable? && resource.pending_reconfirmation?
