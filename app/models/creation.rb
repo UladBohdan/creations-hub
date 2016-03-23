@@ -7,6 +7,7 @@ class Creation < ActiveRecord::Base
   belongs_to :user
   has_many :chapters
   has_many :comments
+  has_one :rating
 
   validates :user_id, :title, presence: true
 
@@ -16,8 +17,8 @@ class Creation < ActiveRecord::Base
       Creation.where(id: id).first
     end
 
-    def get_some_creations
-      Creation.all.limit(5)
+    def get_some_creations(params)
+      Creation.all.sample(5)
     end
 
   end

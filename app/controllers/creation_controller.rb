@@ -1,4 +1,5 @@
 class CreationController < ApplicationController
+  before_action :getting_creations_params, only: :index
 
   def new
     new_creation = Creation.new
@@ -23,8 +24,19 @@ class CreationController < ApplicationController
 
   end
 
+  def index
+    @creations = Creation.get_some_creations params
+    render :json => @creations.to_json
+  end
+
   def read
     @chapter = Creation.where(id: params[:id]).first.chapters.first
+  end
+
+  private
+
+  def getting_creations_params
+    params.permit(:limit, :sort_by, :category)
   end
 
 end

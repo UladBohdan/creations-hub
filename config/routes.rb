@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'admin' => 'main#admin'
 
   get 'user/:id' => 'user#show', as: :user
+  get 'creations' => 'creation#index', as: :creation_index
   get 'creation/new' => 'creation#new', as: :creation_new
   get 'creation/:id' => 'creation#show', as: :creation
   get 'creation/:id/edit' => 'creation#edit', as: :creation_edit

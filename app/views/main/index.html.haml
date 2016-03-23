@@ -1,5 +1,3 @@
--# javascript_include_tag "main/index.js"
-
 .container{"ng-controller" => "CreationsCtrl"}
   .row
     .col-md-8
@@ -21,11 +19,14 @@
           %h4 Category:
           .btn-group{:role => "group"}
             - Category.each_translation do |category|
-              %button{:type => "button", :class => "btn btn-default"}#{category}
+              %button{:type => "button", :class => "btn btn-default",
+                "ng-click" => "loadCreations({category: '#{category}'})"}#{category}
           %h4 Sort:
           .btn-group{:role => "group"}
-            %button{:type => "button", :class => "btn btn-default"}most recent
-            %button{:type => "button", :class => "btn btn-default"}most rated
+            %button{:type => "button", :class => "btn btn-default",
+                    "ng-click" => "loadCreations({sort_by: 'recent'})"}most recent
+            %button{:type => "button", :class => "btn btn-default",
+                    "ng-click" => "loadCreations({sort_by: 'rating'})"}most rated
 
       .panel.panel-default
         .panel-heading

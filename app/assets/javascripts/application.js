@@ -14,28 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-app = angular.module('CreationsHub', ['ui.bootstrap']);
-
-app.controller('NavBarCtrl', ['$scope',
-        function ($scope) {
-            $scope.isCollapsed = true;
-        }
-    ]);
-
-app.controller('CreationsCtrl', ['$scope',
-    function ($scope) {
-
-        $scope.creations = [
-            {"title": "first"},
-            {"title": "second"}
-        ];
-
-        $scope.loadCreations = function() {
-
-        };
-
-        $scope.loadCreations();
-
-    }
-]);
