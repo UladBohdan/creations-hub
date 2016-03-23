@@ -15,6 +15,8 @@ class Ability
       can :manage, Creation, :user_id => user.id
       can :manage, User, :id => user.id
       can :manage, Chapter, :user_id => user.id
+      can :create, Comment
+      can :destroy, Comment, :user_id => user.id
     end
 
 

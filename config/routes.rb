@@ -4,21 +4,20 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
   root 'main#index'
-  get 'admin' => 'main#admin'
+
+  get 'admin' => 'main#admin', as: :admin
 
   get 'user/:id' => 'user#show', as: :user
-  get 'creations' => 'creation#index', as: :creation_index
-  get 'creation/new' => 'creation#new', as: :creation_new
-  get 'creation/:id' => 'creation#show', as: :creation
-  get 'creation/:id/edit' => 'creation#edit', as: :creation_edit
-  get 'creation/:id/read' => 'creation#read', as: :creation_read
-  patch 'creation/:id/update' => 'creation#update', as: :creation_update
-  post 'comment/:id/create' => 'comment#create', as: :comment_create
 
-  #resources :comment
-  #resources :user
-  #resources :creation
+  get 'comment' => 'comment#create'
+
+  resources :creation do
+    member do
+      get 'read'
+    end
+  end
 
   devise_for :users
 

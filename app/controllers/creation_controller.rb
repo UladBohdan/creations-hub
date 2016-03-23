@@ -4,7 +4,7 @@ class CreationController < ApplicationController
   def new
     new_creation = Creation.new
     current_user.creations << new_creation
-    redirect_to creation_edit_url(new_creation)
+    redirect_to edit_creation_url(new_creation)
   end
 
   def show

@@ -22,7 +22,7 @@
             %span{:class => "icon-bar"}
             %span{:class => "icon-bar"}
             %span{:class => "icon-bar"}
-          %a{:class => "navbar-brand", :href => "/"}
+          = link_to root_path, class: "navbar-brand" do
             %span{:class => "logo-text"}Creations Hub
 
         -# Collect the nav links, forms, and other content for toggling
@@ -32,10 +32,10 @@
           %ul{:class => "nav navbar-nav"}
           %form{:class => "navbar-form navbar-left"}
             - if can? :new, Creation
-              %a{:href => creation_new_path}
+              = link_to new_creation_path do
                 %button{:type => "button", :class => "btn btn-success"}Create!
             - if can? :manage, :all
-              %a{:href => admin_path}
+              = link_to admin_path do
                 %button{:type => "button", :class => "btn btn-success"}Admin panel
           %form{:class => "navbar-form navbar-left", :role => "search"}
             .form-group

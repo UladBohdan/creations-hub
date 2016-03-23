@@ -1,4 +1,4 @@
-.container
+.container{"ng-controller" => "CommentsCtrl", "ng-init" => "creation_id = #{@creation.id}; new_comment = ''; sendComment(false);"}
   .row
     .col-md-4
       .page-header
@@ -8,10 +8,10 @@
       %br
       %br
       - if can?(:read, @creation) && @chapters.any?
-        = link_to creation_read_url(@creation), target: "_blank" do
+        = link_to read_creation_path(@creation), target: "_blank" do
           = button_tag("Read", :type => "button", :class => "btn btn-primary")
       - if can? :edit, @creation
-        = link_to creation_edit_url(@creation) do
+        = link_to edit_creation_url(@creation) do
           = button_tag("Edit", :type => "button", :class => "btn btn-primary")
       %br/
       %br/
@@ -42,14 +42,16 @@
         ololo
 
       %h4 Opinions:
-      - @comments.each do |comment|
+      %div{"ng-repeat" => "comment in comments"}
         .panel.panel-primary
           .panel-heading
-            #{comment.user_id} wrote at #{comment.created_at} :
+            {{comment.user_id}} wrote at {{comment.created_at}} :
           .panel-body
-            %h5= comment.text
+            %h5 {{comment.text}}
+            - if can? :destroy, Comment
+              %h6 Remove
 
-      %h4 You may leave your own opinion:
-      = form_for @new_comment, url: comment_create_url do |f|
-        = f.text_area :text, placeholder: "Your comment", class: "form-control"
-        = f.submit "Post", class: "btn btn-primary", style: "margin: 10px;"
+      - if can? :create, Comment
+        %h4 You may leave your own opinion:
+        %textarea{placeholder: "Your comment", class: "form-control", "ng-model": "new_comment"}
+        %button{class: "btn btn-primary", style: "margin: 10px;", "ng-click": "sendComment(true)"}Post
