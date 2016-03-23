@@ -7,5 +7,8 @@ class User < ActiveRecord::Base
   has_many :creations
   has_many :comments
   has_many :chapters, :through => :creations
+  has_many :badges
+  has_many :ratings
+  has_many :tags
 
 end

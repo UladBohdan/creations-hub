@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323135927) do
+ActiveRecord::Schema.define(version: 20160323142035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20160323135927) do
     t.string   "title",      default: "New creation", null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "rating",     default: 0
     t.integer  "category"
   end
 
@@ -67,6 +66,17 @@ ActiveRecord::Schema.define(version: 20160323135927) do
 
   add_index "likes", ["comment_id"], name: "index_likes_on_comment_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "value",       default: 0, null: false
+    t.integer  "creation_id"
+    t.integer  "user_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "ratings", ["creation_id"], name: "index_ratings_on_creation_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "name",        null: false
@@ -107,6 +117,8 @@ ActiveRecord::Schema.define(version: 20160323135927) do
   add_foreign_key "creations", "users"
   add_foreign_key "likes", "comments"
   add_foreign_key "likes", "users"
+  add_foreign_key "ratings", "creations"
+  add_foreign_key "ratings", "users"
   add_foreign_key "tags", "creations"
   add_foreign_key "tags", "users"
 end
