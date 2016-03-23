@@ -5,5 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :creations
+  has_many :comments
+  has_many :chapters, :through => :creations
 
 end

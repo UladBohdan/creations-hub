@@ -50,6 +50,6 @@
             %h5= comment.text
 
       %h4 You may leave your own opinion:
-      -# form_for @new_comment do |f|
-      = text_area :text, placeholder: "Your comment", class: "form-control"
-      = button_tag "Post", class: "btn btn-primary", style: "margin: 10px;"
+      = form_for @new_comment, url: comment_create_url do |f|
+        = f.text_area :text, placeholder: "Your comment", class: "form-control"
+        = f.submit "Post", class: "btn btn-primary", style: "margin: 10px;"

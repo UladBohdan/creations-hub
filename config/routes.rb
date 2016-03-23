@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'creation/:id/edit' => 'creation#edit', as: :creation_edit
   get 'creation/:id/read' => 'creation#read', as: :creation_read
   patch 'creation/:id/update' => 'creation#update', as: :creation_update
+  post 'comment/:id/create' => 'comment#create', as: :comment_create
 
   #resources :comment
   #resources :user

@@ -6,6 +6,7 @@ class Creation < ActiveRecord::Base
 
   belongs_to :user
   has_many :chapters
+  has_many :comments
 
   validates :user_id, :title, presence: true
 
