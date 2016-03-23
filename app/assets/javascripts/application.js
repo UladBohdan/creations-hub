@@ -15,13 +15,27 @@
 //= require turbolinks
 //= require_tree .
 
-angular.module('CreationsHub', ['ui.bootstrap'])
-    .controller('NavBarCtrl', ['$scope',
+app = angular.module('CreationsHub', ['ui.bootstrap']);
+
+app.controller('NavBarCtrl', ['$scope',
         function ($scope) {
-
             $scope.isCollapsed = true;
-
         }
-    ])
+    ]);
 
-    .controller('ProfileImageCtrl', ['$scope', ])
+app.controller('CreationsCtrl', ['$scope',
+    function ($scope) {
+
+        $scope.creations = [
+            {"title": "first"},
+            {"title": "second"}
+        ];
+
+        $scope.loadCreations = function() {
+
+        };
+
+        $scope.loadCreations();
+
+    }
+]);

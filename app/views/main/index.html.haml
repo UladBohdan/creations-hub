@@ -1,17 +1,15 @@
-.container
+-# javascript_include_tag "main/index.js"
+
+.container{"ng-controller" => "CreationsCtrl"}
   .row
     .col-md-8
-      - @creations.each do |creation|
+      %div{"ng-repeat" => "creation in creations"}
         .panel.panel-default
           .panel-heading
             %h3{:class => "panel-title"}
-              by
-              %b= User.where(id: creation.user_id).first.name
+              {{creation.title}}
           .panel-body
-            Title:
-            %b= creation.title
-            - creation.rating.times do
-              %i{:class => "fa fa-star", :style => "color: gold"}
+            sample text
 
     .col-md-4
       %h1{:style => "margin: 10px;"} MAIN PAGE
