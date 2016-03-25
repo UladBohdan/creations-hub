@@ -1,15 +1,10 @@
-.container{"ng-controller" => "CreationsCtrl"}
+.container
+  -#{"ng-controller" => "CreationsCtrl"}
   .row
-    .col-md-8
-      %div{"ng-repeat" => "creation in creations"}
-        .panel.panel-default
-          .panel-heading
-            %h3{:class => "panel-title"}
-              {{creation.title}}
-          .panel-body
-            sample text
+    .col-md-9{:id => "main_creations"}
+      = render "/creation/two_columns_creations"
 
-    .col-md-4
+    .col-md-3
       %h1{:style => "margin: 10px;"} MAIN PAGE
 
       .panel.panel-default
@@ -27,6 +22,10 @@
                     "ng-click" => "loadCreations({sort_by: 'recent'})"}most recent
             %button{:type => "button", :class => "btn btn-default",
                     "ng-click" => "loadCreations({sort_by: 'rating'})"}most rated
+
+          %h4 Test:
+          = link_to creation_index_path, remote: true do
+            %button{:type => "button", :class => "btn btn-default"} test ajax
 
       .panel.panel-default
         .panel-heading

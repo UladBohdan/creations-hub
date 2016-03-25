@@ -18,7 +18,7 @@ class Creation < ActiveRecord::Base
     end
 
     def get_some_creations(params)
-      Creation.all.sample(5)
+      Creation.includes(:user).all.sample(6)
     end
 
   end

@@ -1,0 +1,14 @@
+- [0, 1].each do |column|
+  .col-md-6
+    - @creations.each_with_index do |creation, i|
+      - if i % 2 == column
+        .panel.panel-default
+          .panel-heading
+            %h2{:style => "font-weight: bold;"}
+              = link_to creation.title, creation_path(creation)
+              %small
+                = link_to creation.user.name, user_path(creation.user)
+            %hr/
+            = render partial: "/stars", locals: {number: Rating.get_average_rating(creation.id) }
+          .panel-body
+            sample text

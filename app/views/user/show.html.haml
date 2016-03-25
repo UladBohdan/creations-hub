@@ -23,36 +23,4 @@
               Account Settings
 
     .col-md-9
-      .col-md-6
-        - @user_creations.each_with_index do |creation, i|
-          - if i.even?
-
-            .panel.panel-default
-              .panel-heading
-                %h3{:class => "panel-title"}
-                  %b= creation.title
-                  -# creation.rating.times do
-                    %i{:class => "fa fa-star", :style => "color: gold"}
-              .panel-body
-                -# Category: #{creation.group}
-                %br/
-                OVERVIEW, CHAPTERS
-                %br/
-                = link_to "more", creation_path(creation)
-
-      .col-md-6
-        - @user_creations.each_with_index do |creation, i|
-          - unless i.even?
-
-            .panel.panel-default
-              .panel-heading
-                %h3{:class => "panel-title"}
-                  %b= creation.title
-                  -# creation.rating.times do
-                    %i{:class => "fa fa-star", :style => "color: gold"}
-              .panel-body
-                -# Category: #{creation.group}
-                %br/
-                OVERVIEW, CHAPTERS
-                %br/
-                = link_to "more", creation_path(creation)
+      = render "/creation/two_columns_creations"
