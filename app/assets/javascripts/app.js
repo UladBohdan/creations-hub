@@ -3,6 +3,7 @@ app = angular.module('CreationsHub', ['ui.bootstrap']);
 app.controller('NavBarCtrl', ['$scope',
     function ($scope) {
         $scope.isCollapsed = true;
+        $scope.currentUserId = "";
     }
 ]);
 
@@ -48,5 +49,18 @@ app.controller('CommentsCtrl', ['$scope', '$http',
                alert("failed.");
            });
        };
+
+       $scope.removeComment = function(commentId) {
+           $http({
+               url: "/comment/remove",
+               format: "json",
+               method: "GET",
+               params: {comment_id: commentId, creation_id: $scope.creation_id}
+           }).then(function successCallback(response) {
+               angular.copy(response.data, $scope.comments);
+           }, function errorCallback(response) {
+               alert("failed.");
+           });
+       }
    }
 ]);

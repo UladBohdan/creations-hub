@@ -11,7 +11,7 @@ class CommentController < ApplicationController
 
   def destroy
     if can? :destroy, @comment
-      Comment.destroy @comment
+      @comment.destroy
     end
     render_comments
   end
@@ -19,7 +19,7 @@ class CommentController < ApplicationController
   private
 
   def render_comments
-    render :json => Comment.comments_for_creation(params[:creation_id]).to_json
+    render :json => Comment.comments_for_creation(params[:creation_id]), :include => {:user => {:only => :name} }
   end
 
   def new_comment_params
@@ -27,8 +27,8 @@ class CommentController < ApplicationController
   end
 
   def before_removing_comment
-    params.permit(:id)
-    @comment = Comment.where(id: params[:id])
+    params.permit(:comment_id, :creation_id)
+    @comment = Comment.where(id: params[:comment_id]).first
   end
 
 end

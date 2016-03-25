@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'user/:id' => 'user#show', as: :user
 
   get 'comment' => 'comment#create'
+  get 'comment/remove' => 'comment#destroy', as: :destroy_comment
 
   resources :creation do
     member do

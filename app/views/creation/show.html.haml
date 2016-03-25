@@ -47,9 +47,9 @@
           .panel-heading
             {{comment.user_id}} wrote at {{comment.created_at}} :
           .panel-body
-            %h5 {{comment.text}}
-            - if can? :destroy, Comment
-              %h6 Remove
+            %h4 {{comment.text}}
+            %a{"ng-if" => "comment.user_id == currentUserId", "ng-click" => "removeComment(comment.id)"}
+              %h6 remove
 
       - if can? :create, Comment
         %h4 You may leave your own opinion:
