@@ -21,6 +21,14 @@ class Creation < ActiveRecord::Base
       Creation.includes(:user).all.sample(6)
     end
 
+    def get_average_rating(creation_id)
+      Rating.where(creation_id: creation_id).average(:value).to_i
+    end
+
+    def get_user_rating(user_id, creation_id)
+      Rating.where(user_id: user_id, creation_id: creation_id).first.value.to_i
+    end
+
   end
 
 end
