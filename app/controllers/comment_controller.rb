@@ -19,7 +19,7 @@ class CommentController < ApplicationController
   private
 
   def render_comments
-    render :json => Comment.comments_for_creation(params[:creation_id]), :include => {:user => {:only => :name} }
+    render :json => Comment.comments_for_creation(params[:creation_id]).to_json
   end
 
   def new_comment_params

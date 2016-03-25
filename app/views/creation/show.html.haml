@@ -3,8 +3,12 @@
     .col-md-4
       .page-header
         %h1= @creation.title
-      -# @creation.rating.times do
-        %i{:class => "fa fa-star", :style => "color: gold; font-size: x-large;"}
+      %h4
+        Rating:
+        = render partial: "/stars", locals: {number: @average_rating}
+      %h4
+        Your rating:
+        = render partial: "/stars", locals: {number: @your_rating}
       %br
       %br
       - if can?(:read, @creation) && @chapters.any?
@@ -13,6 +17,9 @@
       - if can? :edit, @creation
         = link_to edit_creation_url(@creation) do
           = button_tag("Edit", :type => "button", :class => "btn btn-primary")
+      - if can? :destroy, @creation
+        = link_to creation_url(@creation), method: :delete, data: {confirm: "Are you sure? This cannot be undone" } do
+          = button_tag("Remove", :type => "button", :class => "btn btn-danger")
       %br/
       %br/
       %h4
