@@ -17,6 +17,7 @@ class CreationController < ApplicationController
   end
 
   def edit
+    @creation = Creation.get_creation params[:id]
     @chapters = Chapter.where(creation_id: @creation.id)
   end
 

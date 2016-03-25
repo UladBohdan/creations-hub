@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     member do
       get 'read'
     end
+    resources :chapter
   end
 
   devise_for :users

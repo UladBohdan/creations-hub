@@ -1,4 +1,4 @@
-.container
+.container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; receiveChapters();"}
   .row
     .col-md-3
       = form_for(@creation) do |f|
@@ -14,17 +14,16 @@
       .panel.panel-default
         .panel-heading
           %ul{:class => "nav nav-tabs"}
-            - @chapters.each do |chapter|
-              %li{:role => "presentation"}
-                %a{:href => "#"}
-                  .panel.panel-primary
-                    .panel-heading
-                      = chapter.title
-            %li{:role => "presentation"}
+            %li{"ng-repeat" => "chapter in chapters", :role => "presentation"}
               %a{:href => "#"}
+                .panel.panel-primary
+                  .panel-heading
+                    {{chapter.title}}
+            %li{:role => "presentation"}
+              %a{:href => "#", "ng-click" => "addNewChapter()"}
                 .panel.panel-success
                   .panel-heading
                     +
             %br/
         .panel-body
-          Each chapter with markdown
+          {{currentChapterMarkdown}}
