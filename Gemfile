@@ -37,6 +37,10 @@ gem 'enumerate_it'
 gem 'cancancan', '~>1.10'
 gem 'font-awesome-sass'
 
+gem 'activeadmin'
+gem 'draper'
+gem 'pundit'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
