@@ -10,8 +10,7 @@ class CreationController < ApplicationController
 
   def show
     @creation = Creation.get_creation params[:id]
-    @chapters = Chapter.where(creation_id: @creation.id)
-    @author = User.where(id: @creation.user_id).first
+    @comments = @creation.get_ordered_comments
     @average_rating = Rating.get_average_rating params[:id]
     @your_rating = Rating.get_user_rating current_user.id, params[:id]
   end
@@ -39,7 +38,6 @@ class CreationController < ApplicationController
     respond_to do |format|
       format.js {}
     end
-    #render :json => @creations.to_json
   end
 
   def read

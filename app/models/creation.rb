@@ -7,18 +7,22 @@ class Creation < ActiveRecord::Base
   belongs_to :user
   has_many :chapters
   has_many :comments
-  has_one :rating
+  has_many :rating
 
   validates :user_id, :title, presence: true
+
+  def get_ordered_comments
+    comments.order(created_at: :asc)
+  end
 
   class << self
 
     def get_creation(id)
-      Creation.where(id: id).first
+      Creation.includes(:chapters, :user, { comments: { likes: :user } }).where(id: id).first
     end
 
     def get_some_creations(params)
-      Creation.includes(:user).all.sample(6)
+      Creation.includes(:user, :rating).all.sample(6)
     end
 
     def get_average_rating(creation_id)

@@ -3,22 +3,23 @@ class Ability
 
   def initialize(user)
 
-    # Checking if authorized
-    can :new, Creation if user
     can :read, :all
 
     user ||= User.new # guest user (not logged in)
     if user.admin?
       can :manage, :all
     else
-      can :read, :all
       can :manage, Creation, :user_id => user.id
+      can :new, Creation, user.id.nil? => false
+
       can :manage, User, :id => user.id
+
       can :manage, Chapter, :user_id => user.id
+
       can :create, Comment, user.id.nil? => false
       can :destroy, Comment, :user_id => user.id
+      can :like, Comment, user.id.nil? => false
     end
-
 
     #
     # The first argument to `can` is the action you are giving the user

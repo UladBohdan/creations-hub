@@ -1,4 +1,4 @@
-.container{"ng-controller" => "CommentsCtrl", "ng-init" => "creation_id = #{@creation.id}; new_comment = ''; sendComment(false);"}
+.container
   .row
     .col-md-4
       .page-header
@@ -11,7 +11,7 @@
         = render partial: "/stars", locals: {number: @your_rating}
       %br
       %br
-      - if can?(:read, @creation) && @chapters.any?
+      - if can?(:read, @creation) && @creation.chapters.any?
         = link_to read_creation_path(@creation), target: "_blank" do
           = button_tag("Read", :type => "button", :class => "btn btn-primary")
       - if can? :edit, @creation
@@ -36,29 +36,17 @@
         .panel-heading
           About author:
         .panel-body
-          %h3= @author.name
+          %h3= @creation.user.name
 
     .col-md-8
       %h4 Chapters overview:
       %ul{:class => "nav nav-tabs"}
-        - @chapters.each do |chapter|
+        - @creation.chapters.each do |chapter|
           %li{:role => "presentation"}
             %a{:href => "#"}= chapter.title
       %br/
       .panel{:style => "height: 200px;"}
         ololo
 
-      %h4 Opinions:
-      %div{"ng-repeat" => "comment in comments"}
-        .panel.panel-primary
-          .panel-heading
-            {{comment.user_id}} wrote at {{comment.created_at}} :
-          .panel-body
-            %h4 {{comment.text}}
-            %a{"ng-if" => "comment.user_id == currentUserId", "ng-click" => "removeComment(comment.id)"}
-              %h6 remove
-
-      - if can? :create, Comment
-        %h4 You may leave your own opinion:
-        %textarea{placeholder: "Your comment", class: "form-control", "ng-model": "new_comment"}
-        %button{class: "btn btn-primary", style: "margin: 10px;", "ng-click": "sendComment(true)"}Post
+      %div{:id => "comments"}
+        = render "comment/comments"

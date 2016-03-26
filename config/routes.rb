@@ -10,14 +10,16 @@ Rails.application.routes.draw do
 
   get 'user/:id' => 'user#show', as: :user
 
-  get 'comment' => 'comment#create', as: :create_comment
-  get 'comment/remove' => 'comment#destroy', as: :destroy_comment
-
   resources :creation do
     member do
       get 'read'
     end
-    resources :chapter
+    resources :comment do
+      member do
+        get 'like'
+      end
+    end
+    #resources :chapter
   end
 
   devise_for :users
