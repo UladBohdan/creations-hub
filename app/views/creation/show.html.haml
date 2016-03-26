@@ -3,12 +3,8 @@
     .col-md-4
       .page-header
         %h1= @creation.title
-      %h4
-        Rating:
-        = render partial: "/stars", locals: {number: @average_rating}
-      %h4
-        Your rating:
-        = render partial: "/stars", locals: {number: @your_rating}
+      %div{:id => "rating-block"}
+        = render "rating_block"
       %br
       %br
       - if can?(:read, @creation) && @creation.chapters.any?

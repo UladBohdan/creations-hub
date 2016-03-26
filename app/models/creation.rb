@@ -7,7 +7,7 @@ class Creation < ActiveRecord::Base
   belongs_to :user
   has_many :chapters
   has_many :comments
-  has_many :rating
+  has_many :ratings
 
   validates :user_id, :title, presence: true
 
@@ -22,7 +22,7 @@ class Creation < ActiveRecord::Base
     end
 
     def get_some_creations(params)
-      Creation.includes(:user, :rating).all.sample(6)
+      Creation.includes(:user, :ratings).all.sample(6)
     end
 
     def get_average_rating(creation_id)

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :creation do
     member do
       get 'read'
+      get 'rate'
     end
     resources :comment do
       member do

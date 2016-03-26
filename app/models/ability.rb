@@ -3,22 +3,26 @@ class Ability
 
   def initialize(user)
 
+    cannot :manage, :all
     can :read, :all
 
     user ||= User.new # guest user (not logged in)
+
     if user.admin?
       can :manage, :all
-    else
+    elsif !user.id.nil?
+      # authorized
       can :manage, Creation, :user_id => user.id
-      can :new, Creation, user.id.nil? => false
+      can :new, Creation
+      can :rate, Creation
 
       can :manage, User, :id => user.id
 
       can :manage, Chapter, :user_id => user.id
 
-      can :create, Comment, user.id.nil? => false
+      can :create, Comment
       can :destroy, Comment, :user_id => user.id
-      can :like, Comment, user.id.nil? => false
+      can :like, Comment
     end
 
     #

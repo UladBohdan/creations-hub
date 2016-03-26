@@ -1,6 +1,6 @@
 class CreationController < ApplicationController
   #before_action :filter_params, only: :index
-  before_action :set_creation, only: [:edit, :update, :destroy]
+  before_action :set_creation, only: [:edit, :update, :destroy, :rate]
 
   def new
     new_creation = Creation.new
@@ -11,8 +11,7 @@ class CreationController < ApplicationController
   def show
     @creation = Creation.get_creation params[:id]
     @comments = @creation.get_ordered_comments
-    @average_rating = Rating.get_average_rating params[:id]
-    @your_rating = Rating.get_user_rating current_user.id, params[:id]
+    set_ratings
   end
 
   def edit
@@ -44,6 +43,20 @@ class CreationController < ApplicationController
     @chapter = Creation.where(id: params[:id]).first.chapters.first
   end
 
+  def rate
+    if can? :rate, Creation
+      if @creation.ratings.where(user_id: current_user.id).empty?
+        @creation.ratings.create value: params[:new_value], user_id: current_user.id
+      else
+        @creation.ratings.where(user_id: current_user.id).first.update value: params[:new_value]
+      end
+    end
+    set_ratings
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
   private
 
   def filter_params
@@ -53,6 +66,14 @@ class CreationController < ApplicationController
   def set_creation
     @creation = Creation.where(id: params[:id]).first
   end
+
+  def set_ratings
+    @average_rating = Rating.get_average_rating params[:id]
+    @your_rating = 0
+    if user_signed_in?
+      @your_rating = Rating.get_user_rating current_user.id, params[:id]
+    end
+    end
 
   def creation_params
     params.require(:creation).permit(:title, :category)

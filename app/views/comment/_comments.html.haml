@@ -3,15 +3,18 @@
   .panel.panel-primary
     .panel-heading
       = image_tag comment.user.image, height: 30, style: "margin-right: 5px;"
-      = "#{comment.user.name}"
+      = link_to "#{comment.user.name}", user_path(comment.user), style: "color: white; font-weight: bold;"
     .panel-body
       %h4= comment.text
       = comment.likes.to_a.length
-      = link_to like_creation_comment_path(@creation, comment), remote: true do
-        - if comment.likes.where(user_id: current_user.id).empty?
-          %i{:class => "fa fa-heart-o", :style => "font-size: large;"}
-        - else
-          %i{:class => "fa fa-heart", :style => "font-size: large;"}
+      - if can? :like, Comment
+        = link_to like_creation_comment_path(@creation, comment), remote: true do
+          - if comment.likes.where(user_id: current_user.id).empty?
+            %i{:class => "fa fa-heart-o", :style => "font-size: large;"}
+          - else
+            %i{:class => "fa fa-heart", :style => "font-size: large;"}
+      - else
+        %i{:class => "fa fa-heart", :style => "font-size: large;"}
       %span{:class => "pull-right"}
         = "at #{comment.created_at} "
         - if can? :destroy, comment
