@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   root 'main#index'
 
-  get 'admin' => 'main#admin', as: :admin
-
   get 'user/:id' => 'user#show', as: :user
 
   get 'comment' => 'comment#create', as: :create_comment
