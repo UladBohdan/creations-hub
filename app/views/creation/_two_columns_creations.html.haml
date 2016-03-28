@@ -23,7 +23,9 @@
                   = chapter.title
                 %br/
           .panel-footer
-            %b= Category.key_for(creation.category).capitalize
+            - if creation.category.present?
+              %b= Category.key_for(creation.category).capitalize
 
             %span{:class => "pull-right"}
               = creation.created_at
+            %br/

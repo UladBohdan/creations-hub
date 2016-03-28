@@ -2,7 +2,8 @@ app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
     function ($scope, $upload) {
 
         $scope.cloud = "tratata";
-        $scope.message = "File not chosen. Your profile image won't be changed";
+        $scope.message_edit = "File not chosen. Your profile image won't be changed";
+        $scope.message_new = "File not chosen. Your profile will be created without profile image";
         $scope.status = 0;
 
         $scope.uploadFile = function() {
@@ -18,7 +19,8 @@ app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
                 }
             }).success(function (data, status, headers, config) {
                 $scope.cloud = data.url;
-                $scope.message = "Image was successfully uploaded! Update your profile with you current password.";
+                $scope.message_edit = "Image was successfully uploaded! Update your profile with you current password.";
+                $scope.message_new = "Image was successfully uploaded!";
                 $scope.status = 1;
             }).error(function (data, status, headers, config) {
                 alert("error:(");

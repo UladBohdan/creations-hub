@@ -1,4 +1,4 @@
-.container
+.container{"ng-controller" => "ImageUploaderCtrl"}
   .row
     .col-md-4.col-sm-4
     .col-md-4.col-sm-4
@@ -10,6 +10,15 @@
             = devise_error_messages!
             %br
             = f.text_field :name, autofocus: true, placeholder: "Your name", class: "form-control"
+            %br/
+            %input{:type => "file", :class => "form-control", "image-upload-dr" => "uploadFile"}
+            %span{:style => "color: gold;", "ng-if" => "status == 0"}
+              %i{:class => "fa fa-exclamation-triangle"}
+            %span{:style => "color: green;", "ng-if" => "status == 1"}
+              %i{:class => "fa fa-check-circle"}
+            {{message_new}}
+            = f.text_field :image, "ng-model": "cloud", "hidden": true
+            %br/
             %br
             = f.email_field :email, placeholder: "Email", class: "form-control"
             %br

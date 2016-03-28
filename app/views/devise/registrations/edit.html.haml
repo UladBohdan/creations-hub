@@ -10,12 +10,12 @@
             %br
             = f.text_field :name, autofocus: true, placeholder: "Your name", class: "form-control"
             %br/
-            %input{:type => "file", :placeholder => "Upload an image", :class => "form-control", "image-upload-dr" => "uploadFile"}
+            %input{:type => "file", :class => "form-control", "image-upload-dr" => "uploadFile"}
             %span{:style => "color: gold;", "ng-if" => "status == 0"}
               %i{:class => "fa fa-exclamation-triangle"}
             %span{:style => "color: green;", "ng-if" => "status == 1"}
               %i{:class => "fa fa-check-circle"}
-            {{message}}
+            {{message_edit}}
             = f.text_field :image, "ng-model": "cloud", "hidden": true
             %br/
             %br/
