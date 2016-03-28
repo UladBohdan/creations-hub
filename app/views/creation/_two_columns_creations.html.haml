@@ -12,3 +12,5 @@
             = render partial: "/stars", locals: {number: Rating.get_average_rating(creation.id) }
           .panel-body
             sample text
+            %br/
+            = creation.created_at

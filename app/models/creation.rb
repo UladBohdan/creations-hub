@@ -21,8 +21,20 @@ class Creation < ActiveRecord::Base
       Creation.includes(:chapters, :user, { comments: { likes: :user } }).where(id: id).first
     end
 
-    def get_some_creations(params)
-      Creation.includes(:user, :ratings).all.sample(6)
+    def get_set_of_creations(filters)
+      filters ||= {}
+      default_filters = { limit: 6, category: "all", sort: "any" }
+      filters.reverse_merge!(default_filters)
+      filters[:sort] = "created_at" if filters[:sort] == "most recent"
+      creations = Creation.includes(:user, :ratings).all
+      creations.where! category: filters[:category] if filters[:category] != "all"
+      if filters[:sort] != "any"
+        creations.order!("#{filters[:sort]} DESC")
+        creations.limit!(filters[:limit]) if filters[:limit] != "no limit"
+      else
+        return creations.sample(filters[:limit].to_i) if filters[:limit] != "no limit"
+     end
+      creations
     end
 
     def get_average_rating(creation_id)

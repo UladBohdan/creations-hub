@@ -1,5 +1,4 @@
 class CreationController < ApplicationController
-  #before_action :filter_params, only: :index
   before_action :set_creation, only: [:edit, :update, :destroy, :rate]
 
   def new
@@ -33,7 +32,7 @@ class CreationController < ApplicationController
   end
 
   def index
-    @creations = Creation.get_some_creations params
+    @creations = Creation.get_set_of_creations filter_params
     respond_to do |format|
       format.js {}
     end
@@ -60,7 +59,7 @@ class CreationController < ApplicationController
   private
 
   def filter_params
-    params.permit(:limit, :sort_by, :category)
+    params.permit(:limit, :sort, :category)
   end
 
   def set_creation

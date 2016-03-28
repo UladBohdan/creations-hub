@@ -1,0 +1,15 @@
+- title ||= filter.capitalize
+.btn-group{:style => "margin-bottom: 5px;", "uib-dropdown" => "", "is-open" => "#{filter}Opened"}
+  %button{"uib-dropdown-toggle" => "", "ng-disabled" => "disabled", :id => "single-button", :type => "button", :class => "btn btn-default"}
+    = "#{title}: {{current#{filter.capitalize}}}"
+    %span{:class => "caret"}
+  %ul{"uib-dropdown-menu" => "", :role => "menu", "aria-labelledby" => "single-button"}
+    - items.each do |item|
+      %li{:role => "menuitem"}
+        %a{"ng-href" => "/creation?limit={{currentLimit}}&sort={{currentSort}}&category={{currentCategory}}", "data-remote" => true}
+          %div{"ng-click" => "current#{filter.capitalize} = '#{item}';"}= item.capitalize
+    %li{:role => "separator", :class => "divider"}
+    - separated_items.each do |item|
+      %li{:role => "menuitem"}
+        %a{"ng-href" => "/creation?limit={{currentLimit}}&sort={{currentSort}}&category={{currentCategory}}", "data-remote" => true}
+          %div{"ng-click" => "current#{filter.capitalize} = '#{item}';"}= item.capitalize
