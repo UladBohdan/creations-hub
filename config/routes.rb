@@ -20,7 +20,7 @@ Rails.application.routes.draw do
         get 'like'
       end
     end
-    #resources :chapter
+    resources :chapter
   end
 
   devise_for :users

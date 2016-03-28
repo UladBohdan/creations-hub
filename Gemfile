@@ -36,6 +36,7 @@ gem 'devise'
 gem 'enumerate_it'
 gem 'cancancan', '~>1.10'
 gem 'font-awesome-sass'
+gem 'redcarpet'
 
 gem 'activeadmin'
 gem 'draper'

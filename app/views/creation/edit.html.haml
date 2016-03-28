@@ -2,23 +2,26 @@
   .row
     .col-md-3
       = form_for(@creation) do |f|
+        %h4 Creation title:
         = f.text_field :title, class: "form-control"
-        %br
-        = f.text_field :category, class: "form-control"
-
-        %br
+        %h4 Category:
+        = f.text_field  :category, class: "form-control"
+        %h4 Tags:
+        tags
+        %br/
+        %br/
         .actions
-          = f.submit "Save", class: "btn btn-success"
+          = f.submit "Save general information", class: "btn btn-success"
 
     .col-md-9
       .panel.panel-default
         .panel-heading
           %ul{:class => "nav nav-tabs"}
             %li{"ng-repeat" => "chapter in chapters", :role => "presentation"}
-              %a{:href => "#"}
+              %a{"ng-click" => "changeWorkingChapter(chapter.id)"}
                 .panel.panel-primary
                   .panel-heading
-                    {{chapter.title}}
+                    {{chapter.id}}
             %li{:role => "presentation"}
               %a{:href => "#", "ng-click" => "addNewChapter()"}
                 .panel.panel-success
@@ -26,4 +29,9 @@
                     +
             %br/
         .panel-body
-          {{currentChapterMarkdown}}
+          %input{:input => "text", :class => "form-control", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;"}
+          %textarea{:class => "form-control", :rows => "10", "ng-model" => "currentChapterText"}
+          %i Use markdown to format the text.
+          %span{:class => "pull-right"}
+            %button{:class => "btn btn-success", :style => "margin-top: 5px;", "ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
+              Update chapter!
