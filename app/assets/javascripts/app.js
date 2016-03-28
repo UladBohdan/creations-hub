@@ -1,4 +1,7 @@
-app = angular.module('CreationsHub', ['ui.bootstrap']);
+app = angular.module('CreationsHub', [
+    'ui.bootstrap',
+    'ngFileUpload'
+]);
 
 app.config([
     "$httpProvider", function($httpProvider) {
