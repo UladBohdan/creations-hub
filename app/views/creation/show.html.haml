@@ -22,6 +22,8 @@
         Categories:
         = @creation.category
       %h4
+        Tags:
+      %h4
         Created at:
         = @creation.created_at
       %h4
@@ -32,17 +34,21 @@
         .panel-heading
           About author:
         .panel-body
-          %h3= @creation.user.name
+          = image_tag @creation.user.image, height: 130, style: "margin-right: 15px; float: left;"
+          %h3= link_to @creation.user.name, user_path(@creation.user)
 
     .col-md-8
-      %h4 Chapters overview:
-      %ul{:class => "nav nav-tabs"}
-        - @creation.chapters.each do |chapter|
-          %li{:role => "presentation"}
-            %a{:href => "#"}= chapter.title
+      - if @creation.chapters.any?
+        %h2{:style => "color: gray;"} Chapters overview:
+        - @creation.chapters.each_with_index do |chapter, i|
+          %h4
+            %b= "#{i+1}."
+            = chapter.title
+            %span{:class => "pull-right", :style => "color: lightgray;"}
+              %i= "modified: #{chapter.updated_at}"
+      - else
+        %h2{:style => "color: gray;"} This creation has no chapters yet.
       %br/
-      .panel{:style => "height: 200px;"}
-        ololo
-
+      %br/
       %div{:id => "comments"}
         = render "comment/comments"

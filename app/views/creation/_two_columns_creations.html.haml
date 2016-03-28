@@ -9,11 +9,18 @@
               %small
                 = link_to creation.user.name, user_path(creation.user)
             = render partial: "/stars", locals: {number: Rating.get_average_rating(creation.id) }
+            - if creation.comments.any?
+              %span{:class => "pull-right"}
+                %i{:class => "fa fa-comments", :style => "color: gray; font-size: large;"}= " #{creation.comments.count}"
+            %br/
           .panel-body
-            - creation.chapters.each_with_index do |chapter, i|
-              %b= "#{i+1}. "
-              = chapter.title
-              %br/
+            - if !creation.chapters.any?
+              %i This creation is empty: it has no chapters. We guess, author will add them later.
+            - else
+              - creation.chapters.each_with_index do |chapter, i|
+                %b= "#{i+1}. "
+                = chapter.title
+                %br/
           .panel-footer
             %b= Category.key_for(creation.category).capitalize
 

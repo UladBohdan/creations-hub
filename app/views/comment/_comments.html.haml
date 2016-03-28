@@ -1,28 +1,32 @@
-%h4 Opinions:
-- @comments.each do |comment|
-  .panel.panel-primary
-    .panel-heading
-      = image_tag comment.user.image, height: 30, style: "margin-right: 5px;"
-      = link_to "#{comment.user.name}", user_path(comment.user), style: "color: white; font-weight: bold;"
-    .panel-body
-      %h4= comment.text
-      = comment.likes.to_a.length
-      - if can? :like, Comment
-        = link_to like_creation_comment_path(@creation, comment), remote: true do
-          - if comment.likes.where(user_id: current_user.id).empty?
-            %i{:class => "fa fa-heart-o", :style => "font-size: large;"}
-          - else
-            %i{:class => "fa fa-heart", :style => "font-size: large;"}
-      - else
-        %i{:class => "fa fa-heart", :style => "font-size: large;"}
-      %span{:class => "pull-right"}
-        = "at #{comment.created_at} "
-        - if can? :destroy, comment
-          = link_to creation_comment_path(@creation, comment), method: :delete, remote: true do
-            %i{:class => "fa fa-trash", :style => "font-size: large;"}
+- if @comments.any?
+  %h4 Opinions:
+  - @comments.each do |comment|
+    .panel.panel-primary
+      .panel-heading
+        = image_tag comment.user.image, height: 30, style: "margin-right: 5px;"
+        = link_to "#{comment.user.name}", user_path(comment.user), style: "color: white; font-weight: bold;"
+      .panel-body
+        %h4= comment.text
+        = comment.likes.to_a.length
+        - if can? :like, Comment
+          = link_to like_creation_comment_path(@creation, comment), remote: true do
+            - if comment.likes.where(user_id: current_user.id).empty?
+              %i{:class => "fa fa-heart-o", :style => "font-size: large;"}
+            - else
+              %i{:class => "fa fa-heart", :style => "font-size: large;"}
+        - else
+          %i{:class => "fa fa-heart", :style => "font-size: large;"}
+        %span{:class => "pull-right"}
+          = "at #{comment.created_at} "
+          - if can? :destroy, comment
+            = link_to creation_comment_path(@creation, comment), method: :delete, remote: true do
+              %i{:class => "fa fa-trash", :style => "font-size: large;"}
 
 - if can? :create, Comment
-  %h4 You may leave your own opinion:
+  - if @comments.any?
+    %h4 You may leave your own opinion:
+  - else
+    %h4 You opinion will be the first:
   = form_for Comment.new(text: ""), url: "/creation/#{@creation.id}/comment", remote: true do |f|
     = f.text_area :text, placeholder: "Your comment", class: "form-control"
     = f.submit "Post", class: "btn btn-primary", style: "margin: 10px;"

@@ -3,7 +3,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
 
         $scope.chapters = [];
         $scope.creation_id = "";
-        $scope.currentChapterId = 0;
+        $scope.currentChapterId = "";
         $scope.currentChapterText = "";
         $scope.currentChapterTitle = "";
         $scope.textBeforeEditing = "";
@@ -16,15 +16,11 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
                 method: "GET"
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
-                $scope.currentChapterId = chapters[0].id;
+                $scope.currentChapterId = $scope.chapters[0].id;
                 chooseChapter();
             }, function errorCallback(response) {
                 alert("failed:(");
             });
-        };
-
-        $scope.saveAllChanges = function() {
-
         };
 
         $scope.updateChapter = function() {
@@ -36,6 +32,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
                 params: { text: $scope.currentChapterText, title: $scope.currentChapterTitle }
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
+                chooseChapter();
             }, function errorCallback(response) {
                 alert("failed:(");
             });
@@ -47,7 +44,17 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
         };
 
         $scope.addNewChapter = function() {
-            $scope.chapters.push({title: "new chapter!!!"});
+            $http({
+                url: "/creation/" + $scope.creation_id + "/chapter",
+                format: "json",
+                method: "POST"
+            }).then( function successCallback(response) {
+                angular.copy(response.data, $scope.chapters);
+                $scope.currentChapterId = $scope.chapters[$scope.chapters.length-1].id;
+                chooseChapter();
+            }, function errorCallback(response) {
+                alert("failed:(");
+            });
         };
 
         function findChapterById(id) {
@@ -56,6 +63,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
                     return $scope.chapters[i];
                 }
             }
+            return 0;
         }
 
         function chooseChapter() {

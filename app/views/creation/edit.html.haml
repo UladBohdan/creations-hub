@@ -12,6 +12,9 @@
         %br/
         .actions
           = f.submit "Save general information", class: "btn btn-success"
+      %br/
+      = link_to creation_path(@creation) do
+        %button{:class => "btn btn-default"} Back to creation's overview
 
     .col-md-9
       .panel.panel-default
