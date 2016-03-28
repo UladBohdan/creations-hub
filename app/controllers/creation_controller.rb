@@ -40,6 +40,8 @@ class CreationController < ApplicationController
 
   def read
     @chapter = Creation.where(id: params[:id]).first.chapters.first
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    @markdowned = markdown.render(@chapter.text)
   end
 
   def rate

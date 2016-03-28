@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require angular.min
 //= require ui-bootstrap-tpls-1.2.4.min
+//= require angularjs-file-upload
 //= require app
 //= require_tree .
