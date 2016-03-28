@@ -8,9 +8,14 @@
               = link_to creation.title, creation_path(creation)
               %small
                 = link_to creation.user.name, user_path(creation.user)
-            %hr/
             = render partial: "/stars", locals: {number: Rating.get_average_rating(creation.id) }
           .panel-body
-            sample text
-            %br/
-            = creation.created_at
+            - creation.chapters.each_with_index do |chapter, i|
+              %b= "#{i+1}. "
+              = chapter.title
+              %br/
+          .panel-footer
+            %b= Category.key_for(creation.category).capitalize
+
+            %span{:class => "pull-right"}
+              = creation.created_at

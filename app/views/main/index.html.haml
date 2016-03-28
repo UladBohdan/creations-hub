@@ -1,9 +1,9 @@
 .container
   .row
-    .col-md-8{:id => "main_creations"}
+    .col-md-9{:id => "main_creations"}
       = render "/creation/two_columns_creations"
 
-    .col-md-4
+    .col-md-3
       %h1{:style => "margin: 10px;"} MAIN PAGE
       .panel.panel-default
         .panel-heading
@@ -17,7 +17,7 @@
             = render partial: "filter_dropdown",
                       locals: {filter: "sort",
                                 title: "Show first",
-                                items: ["most recent", "most rated"],
+                                items: ["most rated", "recently created", "recently updated"],
                                 separated_items: ["any"]}
             = render partial: "filter_dropdown",
                       locals: {filter: "limit",

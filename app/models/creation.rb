@@ -1,9 +1,4 @@
 class Creation < ActiveRecord::Base
-  extend EnumerateIt
-  attr_accessor :category
-
-  has_enumeration_for :category, with: Category
-
   belongs_to :user
   has_many :chapters
   has_many :comments
@@ -25,10 +20,15 @@ class Creation < ActiveRecord::Base
       filters ||= {}
       default_filters = { limit: 6, category: "all", sort: "any" }
       filters.reverse_merge!(default_filters)
-      filters[:sort] = "created_at" if filters[:sort] == "most recent"
+      filters[:sort] = "created_at" if filters[:sort] == "recently created"
+      filters[:sort] = "updated_at" if filters[:sort] == "recently updated"
       creations = Creation.includes(:user, :ratings).all
-      creations.where! category: filters[:category] if filters[:category] != "all"
-      if filters[:sort] != "any"
+      creations.where! category: Category.value_for(filters[:category].upcase) if filters[:category] != "all"
+      if filters[:sort] == "most rated"
+        #creations = creations.average("ratings.value", :includes => :ratings, order: "avg_ratings_value DESC")
+        # how to search top-limit creations
+        creations.limit!(filters[:limit]) if filters[:limit] != "no limit"
+      elsif filters[:sort] != "any"
         creations.order!("#{filters[:sort]} DESC")
         creations.limit!(filters[:limit]) if filters[:limit] != "no limit"
       else
