@@ -19,7 +19,8 @@
             - else
               - creation.chapters.each_with_index do |chapter, i|
                 %b= "#{i+1}. "
-                = chapter.title
+                = link_to read_path(chapter), target: "_blank" do
+                  = chapter.title
                 %br/
           .panel-footer
             %b= Category.key_for(creation.category).capitalize

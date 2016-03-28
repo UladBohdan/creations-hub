@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   root 'main#index'
 
   get 'user/:id' => 'user#show', as: :user
+  get 'read/:id' => 'chapter#read', as: :read
 
   resources :creation do
     member do
-      get 'read'
       get 'rate'
     end
     resources :comment do

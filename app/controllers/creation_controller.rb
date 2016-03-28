@@ -38,12 +38,6 @@ class CreationController < ApplicationController
     end
   end
 
-  def read
-    @chapter = Creation.where(id: params[:id]).first.chapters.first
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    @markdowned = markdown.render(@chapter.text)
-  end
-
   def rate
     if can? :rate, Creation
       if @creation.ratings.where(user_id: current_user.id).empty?
