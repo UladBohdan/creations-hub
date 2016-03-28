@@ -38,9 +38,6 @@ gem 'cancancan', '~>1.10'
 gem 'font-awesome-sass'
 gem 'redcarpet'
 
-gem 'angularjs-file-upload-rails', '~> 2.2.0'
-gem 'carrierwave'
-
 gem 'activeadmin'
 gem 'draper'
 gem 'pundit'

@@ -20,9 +20,7 @@ Rails.application.routes.draw do
         get 'like'
       end
     end
-    get 'chapter/index' => 'chapter#index', as: :chapter_index
-    get 'chapter/create' => 'chapter#create', as: :chapter_create
-    post 'chapter/:id/update' => 'chapter#update', as: :chapter_update
+    resources :chapter
   end
 
   devise_for :users

@@ -11,7 +11,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
 
         $scope.receiveChapters = function() {
             $http({
-                url: "/creation/" + $scope.creation_id + "/chapter/index",
+                url: "/creation/" + $scope.creation_id + "/chapter",
                 format: "json",
                 method: "GET"
             }).then( function successCallback(response) {
@@ -26,9 +26,9 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
         $scope.updateChapter = function() {
             $http({
                 url: "/creation/" + $scope.creation_id + "/chapter/"
-                        + $scope.currentChapterId + "/update",
+                        + $scope.currentChapterId,
                 format: "json",
-                method: "POST",
+                method: "PUT",
                 data: { text: $scope.currentChapterText, title: $scope.currentChapterTitle }
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
@@ -45,9 +45,9 @@ app.controller('EditCreationCtrl', ['$scope', '$http',
 
         $scope.addNewChapter = function() {
             $http({
-                url: "/creation/" + $scope.creation_id + "/chapter/create",
+                url: "/creation/" + $scope.creation_id + "/chapter",
                 format: "json",
-                method: "GET"
+                method: "POST"
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
                 $scope.currentChapterId = $scope.chapters[$scope.chapters.length-1].id;
