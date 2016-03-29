@@ -1,4 +1,4 @@
-.container
+.container{"ng-controller" => "UserCtrl"}
   .row
     .col-md-3
       = image_tag @user.image, width: "100%", class: "profile-image"
@@ -11,16 +11,20 @@
           email: #{@user.email}
       %hr
       %ul{:class => "nav nav-pills nav-stacked"}
-        %li{:role => "presentation", :class => "active"}
-          %a{:href => "#"}Creations
-        %li{:role => "presentation"}
-          %a{:href => "#"}
+        %li{:role => "presentation", "ng-class" => "creationsClass"}
+          %a{:href => "#", "ng-click" => "mode = 'creations'; switchMode();"}
+            Creations
+        %li{:role => "presentation", "ng-class" => "badgesClass"}
+          %a{:href => "#", "ng-click" => "mode = 'badges'; switchMode();"}
             Badges
-            %span{:class => "badge"}42
+            %span{:class => "badge"}= @badges.length
         - if can? :edit, @user
           %li{:role => "presentation"}
             = link_to edit_user_registration_path do
               Account Settings
 
     .col-md-9
-      = render "/creation/two_columns_creations"
+      %div{"ng-if" => "mode == 'creations'"}
+        = render "/creation/two_columns_creations"
+      %div{"ng-if" => "mode == 'badges'"}
+        = render "badges"

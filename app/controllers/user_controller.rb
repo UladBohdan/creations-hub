@@ -1,6 +1,23 @@
 class UserController < ApplicationController
+  before_action :set_user
+  before_action :set_creations
+  before_action :set_badges
+
   def show
-    @user = User.where(id: params[:id]).first
+  end
+
+  private
+
+  def set_user
+    @user = User.includes(creations: :comments).where(id: params[:id]).first
+  end
+
+  def set_creations
     @creations = @user.creations.all
   end
+
+  def set_badges
+    @badges = Badge.where(user_id: params[:id])
+  end
+
 end

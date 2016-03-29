@@ -1,0 +1,9 @@
+- [0, 1, 2].each do |column|
+  .col-md-4
+    - @badges.each_with_index do |badge, i|
+      - if i % 3 == column
+        .panel.panel-default
+          .panel-body
+            = image_tag "http://foursquareguru.com/media/badges/bookworm.png", width: "100%"
+            %h3{:style => "text-align: center;"}= badge.title
+            %h5{:style => "text-align: center;"}= "level #{badge.level}"

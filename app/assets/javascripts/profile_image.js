@@ -1,7 +1,7 @@
 app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
     function ($scope, $upload) {
 
-        $scope.cloud = "tratata";
+        $scope.cloud = "";
         $scope.message_edit = "File not chosen. Your profile image won't be changed";
         $scope.message_new = "File not chosen. Your profile will be created without profile image";
         $scope.status = 0;
@@ -13,7 +13,6 @@ app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
                 data: {
                     upload_preset: "mjqs75rz",
                     tags: "creation_profile_images",
-                    context: 'photo=ololo',
                     authorization: undefined,
                     file: local_image
                 }

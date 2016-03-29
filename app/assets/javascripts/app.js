@@ -26,3 +26,16 @@ app.controller('DropdownCtrl',
         $scope.currentLimit = "6";
     }
 );
+
+app.controller("UserCtrl",
+    function ($scope) {
+        $scope.mode = "creations";
+        $scope.creationsClass = "active";
+        $scope.badgesClass = "";
+
+        $scope.switchMode = function() {
+            $scope.creationsClass = ($scope.mode == "creations" ? "active" : "");
+            $scope.badgesClass = ($scope.mode == "badges" ? "active" : "");
+        }
+    }
+);
