@@ -9,11 +9,11 @@ class UserController < ApplicationController
   private
 
   def set_user
-    @user = User.includes(creations: :comments).where(id: params[:id]).first
+    @user = User.includes(creations: [:comments, :chapters, :ratings]).where(id: params[:id]).first
   end
 
   def set_creations
-    @creations = @user.creations.all
+    @creations = @user.creations
   end
 
   def set_badges

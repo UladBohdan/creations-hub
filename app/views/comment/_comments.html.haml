@@ -1,4 +1,4 @@
-- if @comments.any?
+- if !@comments.empty?
   %h4 Opinions:
   - @comments.each do |comment|
     .panel.panel-primary

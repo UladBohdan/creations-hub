@@ -6,16 +6,15 @@ class Rating < ActiveRecord::Base
 
   class << self
 
-    def get_average_rating(creation_id)
-      rating = Rating.where(creation_id: creation_id)
-      return 0 if rating.empty?
-      rating.average(:value).to_i
+    def get_average_rating(creation)
+      return 0 if creation.ratings.empty?
+      creation.ratings.inject(0) { |sum, r| sum + r.value } / creation.ratings.length
     end
 
     def get_user_rating(user_id, creation_id)
-      rating = Rating.where(user_id: user_id, creation_id: creation_id)
+      rating = Rating.where(user_id: user_id, creation_id: creation_id).to_a
       return 0 if rating.empty?
-      rating.first.value.to_i
+      rating[0].value.to_i
     end
 
   end

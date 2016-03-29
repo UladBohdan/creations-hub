@@ -1,5 +1,5 @@
 class CreationController < ApplicationController
-  before_action :set_creation, only: [:edit, :update, :destroy, :rate]
+  before_action :set_creation, only: [:edit, :update, :destroy, :rate, :show]
 
   def new
     new_creation = Creation.new
@@ -8,7 +8,6 @@ class CreationController < ApplicationController
   end
 
   def show
-    @creation = Creation.get_creation params[:id]
     @comments = @creation.get_ordered_comments
     set_ratings
   end
@@ -59,16 +58,16 @@ class CreationController < ApplicationController
   end
 
   def set_creation
-    @creation = Creation.where(id: params[:id]).first
+    @creation = Creation.get_creation params[:id]
   end
 
   def set_ratings
-    @average_rating = Rating.get_average_rating params[:id]
+    @average_rating = Rating.get_average_rating @creation
     @your_rating = 0
     if user_signed_in?
       @your_rating = Rating.get_user_rating current_user.id, params[:id]
     end
-    end
+  end
 
   def creation_params
     params.require(:creation).permit(:title, :category)

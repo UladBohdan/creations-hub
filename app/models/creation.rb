@@ -7,7 +7,7 @@ class Creation < ActiveRecord::Base
   validates :user_id, :title, presence: true
 
   def get_ordered_comments
-    comments.order(created_at: :asc)
+    comments.order(created_at: :asc).to_a
   end
 
   class << self
@@ -22,7 +22,7 @@ class Creation < ActiveRecord::Base
       filters.reverse_merge!(default_filters)
       filters[:sort] = "created_at" if filters[:sort] == "recently created"
       filters[:sort] = "updated_at" if filters[:sort] == "recently updated"
-      creations = Creation.includes(:user, :ratings).all
+      creations = Creation.includes(:user, :ratings, :comments, :chapters).all
       creations.where! category: Category.value_for(filters[:category].upcase) if filters[:category] != "all"
       if filters[:sort] == "most rated"
         #creations = creations.average("ratings.value", :includes => :ratings, order: "avg_ratings_value DESC")
