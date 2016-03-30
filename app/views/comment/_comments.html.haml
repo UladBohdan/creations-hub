@@ -31,4 +31,4 @@
     %h4 You opinion will be the first:
   = form_for Comment.new(text: ""), url: "/creation/#{@creation.id}/comment", remote: true do |f|
     = f.text_area :text, placeholder: "Your comment", class: "form-control"
-    = f.submit "Post", class: "btn btn-primary", style: "margin: 10px;", "compile-data" => "", "ng-click" => "checkBadgesPending('commentator');"
+    = f.submit "Post", class: "btn btn-primary", style: "margin: 10px;", "ng-click" => "checkBadgesPending('commentator');"

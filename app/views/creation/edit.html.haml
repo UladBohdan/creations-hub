@@ -1,4 +1,4 @@
-.container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; receiveChapters();"}
+.container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; receiveChapters(); checkBadgesPending('author');"}
   .row
     .col-md-3
       = form_for(@creation) do |f|

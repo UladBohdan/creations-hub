@@ -53,7 +53,7 @@ app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $u
     };
 
     $scope.checkBadgesPending = function(badgeName) {
-        alert("checking");
+        //alert("checking");
         $http({
             url: "/badges",
             format: "json",
@@ -64,7 +64,7 @@ app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $u
             if ($scope.newBadge.exists == true) {
                 $scope.open();
             } else {
-                alert("no new badges at the moment");
+                //alert("no new badges at the moment");
             }
         }, function errorCallback(response) {
             alert("failed:( badge");
@@ -79,26 +79,5 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, newBadg
 
     $scope.cancel = function () {
         $uibModalInstance.close();
-    };
-});
-
-app.directive( 'compileData', function ( $compile ) {
-    return {
-        scope: true,
-        link: function ( scope, element, attrs ) {
-
-            var elmnt;
-
-            attrs.$observe( 'template', function ( myTemplate ) {
-                if ( angular.isDefined( myTemplate ) ) {
-                    // compile the provided template against the current scope
-                    elmnt = $compile( myTemplate )( scope );
-
-                    element.html(""); // dummy "clear"
-
-                    element.append( elmnt );
-                }
-            });
-        }
     };
 });
