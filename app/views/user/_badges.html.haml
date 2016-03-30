@@ -4,6 +4,7 @@
       - if i % 3 == column
         .panel.panel-default
           .panel-body
-            = image_tag "http://foursquareguru.com/media/badges/bookworm.png", width: "100%"
-            %h3{:style => "text-align: center;"}= badge.title
-            %h5{:style => "text-align: center;"}= "level #{badge.level}"
+            = image_tag "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/#{badge.title}.png", width: "100%"
+            %h3{:style => "text-align: center;"}= badge.title.capitalize
+            %h4{:style => "text-align: center;"}= "level #{badge.level}"
+            %h5{:style => "text-align: center;"}= badge.description

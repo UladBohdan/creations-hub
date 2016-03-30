@@ -5,6 +5,7 @@ class CommentController < ApplicationController
     if can? :create, Comment
       Comment.create! new_comment_params
     end
+    check_badge "commentator"
     render_comments
   end
 

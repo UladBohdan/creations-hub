@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   has_many :ratings
   has_many :tags
 
+  def self.get_full_info(id)
+    includes(:comments).where(id: id).first
+  end
+
 end

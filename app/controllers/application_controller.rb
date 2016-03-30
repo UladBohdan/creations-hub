@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:account_update) << :name << :image
   end
 
+  def check_badge(name)
+    if user_signed_in?
+      Badge.check_badge name, current_user
+    end
+  end
+
   private
 
   def resolve_layout
