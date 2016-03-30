@@ -7,7 +7,7 @@
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-app" => "CreationsHub", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
+  %body{"ng-app" => "CreationsHub", "ng-controller" => "BadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
     %nav{:class => "navbar navbar-default", "ng-controller" => "NavBarCtrl"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
@@ -56,5 +56,16 @@
       .alert.alert-info{:role => "alert", :style => " margin: 10px;"}=notice
     - if flash[:alert]
       .alert.alert-danger{:role => "alert", :style => " margin: 0 auto; width: 70%;"}=alert
+
+    %div
+      %script{:id => "badge_modal", :type => "text/ng-template"}
+        %div{:style => "text-align: center;"}
+          %h1 New badge!
+          %img{:src => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{newBadge.title}}.png", width: "200px"}
+          %h3 {{newBadge.title}}
+          %h4 level {{newBadge.level}}
+          %h5 {{newBadge.description}}
+          %button.btn.btn-warning{:type => "button", :style => "margin-bottom: 10px;", "ng-click" => "cancel()"} Great!
+      %button.btn.btn-default{"ng-click" => "checkBadgesPending('commentator')", :type => "button"} Check badges!
 
     = yield

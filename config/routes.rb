@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get 'user/:id' => 'user#show', as: :user
   get 'read/:id' => 'chapter#read', as: :read
+  get 'badges' => 'badge#check', as: :check_badge
 
   resources :creation do
     member do

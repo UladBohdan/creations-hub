@@ -1,2 +1,7 @@
 :plain
-  $('#comments').html("#{j (render 'comments') }")
+  htmlCode = "#{j (render 'comments') }"
+  elem = angular.element("div#comments")
+  $compile = elem.injector().get('$compile')
+  scope = elem.scope()
+  elem.html( $compile(htmlCode)(scope) )
+  scope.$digest()

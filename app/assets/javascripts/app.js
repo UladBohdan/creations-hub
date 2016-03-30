@@ -34,50 +34,70 @@ app.controller("UserCtrl", function ($scope) {
     }
 });
 
-app.controller("BadgeCtrl", function($scope) {
-    $scope.showModal = false;
-    $scope.toggleModal = function(){
-        $scope.showModal = !$scope.showModal;
-    }
+app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $uibModal, $http) {
+
+    $scope.newBadge = [];
+
+    $scope.open = function() {
+        $uibModal.open({
+            animation: true,
+            templateUrl: 'badge_modal',
+            controller: 'ModalInstanceCtrl',
+            size: 'sm',
+            resolve: {
+                newBadge: function () {
+                    return $scope.newBadge;
+                }
+            }
+        });
+    };
+
+    $scope.checkBadgesPending = function(badgeName) {
+        alert("checking");
+        $http({
+            url: "/badges",
+            format: "json",
+            method: "GET",
+            params: { name: badgeName }
+        }).then( function successCallback(response) {
+            angular.copy(response.data, $scope.newBadge);
+            if ($scope.newBadge.exists == true) {
+                $scope.open();
+            } else {
+                alert("no new badges at the moment");
+            }
+        }, function errorCallback(response) {
+            alert("failed:( badge");
+        });
+    };
+
+}]);
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, newBadge) {
+
+    $scope.newBadge = newBadge;
+
+    $scope.cancel = function () {
+        $uibModalInstance.close();
+    };
 });
 
-app.directive('modal', function () {
+app.directive( 'compileData', function ( $compile ) {
     return {
-        template: '<div class="modal fade">' +
-        '<div class="modal-dialog">' +
-        '<div class="modal-content">' +
-        '<div class="modal-header">' +
-        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-        '<h4 class="modal-title">{{ title }}</h4>' +
-        '</div>' +
-        '<div class="modal-body" ng-transclude></div>' +
-        '</div>' +
-        '</div>' +
-        '</div>',
-        restrict: 'E',
-        transclude: true,
-        replace:true,
-        scope:true,
-        link: function postLink(scope, element, attrs) {
-            scope.title = attrs.title;
+        scope: true,
+        link: function ( scope, element, attrs ) {
 
-            scope.$watch(attrs.visible, function(value){
-                if(value == true)
-                    $(element).modal('show');
-                else
-                    $(element).modal('hide');
-            });
+            var elmnt;
 
-            $(element).on('shown.bs.modal', function(){
-                scope.$apply(function(){
-                    scope.$parent[attrs.visible] = true;
-                });
-            });
+            attrs.$observe( 'template', function ( myTemplate ) {
+                if ( angular.isDefined( myTemplate ) ) {
+                    // compile the provided template against the current scope
+                    elmnt = $compile( myTemplate )( scope );
 
-            $(element).on('hidden.bs.modal', function(){
-                scope.$apply(function(){
-                    scope.$parent[attrs.visible] = false;
-                });
+                    element.html(""); // dummy "clear"
+
+                    element.append( elmnt );
+                }
             });
         }
     };

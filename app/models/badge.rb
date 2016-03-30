@@ -12,13 +12,13 @@ class Badge < ActiveRecord::Base
         if user.comments.length >= 5*i && i > badge.level
           params = {title: "commentator",
                     level: i,
-                    description: "you have #{5*i} comments under creations at the time! Congrats!"}
+                    description: "you have #{user.comments.length} comments under creations at the time! Congrats!"}
           if badge.nil?
             user.badges.create! params
           else
             badge.update! params
           end
-          return
+          return params
         end
       end
     end
@@ -26,7 +26,7 @@ class Badge < ActiveRecord::Base
     private
 
     def current_badge(name, user_id)
-      Badge.where(user_id: user_id, title: name).first
+      Badge.where(user_id: user_id, title: name).first || Badge.new
     end
 
   end
