@@ -18,11 +18,15 @@
           = button_tag("Remove", :type => "button", :class => "btn btn-danger")
       %br/
       %br/
-      %h4
-        Categories:
-        = @creation.category
-      %h4
-        Tags:
+      - if @creation.category
+        %h4
+          Category:
+          %b= Category.key_for(@creation.category).capitalize
+      - if not @creation.tags.empty?
+        %h4
+          Tags:
+          - @creation.tags.each do |tag|
+            = tag
       %h4
         Created at:
         = @creation.created_at

@@ -4,6 +4,8 @@ class Creation < ActiveRecord::Base
   has_many :comments
   has_many :ratings
 
+  acts_as_taggable
+
   validates :user_id, :title, presence: true
 
   def get_ordered_comments
@@ -13,7 +15,7 @@ class Creation < ActiveRecord::Base
   class << self
 
     def get_creation(id)
-      Creation.includes(:chapters, {ratings: :user}, { comments: [:user, { likes: :user }] }).where(id: id).first
+      Creation.includes(:chapters, :tags, {ratings: :user}, { comments: [:user, { likes: :user }] }).where(id: id).first
     end
 
     def get_creation_to_edit(id)

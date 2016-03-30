@@ -37,6 +37,7 @@ gem 'enumerate_it'
 gem 'cancancan', '~>1.10'
 gem 'font-awesome-sass'
 gem 'redcarpet'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 gem 'activeadmin'
 gem 'draper'
