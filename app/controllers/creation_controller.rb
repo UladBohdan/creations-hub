@@ -1,5 +1,6 @@
 class CreationController < ApplicationController
-  before_action :set_creation, only: [:edit, :update, :destroy, :rate, :show]
+  before_action :set_creation, only: [:update, :destroy, :rate, :show]
+  before_action :set_creation_to_edit, only: :edit
 
   def new
     new_creation = Creation.new
@@ -13,8 +14,7 @@ class CreationController < ApplicationController
   end
 
   def edit
-    @creation = Creation.get_creation params[:id]
-    @chapters = Chapter.where(creation_id: @creation.id)
+    @chapters = @creation.chapters
   end
 
   def update
@@ -61,11 +61,15 @@ class CreationController < ApplicationController
     @creation = Creation.get_creation params[:id]
   end
 
+  def set_creation_to_edit
+    @creation = Creation.get_creation_to_edit params[:id]
+  end
+
   def set_ratings
     @average_rating = Rating.get_average_rating @creation
     @your_rating = 0
     if user_signed_in?
-      @your_rating = Rating.get_user_rating current_user.id, params[:id]
+      @your_rating = Rating.get_user_rating current_user.id, @creation
     end
   end
 

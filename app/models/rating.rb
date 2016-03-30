@@ -11,10 +11,10 @@ class Rating < ActiveRecord::Base
       creation.ratings.inject(0) { |sum, r| sum + r.value } / creation.ratings.length
     end
 
-    def get_user_rating(user_id, creation_id)
-      rating = Rating.where(user_id: user_id, creation_id: creation_id).to_a
-      return 0 if rating.empty?
-      rating[0].value.to_i
+    def get_user_rating(user_id, creation)
+      rating = 0
+      creation.ratings.each { |r| rating = r.value if r.user_id == user_id }
+      rating
     end
 
   end

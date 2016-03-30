@@ -30,7 +30,7 @@ class ChapterController < ApplicationController
   end
 
   def set_creation
-    @creation = Creation.get_creation params[:creation_id]
+    @creation = Creation.get_creation_to_edit params[:creation_id]
   end
 
   def set_chapter
@@ -38,7 +38,7 @@ class ChapterController < ApplicationController
   end
 
   def set_chapters
-    @chapters = @creation.chapters.all
+    @chapters = @creation.chapters
   end
 
 end

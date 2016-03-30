@@ -10,7 +10,9 @@
         = comment.likes.to_a.length
         - if can? :like, Comment
           = link_to like_creation_comment_path(@creation, comment), remote: true do
-            - if comment.likes.where(user_id: current_user.id).empty?
+            - have_like = false
+            - comment.likes.to_a.each { |like| have_like = true if like.user_id == current_user.id }
+            - if !have_like
               %i{:class => "fa fa-heart-o", :style => "font-size: large;"}
             - else
               %i{:class => "fa fa-heart", :style => "font-size: large;"}
@@ -23,7 +25,7 @@
               %i{:class => "fa fa-trash", :style => "font-size: large;"}
 
 - if can? :create, Comment
-  - if @comments.any?
+  - if !@comments.empty?
     %h4 You may leave your own opinion:
   - else
     %h4 You opinion will be the first:
