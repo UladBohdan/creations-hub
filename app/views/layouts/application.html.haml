@@ -66,6 +66,6 @@
           %h4 level {{newBadge.level}}
           %h5 {{newBadge.description}}
           %button.btn.btn-warning{:type => "button", :style => "margin-bottom: 10px;", "ng-click" => "cancel()"} Great!
-      %button.btn.btn-default{"ng-click" => "checkBadgesPending('commentator')", :type => "button"} Check badges!
+      -#%button.btn.btn-default{"ng-click" => "checkBadgesPending('commentator')", :type => "button"} Check badges!
 
     = yield

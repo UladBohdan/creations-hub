@@ -33,8 +33,12 @@
             %br/
         .panel-body
           %input{:input => "text", :class => "form-control", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;"}
-          %textarea{:class => "form-control", :rows => "10", "ng-model" => "currentChapterText"}
+          %textarea{:class => "form-control", :rows => "14", "ng-model" => "currentChapterText"}
           %i Use markdown to format the text.
+          %br/
+          %i
+            You may get started with markdown
+            %a{:href => "https://help.github.com/articles/basic-writing-and-formatting-syntax/"} here
           %span{:class => "pull-right"}
             %button{:class => "btn btn-success", :style => "margin-top: 5px;", "ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
               Update chapter!
