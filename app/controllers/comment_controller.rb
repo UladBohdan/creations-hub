@@ -1,32 +1,28 @@
 class CommentController < ApplicationController
-  before_action :set_creation
   before_action :set_comment, only: [:destroy, :like]
-  before_action :set_all_comments
 
   def create
     if can? :create, Comment
-      @creation.comments.create(user_id: current_user.id, text: new_comment_params[:text])
+      Comment.create! new_comment_params
     end
-    respond_to do |format|
-      format.js { render "comments" }
-    end
+    render_comments
   end
 
   def destroy
     if can? :destroy, @comment
       @comment.destroy
     end
-    respond_to do |format|
-      format.js { render "comments" }
-    end
+    render_comments
   end
 
   def like
     if can? :like, Comment
-      if @comment.likes.where(user_id: current_user.id).empty?
-        @comment.likes.create user_id: current_user.id
+      user_like = nil
+      @comment.likes.each { |like| user_like = like if like.user_id == current_user.id }
+      if user_like.nil?
+        @comment.likes.create! user_id: current_user.id
       else
-        @comment.likes.where(user_id: current_user.id).first.destroy
+        user_like.destroy
       end
     end
     render_comments
@@ -34,23 +30,17 @@ class CommentController < ApplicationController
 
   private
 
-  def set_creation
-    @creation = Creation.get_creation params[:creation_id]
-  end
-
   def set_comment
-    @comment = @creation.comments.where(id: params[:id]).first
-  end
-  
-  def set_all_comments
-    @comments = @creation.get_ordered_comments
+    @comment = Comment.get_comment params[:id]
   end
 
   def new_comment_params
-    params.require(:comment).permit(:creation_id, :text)
+    params.require(:comment).permit(:text).merge(user_id: current_user.id, creation_id: params[:creation_id])
   end
 
   def render_comments
+    @creation = Creation.get_creation_with_comments params[:creation_id]
+    @comments = @creation.get_ordered_comments
     respond_to do |format|
       format.js { render "comments" }
     end

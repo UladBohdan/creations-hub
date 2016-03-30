@@ -7,7 +7,7 @@ class Creation < ActiveRecord::Base
   validates :user_id, :title, presence: true
 
   def get_ordered_comments
-    comments.to_a
+    comments.to_a.sort { |comment1, comment2| comment1.created_at <=> comment2.created_at }
   end
 
   class << self
@@ -18,6 +18,10 @@ class Creation < ActiveRecord::Base
 
     def get_creation_to_edit(id)
       Creation.includes(:chapters).where(id: id).first
+    end
+
+    def get_creation_with_comments(id)
+      Creation.includes(comments: [:user, { likes: :user }]).where(id: id).first
     end
 
     def get_set_of_creations(filters)
