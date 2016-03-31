@@ -22,21 +22,17 @@
     .col-md-9
       .panel.panel-default
         .panel-heading
-          %ul{:class => "nav nav-tabs"}
-            %li{"ng-repeat" => "chapter in chapters", :role => "presentation"}
+          %ul{:class => "nav nav-tabs", :style => "font-size: large; font-weight: bold;"}
+            %li{"ng-repeat" => "chapter in chapters", :role => "presentation", "ng-class" => "currentChapterId == chapter.id ? 'active' : '';"}
               %a{"ng-click" => "changeWorkingChapter(chapter.id)"}
-                .panel.panel-primary
-                  .panel-heading
-                    {{chapter.id}}
-            %li{:role => "presentation"}
+                {{chapter.id}}
+            %li{:role => "presentation", :class => "pull-right"}
               %a{:href => "#", "ng-click" => "addNewChapter()"}
-                .panel.panel-success
-                  .panel-heading
-                    +
+                %i.fa.fa-plus{:style => "color: #28b62c;"}
             %br/
         .panel-body
-          %input{:input => "text", :class => "form-control", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;"}
-          %textarea{:class => "form-control", :rows => "14", "ng-model" => "currentChapterText"}
+          %input{:input => "text", :class => "form-control", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
+          %textarea{:class => "form-control", :rows => "17", "ng-model" => "currentChapterText"}
           %i Use markdown to format the text.
           %br/
           %i

@@ -35,3 +35,11 @@ app.controller("UserCtrl", function ($scope) {
         $scope.badgesClass = ($scope.mode == "badges" ? "active" : "");
     }
 });
+
+app.controller("SwitchThemeCtrl", function($scope) {
+    $scope.style = "light";
+
+    $scope.switchStyle = function() {
+        $scope.style = ($scope.style == "light" ? "dark" : "light");
+    }
+});

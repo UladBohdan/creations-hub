@@ -1,4 +1,4 @@
-- [0, 1].each do |column|
+- 2.times do |column|
   .col-md-6
     - @creations.each_with_index do |creation, i|
       - if i % 2 == column
@@ -25,11 +25,8 @@
           .panel-footer
             - if creation.category.present?
               %b= Category.key_for(creation.category).capitalize
-            - if not creation.tags.empty?
-              %br/
-              - creation.tags.each do |tag|
-                = tag
-
-            %span{:class => "pull-right"}
-              = creation.created_at
+            %span.pull-right
+              %b= creation.created_at
             %br/
+            - if not creation.tags.empty?
+              %i= list_of_tags creation

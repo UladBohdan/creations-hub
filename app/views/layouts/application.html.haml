@@ -1,13 +1,14 @@
 !!! 5
-%html
+%html{"ng-app" => "CreationsHub", "ng-controller" => "SwitchThemeCtrl"}
   %head
     %title Creations Hub
+    = stylesheet_link_tag_ng.html_safe
     = stylesheet_link_tag     'application', media: 'all'
     = javascript_include_tag  'application'
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-app" => "CreationsHub", "ng-controller" => "BadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
+  %body{"ng-controller" => "BadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
     %nav{:class => "navbar navbar-default", "ng-controller" => "NavBarCtrl"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
@@ -43,6 +44,9 @@
             %button{:type => "submit", :class => "btn btn-default"}Search on site!
 
           %ul{:class => "nav navbar-nav navbar-right", :style => "font-weight: bold;"}
+            %li
+              %a{:href => "#", :title => "Switch a theme"}
+                %i.fa.fa-circle{:style => "font-size: x-large;", "ng-click" => "switchStyle();"}
             - if user_signed_in?
               %li
                 = link_to("#{current_user.name || current_user.email}", "/user/#{current_user.id}")
