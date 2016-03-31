@@ -18,7 +18,7 @@ class CreationController < ApplicationController
   end
 
   def update
-    if @creation.update creation_params
+    if @creation.update! creation_params
       redirect_to creation_url(@creation), notice: "Creation was successfully updated!"
     else
       redirect_to creation_url(@creation), alert: "Creation wasn't updated as something went wrong."
@@ -74,7 +74,7 @@ class CreationController < ApplicationController
   end
 
   def creation_params
-    params.require(:creation).permit(:title, :category)
+    params.require(:creation).permit(:title, :category, { tag_list: [] })
   end
 
 end

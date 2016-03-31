@@ -8,6 +8,29 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.textBeforeEditing = "";
     $scope.titleBeforeEditing = "";
 
+    $scope.strTags = "";
+    $scope.strAllTags = "";
+
+    $scope.tags = [];
+    $scope.allTags = [];
+
+    $scope.arrayOfTags = function() {
+        var response = [];
+        for (var i = 0; i < $scope.tags.length; i++) {
+            response.push($scope.tags[i].text);
+        }
+        document.getElementById("railsTags").value = response;
+    };
+
+    $scope.loadTags = function() {
+        return $scope.allTags;
+    };
+
+    $scope.initTags = function() {
+        $scope.tags = JSON.parse($scope.strTags);
+        $scope.allTags = JSON.parse($scope.strAllTags);
+    };
+
     $scope.receiveChapters = function() {
         $http({
             url: "/creation/" + $scope.creation_id + "/chapter",

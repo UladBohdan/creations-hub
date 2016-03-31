@@ -1,4 +1,4 @@
-.container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; receiveChapters(); checkBadgesPending('author');"}
+.container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; strAllTags = '#{Creation.get_all_tags.to_json}'; strTags = '#{@creation.get_tags.to_json}'; initTags(); receiveChapters(); checkBadgesPending('author');"}
   .row
     .col-md-3
       = form_for(@creation) do |f|
@@ -7,11 +7,14 @@
         %h4 Category:
         = f.text_field :category, class: "form-control"
         %h4 Tags:
-        = f.text_field :tags, class: "form-control"
-        %br/
+        = f.text_field :tag_list, multiple: true, id: "railsTags", hidden: true
+        %tags-input{"ng-model" => "tags"}
+          %auto-complete{"source" => "loadTags($query)"}
         %br/
         .actions
-          = f.submit "Save general information", class: "btn btn-success"
+          = f.submit "Save general information", class: "btn btn-success", "ng-click": "arrayOfTags();"
+
+
       %br/
       = link_to creation_path(@creation) do
         %button{:class => "btn btn-default"} Back to creation's overview

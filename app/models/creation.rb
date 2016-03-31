@@ -12,6 +12,12 @@ class Creation < ActiveRecord::Base
     comments.to_a.sort { |comment1, comment2| comment1.created_at <=> comment2.created_at }
   end
 
+  def get_tags
+    tags = []
+    tag_list.to_a.each { |tag| tags << {text: tag} }
+    tags
+  end
+
   class << self
 
     def get_creation(id)
@@ -53,6 +59,12 @@ class Creation < ActiveRecord::Base
 
     def get_user_rating(user_id, creation_id)
       Rating.where(user_id: user_id, creation_id: creation_id).first.value.to_i
+    end
+
+    def get_all_tags
+      all_tags = []
+      Creation.tag_counts_on(:tags).each { |tag| all_tags << { text: tag.name } }
+      all_tags
     end
 
   end

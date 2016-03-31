@@ -1,6 +1,7 @@
 app = angular.module('CreationsHub', [
     'ui.bootstrap',
-    'ngFileUpload'
+    'ngFileUpload',
+    'ngTagsInput'
 ]);
 
 app.config([
