@@ -1,8 +1,9 @@
 class Creation < ActiveRecord::Base
   belongs_to :user
-  has_many :chapters
-  has_many :comments
-  has_many :ratings
+  has_many :chapters, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :ratings, dependent: :destroy
+  has_many :tags, dependent: :destroy
 
   acts_as_taggable
 
@@ -38,7 +39,7 @@ class Creation < ActiveRecord::Base
       filters.reverse_merge!(default_filters)
       filters[:sort] = "created_at" if filters[:sort] == "recently created"
       filters[:sort] = "updated_at" if filters[:sort] == "recently updated"
-      creations = Creation.includes(:user, :ratings, :comments, :chapters).all
+      creations = Creation.includes(:user, :ratings, :comments, :chapters, :tags).all
       creations.where! category: Category.value_for(filters[:category].upcase) if filters[:category] != "all"
       if filters[:sort] == "most rated"
         #creations = creations.average("ratings.value", :includes => :ratings, order: "avg_ratings_value DESC")

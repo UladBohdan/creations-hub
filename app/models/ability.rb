@@ -10,7 +10,7 @@ class Ability
 
     if user.admin?
       can :manage, :all
-    elsif !user.id.nil?
+    elsif not user.id.nil?
       # authorized
       can :manage, Creation, :user_id => user.id
       can :new, Creation

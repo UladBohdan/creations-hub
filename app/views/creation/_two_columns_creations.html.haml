@@ -27,7 +27,6 @@
               %b= Category.key_for(creation.category).capitalize
             - if not creation.tags.empty?
               %br/
-              tags:
               - creation.tags.each do |tag|
                 = tag
 

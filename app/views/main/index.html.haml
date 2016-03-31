@@ -24,4 +24,4 @@
                                 items: %w(4 6 10),
                                 separated_items: ["no limit"]}
       %div{"ng-controller" => "TagCloudCtrl", "ng-init" => "strTags = '#{Creation.get_cloudy_tags}'; initTags();"}
-        %jqcloud{:words => "words", :height => "300"}
+        %jqcloud{:words => "words", :height => "300", :colors => ["#158cba"], "auto-resize" => "true"} }
