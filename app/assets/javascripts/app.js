@@ -36,10 +36,25 @@ app.controller("UserCtrl", function ($scope) {
     }
 });
 
-app.controller("SwitchThemeCtrl", function($scope) {
-    $scope.style = "light";
+app.controller("LocalDataCtrl", function($scope) {
+    $scope.style = "";
 
     $scope.switchStyle = function() {
         $scope.style = ($scope.style == "light" ? "dark" : "light");
+        if (storageAvailable()) {
+            localStorage.setItem("Style", $scope.style);
+        }
+    };
+
+    function loadLocalData() {
+        if (storageAvailable()) {
+            $scope.style = localStorage.getItem("Style") || "light";
+        }
     }
+
+    function storageAvailable() {
+        return !(typeof(Storage) == "undefined");
+    }
+
+    loadLocalData();
 });

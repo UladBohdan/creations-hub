@@ -9,10 +9,10 @@ module ApplicationHelper
   end
 
   def stylesheet_link_tag_ng
-    link = stylesheet_link_tag('light-bootstrap.min')[0..-3]
-    link << %&ng-disabled = "style != 'light'" /> &
-    link << stylesheet_link_tag('dark-bootstrap.min')[0..-3]
+    link = stylesheet_link_tag('dark-bootstrap.min')[0..-3]
     link << %&ng-disabled = "style != 'dark'" /> &
+    link << stylesheet_link_tag('light-bootstrap.min')[0..-3]
+    link << %&ng-disabled = "style != 'light'" /> &
   end
 
 end
