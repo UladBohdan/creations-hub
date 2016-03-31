@@ -1,7 +1,8 @@
 app = angular.module('CreationsHub', [
     'ui.bootstrap',
     'ngFileUpload',
-    'ngTagsInput'
+    'ngTagsInput',
+    'angular-jqcloud'
 ]);
 
 app.config([
@@ -80,5 +81,14 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, newBadg
 
     $scope.cancel = function () {
         $uibModalInstance.close();
+    };
+});
+
+app.controller('TagCloudCtrl', function($scope) {
+    $scope.words = [];
+    $scope.strTags = "";
+
+    $scope.initTags = function() {
+        $scope.words = JSON.parse($scope.strTags);
     };
 });

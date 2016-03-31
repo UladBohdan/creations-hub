@@ -12,7 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jqcloud.min
 //= require angular.min
+//= require angular-jqcloud
 //= require ui-bootstrap-tpls-1.2.4.min
 //= require ng-file-upload.min
 //= require ng-tags-input.min

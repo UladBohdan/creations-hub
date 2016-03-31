@@ -67,6 +67,12 @@ class Creation < ActiveRecord::Base
       all_tags
     end
 
+    def get_cloudy_tags
+      all_tags = []
+      Creation.tag_counts_on(:tags).each { |tag| all_tags << { text: tag.name, weight: tag.taggings_count } }
+      all_tags.to_json
+    end
+
   end
 
 end
