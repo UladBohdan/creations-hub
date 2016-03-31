@@ -38,6 +38,8 @@ app.controller("UserCtrl", function ($scope) {
 
 app.controller("LocalDataCtrl", function($scope) {
     $scope.style = "";
+    $scope.lang = "";
+    $scope.langDropdownOpened = false;
 
     $scope.switchStyle = function() {
         $scope.style = ($scope.style == "light" ? "dark" : "light");
@@ -46,9 +48,17 @@ app.controller("LocalDataCtrl", function($scope) {
         }
     };
 
+    $scope.switchLanguage = function(lang) {
+        $scope.lang = lang;
+        if (storageAvailable()) {
+            localStorage.setItem("Language", $scope.lang);
+        }
+    };
+
     function loadLocalData() {
         if (storageAvailable()) {
             $scope.style = localStorage.getItem("Style") || "light";
+            $scope.lang = localStorage.getItem("Language") || "en";
         }
     }
 
