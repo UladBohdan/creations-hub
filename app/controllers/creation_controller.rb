@@ -74,6 +74,7 @@ class CreationController < ApplicationController
   end
 
   def creation_params
+    params[:creation][:category] = nil if params[:creation][:category] == 0
     params.require(:creation).permit(:title, :category, { tag_list: [] })
   end
 
