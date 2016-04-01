@@ -6,10 +6,10 @@
   %ul{"uib-dropdown-menu" => "", :role => "menu", "aria-labelledby" => "single-button"}
     - items.each do |item|
       %li{:role => "menuitem"}
-        %a{"ng-href" => "/creation?limit={{currentLimit}}&sort={{currentSort}}&category={{currentCategory}}&locale={{lang}}", "data-remote" => true}
+        %a{"ng-href" => "/creation?limit={{currentLimit}}&sort={{currentSort}}&category={{currentCategory}}", "data-remote" => true}
           %div{"ng-click" => "current#{filter.capitalize} = '#{item}'; translate();"}= t("enumerations.#{filter}.#{item.to_s}").capitalize
     %li{:role => "separator", :class => "divider"}
     - separated_items.each do |item|
       %li{:role => "menuitem"}
-        %a{"ng-href" => "/creation?limit={{currentLimit}}&sort={{currentSort}}&category={{currentCategory}}&locale={{lang}}", "data-remote" => true}
+        %a{"ng-href" => "/creation?limit={{currentLimit}}&sort={{currentSort}}&category={{currentCategory}}", "data-remote" => true}
           %div{"ng-click" => "current#{filter.capitalize} = '#{item}'; translate();"}= t("enumerations.#{filter}.#{item.to_s}").capitalize

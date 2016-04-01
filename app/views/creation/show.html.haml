@@ -20,7 +20,7 @@
       %br/
       - if @creation.category
         %h3
-          %b= Category.key_for(@creation.category).capitalize
+          %b= t "enumerations.category.#{Category.key_for(@creation.category).to_s}"
       - if not @creation.tags.empty?
         %h4
           %i= list_of_tags(@creation)

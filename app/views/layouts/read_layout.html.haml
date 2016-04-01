@@ -1,7 +1,8 @@
 !!! 5
-%html
+%html{"ng-app" => "CreationsHub", "ng-controller" => "LocalDataCtrl"}
   %head
-    %title Creations Hub
+    %title Reading
+    = stylesheet_link_tag_ng.html_safe
     = stylesheet_link_tag     'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag  'application', 'data-turbolinks-track' => true
     = favicon_link_tag "favicon.png"
@@ -37,5 +38,21 @@
               %button{:type => "button", :class => "btn btn-warning"}Text width
             %a{:href => "#"}
               %button{:type => "button", :class => "btn btn-warning"}Next chapter
+
+          %ul{:class => "nav navbar-nav navbar-right", :style => "font-weight: bold;"}
+
+            %li{"uib-dropdown" => ""}
+              %a{:href => "", :id => "lang-dropdown", "uib-dropdown-toggle" => "", :style => "font-size: large;"}
+                {{lang}}
+              %ul{"uib-dropdown-menu" => "", "aria-labelledby" => "lang-dropdown"}
+                %li{:role => "menuitem"}
+                  %a{"ng-href" => "", "ng-click" => "switchLanguage('be');"}
+                    Беларуская
+                %li{:role => "menuitem"}
+                  %a{"ng-href" => "", "ng-click" => "switchLanguage('en');"}
+                    English
+            %li
+              %a{:href => "#", :title => t('.switch_theme')}
+                %i.fa.fa-circle{:style => "font-size: x-large;", "ng-click" => "switchStyle();"}
 
     = yield

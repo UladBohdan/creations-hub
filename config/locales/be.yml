@@ -270,6 +270,10 @@ be:
       get_started_markdown: "Вы можаце паглядзець асновы markdown-а"
       update_chapter: "Абнавіць главу!"
 
+    rating_block:
+      rating: "Рэйтынг:"
+      yout-rating: "Ваш рэйтынг:"
+
   comment:
     comments:
       opinions: "Меркаванні:"

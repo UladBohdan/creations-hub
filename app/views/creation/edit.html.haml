@@ -5,7 +5,7 @@
         %h4= t '.creation_title'
         = f.text_field :title, class: "form-control"
         %h4= t '.category'
-        = f.select :category, Category.to_a.push(["",0]), {:selected => (@creation.category || 0)}, class: "form-control"
+        = f.select :category, get_translated_categories, {:selected => (@creation.category || 0)}, class: "form-control"
         %h4= t '.tags'
         = f.text_field :tag_list, multiple: true, id: "railsTags", hidden: true
         %tags-input{"ng-model" => "tags"}

@@ -8,4 +8,5 @@ class Category < EnumerateIt::Base
       programming: [6, "Programming"],
       others: [7, "Others"]
   )
+
 end

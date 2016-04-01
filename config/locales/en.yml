@@ -63,6 +63,10 @@ en:
       get_started_markdown: "You may get started with markdown"
       update_chapter: "Update chapter!"
 
+    rating_block:
+      rating: "Rating:"
+      yout-rating: "Your rating:"
+
   comment:
     comments:
       opinions: "Opinions:"
