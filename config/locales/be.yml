@@ -253,6 +253,7 @@ be:
       new_badge: "Новы бэйдж!"
       great_badge: "Цудоўна!"
       switch_theme: "Пераключыць тэму"
+      search_placeholder: "Шукаць"
 
   creation:
     show:
@@ -282,6 +283,14 @@ be:
 
   user:
     show:
-      email: "электронная пошта"
+      email: "е-мэйл"
       badges: "Бэйджы"
       account_settings: "Налады акаўнта"
+
+    badges:
+      level: "узровень %{level}"
+      no_translation: "Выбачайце, але мова апісання фіксаваная"
+
+  badge:
+    author: "Аўтар"
+    commentator: "Каментатар"

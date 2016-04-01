@@ -40,14 +40,14 @@
                 %button{:type => "button", :class => "btn btn-success"}= t '.admin_panel'
           %form{:class => "navbar-form navbar-left", :role => "search"}
             .form-group
-              %input{:type => "text", :class => "form-control", :placeholder => "Search"}
+              %input{:type => "text", :class => "form-control", :placeholder => t(".search_placeholder")}
             %button{:type => "submit", :class => "btn btn-default"}= t '.search'
 
           %ul{:class => "nav navbar-nav navbar-right", :style => "font-weight: bold;"}
 
             %li{"uib-dropdown" => ""}
-              %a{:href => "", :id => "lang-dropdown", "uib-dropdown-toggle" => ""}
-                %i.fa.fa-language{:style => "font-size: x-large;"}
+              %a{:href => "", :id => "lang-dropdown", "uib-dropdown-toggle" => "", :style => "font-size: large;"}
+                {{lang}}
               %ul{"uib-dropdown-menu" => "", "aria-labelledby" => "lang-dropdown"}
                 %li{:role => "menuitem"}
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('be');"}

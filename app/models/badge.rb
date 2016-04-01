@@ -26,7 +26,6 @@ class Badge < ActiveRecord::Base
 
     def check_author_badge(user, badge)
       [15,10,5,2,1].each_with_index do |value, level|
-        puts "AUTHOR #{value}  #{5-level}    badge #{badge.level}"
         if user.creations.length >= value && 5-level > badge.level
           params = {title: "author",
                     level: 5-level,

@@ -37,19 +37,22 @@ class Creation < ActiveRecord::Base
       filters ||= {}
       default_filters = { limit: 6, category: "all", sort: "any" }
       filters.reverse_merge!(default_filters)
-      filters[:sort] = "created_at" if filters[:sort] == "recently created"
-      filters[:sort] = "updated_at" if filters[:sort] == "recently updated"
+      filters[:sort] = "created_at" if filters[:sort] == "recently_created"
+      filters[:sort] = "updated_at" if filters[:sort] == "recently_updated"
+      filters[:limit] = 4 if filters[:limit] == "four"
+      filters[:limit] = 6 if filters[:limit] == "six"
+      filters[:limit] = 10 if filters[:limit] == "ten"
       creations = Creation.includes(:user, :ratings, :comments, :chapters, :tags).all
       creations.where! category: Category.value_for(filters[:category].upcase) if filters[:category] != "all"
       if filters[:sort] == "most rated"
         #creations = creations.average("ratings.value", :includes => :ratings, order: "avg_ratings_value DESC")
         # how to search top-limit creations
-        creations.limit!(filters[:limit]) if filters[:limit] != "no limit"
+        creations.limit!(filters[:limit]) if filters[:limit] != "no_limit"
       elsif filters[:sort] != "any"
         creations.order!("#{filters[:sort]} DESC")
-        creations.limit!(filters[:limit]) if filters[:limit] != "no limit"
+        creations.limit!(filters[:limit]) if filters[:limit] != "no_limit"
       else
-        return creations.sample(filters[:limit].to_i) if filters[:limit] != "no limit"
+        return creations.sample(filters[:limit].to_i) if filters[:limit] != "no_limit"
      end
       creations
     end

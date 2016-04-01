@@ -30,7 +30,7 @@ app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $u
                 //alert("no new badges at the moment");
             }
         }, function errorCallback(response) {
-            alert("failed:( badge");
+            //alert("failed:( badge");
         });
     };
 

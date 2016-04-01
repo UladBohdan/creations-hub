@@ -6,11 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
 
-  layout :resolve_layout
+  after_action :set_locale_cookie
 
-  def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
-  end
+  layout :resolve_layout
 
   protected
 
@@ -37,7 +35,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = params[:locale] || I18n.default_locale
+    I18n.locale = cookies[:locale] || params[:locale] || I18n.default_locale
+  end
+
+  def set_locale_cookie
+    cookies.permanent[:locale] = I18n.locale.to_s
   end
 
 end

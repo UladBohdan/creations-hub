@@ -18,5 +18,6 @@
 //= require ui-bootstrap-tpls-1.2.4.min
 //= require ng-file-upload.min
 //= require ng-tags-input.min
+//= require angular-cookies.min
 //= require app
 //= require_tree .

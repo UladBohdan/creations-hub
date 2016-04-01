@@ -46,6 +46,7 @@ en:
       new_badge: "New badge!"
       great_badge: "Great!"
       switch_theme: "Switch theme"
+      search_placeholder: "Search"
 
   creation:
     show:
@@ -78,3 +79,11 @@ en:
       email: "email"
       badges: "Badges"
       account_settings: "Account settings"
+
+    badges:
+      level: "level %{level}"
+      no_translation: "Sorry, but descriptions' language is static"
+
+  badge:
+    author: "Author"
+    commentator: "Commentator"

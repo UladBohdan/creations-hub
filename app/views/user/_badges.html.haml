@@ -3,8 +3,9 @@
     - @badges.each_with_index do |badge, i|
       - if i % 3 == column
         .panel.panel-default
-          .panel-body
+          .panel-body{:style => "text-align: center;"}
             = image_tag "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/#{badge.title}.png", width: "100%"
-            %h3{:style => "text-align: center;"}= badge.title.capitalize
-            %h4{:style => "text-align: center;"}= "level #{badge.level}"
-            %h5{:style => "text-align: center;"}= badge.description
+            %h3= t "badge.#{badge.title}"
+            %h4= t ".level", level: badge.level
+            %h5= badge.description
+            %small= t ".no_translation"
