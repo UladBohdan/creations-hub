@@ -87,3 +87,39 @@ en:
   badge:
     author: "Author"
     commentator: "Commentator"
+
+  devise:
+    sessions:
+      new:
+        sign_in: "Sign in"
+        email: "Email"
+        password: "Password"
+        log_in: "Log in"
+        remember_me: "remember me"
+
+    shared:
+      links:
+        sign_up: "Sign up"
+        log_in: "Log in"
+        forgot_password: "Forgot your password?"
+
+    registrations:
+      edit:
+        edit_user: "Edit user"
+        your_name: "Your name"
+        email: "Email"
+        password: "Password (leave blank if you don't want to change it)"
+        password_confirmation: "Password confirmation"
+        current_password: "Current password to confirm your changes"
+        update: "Update"
+        cancel_account: "Cancel my account"
+        unhappy: "Unhappy?"
+        back: "Back"
+
+      new:
+        sign_up: "Sign up"
+        your_name: "Your name"
+        email: "Email"
+        min_pass: " (%{length} characters minimum)"
+        pass_text: "Password%{text}"
+        password_confirmation: "Password confirmation"

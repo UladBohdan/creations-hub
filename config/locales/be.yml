@@ -294,3 +294,39 @@ be:
   badge:
     author: "Аўтар"
     commentator: "Каментатар"
+
+  devise:
+    sessions:
+      new:
+        sign_in: "Увайсці"
+        email: "Email"
+        password: "Пароль"
+        log_in: "Уваход"
+        remember_me: "запомніць мяне"
+
+    shared:
+      links:
+        sign_up: "Зарэгістравацца"
+        log_in: "Увайсці"
+        forgot_password: "Забылі пароль?"
+
+    registrations:
+      edit:
+        edit_user: "Рэдагаваць акаўнт"
+        your_name: "Вашае імя"
+        email: "Email"
+        password: "Пароль (пакіньце поле пустым, калі не хочаце мяняць пароль)"
+        password_confirmation: "Пацверджанне пароля"
+        current_password: "Сапраўдны пароль для пацверджання дзеянняў"
+        update: "Абнавіць"
+        cancel_account: "Выдаліць акаўнт"
+        unhappy: "Незадаволеныя?"
+        back: "Назад"
+
+      new:
+        sign_up: "Зарэгістравацца"
+        your_name: "Вашае імя"
+        email: "Email"
+        min_pass: " (мінімум %{length} сімвалаў)"
+        pass_text: "Пароль%{text}"
+        password_confirmation: "Пацверджанне пароля"
