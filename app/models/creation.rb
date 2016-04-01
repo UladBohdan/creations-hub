@@ -34,19 +34,11 @@ class Creation < ActiveRecord::Base
     end
 
     def get_set_of_creations(filters)
-      filters ||= {}
-      default_filters = { limit: 6, category: "all", sort: "any" }
-      filters.reverse_merge!(default_filters)
-      filters[:sort] = "created_at" if filters[:sort] == "recently_created"
-      filters[:sort] = "updated_at" if filters[:sort] == "recently_updated"
-      filters[:limit] = 4 if filters[:limit] == "four"
-      filters[:limit] = 6 if filters[:limit] == "six"
-      filters[:limit] = 10 if filters[:limit] == "ten"
+      filters = improve_params filters || {}
       creations = Creation.includes(:user, :ratings, :comments, :chapters, :tags).all
       creations.where! category: Category.value_for(filters[:category].upcase) if filters[:category] != "all"
-      if filters[:sort] == "most rated"
-        #creations = creations.average("ratings.value", :includes => :ratings, order: "avg_ratings_value DESC")
-        # how to search top-limit creations
+      if filters[:sort] == "most_rated"
+        creations = most_rated.includes(:user, :comments, :chapters, :tags).preload(:ratings)
         creations.limit!(filters[:limit]) if filters[:limit] != "no_limit"
       elsif filters[:sort] != "any"
         creations.order!("#{filters[:sort]} DESC")
@@ -55,6 +47,21 @@ class Creation < ActiveRecord::Base
         return creations.sample(filters[:limit].to_i) if filters[:limit] != "no_limit"
      end
       creations
+    end
+
+    def improve_params(filters)
+      default_filters = { limit: 6, category: "all", sort: "any" }
+      filters.reverse_merge!(default_filters)
+      filters[:sort] = "created_at" if filters[:sort] == "recently_created"
+      filters[:sort] = "updated_at" if filters[:sort] == "recently_updated"
+      filters[:limit] = 4 if filters[:limit] == "four"
+      filters[:limit] = 6 if filters[:limit] == "six"
+      filters[:limit] = 10 if filters[:limit] == "ten"
+      filters
+    end
+
+    def most_rated
+      joins(:ratings).group("creations.id").order("AVG(ratings.value) DESC")
     end
 
     def get_all_tags
