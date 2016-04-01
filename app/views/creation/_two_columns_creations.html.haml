@@ -24,9 +24,9 @@
                 %br/
           .panel-footer
             - if creation.category.present?
-              %b= Category.key_for(creation.category).capitalize
+              %b= t "enumerations.category.#{Category.key_for(creation.category).to_s}"
             %span.pull-right
-              %b= creation.created_at
+              %b= l creation.created_at, format: :long
             %br/
             - if not creation.tags.empty?
               %i= list_of_tags creation

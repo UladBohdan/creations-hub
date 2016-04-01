@@ -8,21 +8,21 @@
           %small (you)
       - if can? :edit, @user
         %h5
-          email: #{@user.email}
+          ="#{t('.email')}: #{@user.email}"
       %hr
       %ul{:class => "nav nav-pills nav-stacked"}
         %li{:role => "presentation", "ng-class" => "creationsClass"}
           %a{:href => "#", "ng-click" => "mode = 'creations'; switchMode();"}
-            Creations
+            = t :creations
         %li{:role => "presentation", "ng-class" => "badgesClass"}
           %a{:href => "#", "ng-click" => "mode = 'badges'; switchMode();"}
-            Badges
+            = t '.badges'
             %span{:class => "badge"}= @badges.length
         - if can? :edit, @user
           %li{:role => "presentation"}
             = link_to edit_user_registration_path do
               %i.fa.fa-cogs
-              Account Settings
+              = t '.account_settings'
 
     .col-md-9
       %div{"ng-if" => "mode == 'creations'"}

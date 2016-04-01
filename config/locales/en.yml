@@ -1,23 +1,80 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+
+  enumerations:
+    category:
+      category: "category"
+      fiction: "Fiction"
+      fantasy: "Fantasy"
+      comedy: "Comedy"
+      science: "Science"
+      cooking: "Cooking"
+      programming: "Programming"
+      others: "Others"
+      all: "all"
+
+    sort:
+      sort: "show first"
+      recently_created: "Recently created"
+      recently_updated: "Recently updated"
+      most_rated: "Most rated"
+      any: "any"
+
+    limit:
+      limit: "limit"
+      four: "4"
+      six: "6"
+      ten: "10"
+      no_limit: "no limit"
+
+  creations: "Creations"
+  read: "Read"
+  edit: "Edit"
+  remove: "Remove"
+  created_at: "Created at"
+  last_modified_at: "Last modified at"
+  last_modified: "last modified"
+  by: "by"
+  here: "here"
+
+  layouts:
+    application:
+      create: "Create!"
+      admin_panel: "Admin panel"
+      search: "Search on site!"
+      sign_in: "Sign in"
+      sign_out: "Sign out"
+      new_badge: "New badge!"
+      great_badge: "Great!"
+      switch_theme: "Switch theme"
+
+  creation:
+    show:
+      chapters_overview: "Chapters overview"
+      no_chapters: "This creation has no chapters yet."
+
+    edit:
+      creation_title: "Creation title:"
+      category: "Category:"
+      tags: "Tags:"
+      save: "Save general information"
+      back: "Back to creation's overview"
+      use_markdown: "Use markdown to format the text."
+      get_started_markdown: "You may get started with markdown"
+      update_chapter: "Update chapter!"
+
+  comment:
+    comments:
+      opinions: "Opinions:"
+      may_leave_opinion: "You may leave your own opinion:"
+      first_opinion: "You opinion will be the first:"
+      post: "Post"
+
+  main:
+    index:
+      filters_sort_settings: "Filters and sort settings"
+
+  user:
+    show:
+      email: "email"
+      badges: "Badges"
+      account_settings: "Account settings"

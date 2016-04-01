@@ -34,14 +34,14 @@
           %form{:class => "navbar-form navbar-left"}
             - if can? :new, Creation
               = link_to new_creation_path do
-                %button{:type => "button", :class => "btn btn-success"}Create!
+                %button{:type => "button", :class => "btn btn-success"}= t '.create'
             - if can? :manage, :all
               = link_to admin_root_path do
-                %button{:type => "button", :class => "btn btn-success"}Admin panel
+                %button{:type => "button", :class => "btn btn-success"}= t '.admin_panel'
           %form{:class => "navbar-form navbar-left", :role => "search"}
             .form-group
               %input{:type => "text", :class => "form-control", :placeholder => "Search"}
-            %button{:type => "submit", :class => "btn btn-default"}Search on site!
+            %button{:type => "submit", :class => "btn btn-default"}= t '.search'
 
           %ul{:class => "nav navbar-nav navbar-right", :style => "font-weight: bold;"}
 
@@ -56,16 +56,16 @@
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('en');"}
                     English
             %li
-              %a{:href => "#", :title => "Switch theme"}
+              %a{:href => "#", :title => t('.switch_theme')}
                 %i.fa.fa-circle{:style => "font-size: x-large;", "ng-click" => "switchStyle();"}
             - if user_signed_in?
               %li
-                = link_to("#{current_user.name || current_user.email}", "/user/#{current_user.id}")
+                = link_to "#{current_user.name || current_user.email}", user_path(current_user)
               %li
-                = link_to("Sign out", destroy_user_session_url, method: :delete)
+                = link_to(t('.sign_out'), destroy_user_session_url, method: :delete)
             -else
               %li
-                %a{:href => "/login"}Sign in
+                %a{:href => "/login"}= t '.sign_in'
 
     - if flash[:notice]
       .alert.alert-info{:role => "alert", :style => " margin: 10px;"}=notice
@@ -75,12 +75,11 @@
     %div
       %script{:id => "badge_modal", :type => "text/ng-template"}
         %div{:style => "text-align: center;"}
-          %h1 New badge!
+          %h1= t '.new_badge'
           %img{:src => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{newBadge.title}}.png", width: "200px"}
           %h3 {{newBadge.title}}
           %h4 level {{newBadge.level}}
           %h5 {{newBadge.description}}
-          %button.btn.btn-warning{:type => "button", :style => "margin-bottom: 10px;", "ng-click" => "cancel()"} Great!
-      -#%button.btn.btn-default{"ng-click" => "checkBadgesPending('commentator')", :type => "button"} Check badges!
+          %button.btn.btn-warning{:type => "button", :style => "margin-bottom: 10px;", "ng-click" => "cancel()"}= t '.great_badge'
 
     = yield

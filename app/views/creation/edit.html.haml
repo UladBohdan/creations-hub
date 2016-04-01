@@ -2,22 +2,22 @@
   .row
     .col-md-3
       = form_for(@creation) do |f|
-        %h4 Creation title:
+        %h4= t '.creation_title'
         = f.text_field :title, class: "form-control"
-        %h4 Category:
+        %h4= t '.category'
         = f.select :category, Category.to_a.push(["",0]), {:selected => (@creation.category || 0)}, class: "form-control"
-        %h4 Tags:
+        %h4= t '.tags'
         = f.text_field :tag_list, multiple: true, id: "railsTags", hidden: true
         %tags-input{"ng-model" => "tags"}
           %auto-complete{"source" => "loadTags($query)"}
         %br/
         .actions
-          = f.submit "Save general information", class: "btn btn-success", "ng-click": "arrayOfTags();"
+          = f.submit t('.save'), class: "btn btn-success", "ng-click": "arrayOfTags();"
 
 
       %br/
       = link_to creation_path(@creation) do
-        %button{:class => "btn btn-default"} Back to creation's overview
+        %button{:class => "btn btn-default"}= t '.back'
 
     .col-md-9
       .panel.panel-default
@@ -33,11 +33,11 @@
         .panel-body
           %input{:input => "text", :class => "form-control", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
           %textarea{:class => "form-control", :rows => "17", "ng-model" => "currentChapterText"}
-          %i Use markdown to format the text.
+          %i= t '.use_markdown'
           %br/
           %i
-            You may get started with markdown
-            %a{:href => "https://help.github.com/articles/basic-writing-and-formatting-syntax/"} here
+            = t '.get_started_markdown'
+            %a{:href => "https://help.github.com/articles/basic-writing-and-formatting-syntax/"}= t :here
           %span{:class => "pull-right"}
             %button{:class => "btn btn-success", :style => "margin-top: 5px;", "ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
-              Update chapter!
+              = t '.update_chapter'

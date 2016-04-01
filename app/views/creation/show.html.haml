@@ -9,13 +9,13 @@
       %br
       - if can?(:read, @creation) && @creation.chapters.any?
         = link_to read_path(@creation.chapters.first), target: "_blank" do
-          = button_tag("Read", :type => "button", :class => "btn btn-primary")
+          = button_tag(t(:read), :type => "button", :class => "btn btn-primary")
       - if can? :edit, @creation
         = link_to edit_creation_url(@creation) do
-          = button_tag("Edit", :type => "button", :class => "btn btn-primary")
+          = button_tag(t(:edit), :type => "button", :class => "btn btn-primary")
       - if can? :destroy, @creation
         = link_to creation_url(@creation), method: :delete, data: {confirm: "Are you sure? This cannot be undone" } do
-          = button_tag("Remove", :type => "button", :class => "btn btn-danger")
+          = button_tag(t(:remove), :type => "button", :class => "btn btn-danger")
       %br/
       %br/
       - if @creation.category
@@ -26,31 +26,31 @@
           %i= list_of_tags(@creation)
       %br/
       %h4
-        created at
-        = @creation.created_at
+        = t :created_at
+        = l @creation.created_at, format: :long
       %h4
-        last modified at
-        = @creation.updated_at
+        = t :last_modified_at
+        = l @creation.updated_at, format: :long
       %h4
-        by
+        = t :by
         = image_tag @creation.user.image, height: 40, style: "margin-right: 5px; margin-left: 5px;"
         = link_to @creation.user.name, user_path(@creation.user)
 
     .col-md-8
       - if @creation.chapters.any?
         %h2{:style => "color: gray;"}
-          Chapters overview:
+          = t '.chapters_overview'
           %span{:class => "pull-right", :style => "color: lightgray;"}
-            last modified
+            = t :last_modified
         - @creation.chapters.each_with_index do |chapter, i|
           %h4
             %b= "#{i+1}."
             = link_to read_path(chapter), target: "_blank" do
               = chapter.title
             %span{:class => "pull-right", :style => "color: lightgray;"}
-              %i= chapter.updated_at
+              %i= l chapter.updated_at, format: :short
       - else
-        %h2{:style => "color: gray;"} This creation has no chapters yet.
+        %h2{:style => "color: gray;"}= t '.no_chapters'
       %br/
       %br/
       %div{:id => "comments"}
