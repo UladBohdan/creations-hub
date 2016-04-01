@@ -34,22 +34,15 @@ class Creation < ActiveRecord::Base
     end
 
     def get_set_of_creations(filters)
-      filters = improve_params filters || {}
-      creations = Creation.includes(:user, :ratings, :comments, :chapters, :tags).all
-      creations.where! category: Category.value_for(filters[:category].upcase) if filters[:category] != "all"
-      if filters[:sort] == "most_rated"
-        creations = most_rated.includes(:user, :comments, :chapters, :tags).preload(:ratings)
-        creations.limit!(filters[:limit]) if filters[:limit] != "no_limit"
-      elsif filters[:sort] != "any"
-        creations.order!("#{filters[:sort]} DESC")
-        creations.limit!(filters[:limit]) if filters[:limit] != "no_limit"
-      else
-        return creations.sample(filters[:limit].to_i) if filters[:limit] != "no_limit"
-     end
-      creations
+      filters = refactor_params filters
+      all.set_category(filters[:category])
+          .set_sort(filters[:sort])
+          .set_limit(filters[:limit])
+          .includes(:user, :comments, :chapters, :tags).preload(:ratings)
     end
 
-    def improve_params(filters)
+    def refactor_params(filters)
+      filters ||= {}
       default_filters = { limit: 6, category: "all", sort: "any" }
       filters.reverse_merge!(default_filters)
       filters[:sort] = "created_at" if filters[:sort] == "recently_created"
@@ -60,8 +53,25 @@ class Creation < ActiveRecord::Base
       filters
     end
 
-    def most_rated
-      joins(:ratings).group("creations.id").order("AVG(ratings.value) DESC")
+    def set_category(category)
+      (category == "all") ? all : where(category: Category.value_for(category.upcase))
+    end
+
+    def set_sort(sort)
+      case sort
+        when "most_rated"
+          joins(:ratings).group("creations.id").order("AVG(ratings.value) DESC")
+        when "created_at"
+          order "created_at DESC"
+        when "updated_at"
+          order "updated_at DESC"
+        else
+          all
+      end
+    end
+
+    def set_limit(limit)
+      (limit == "no_limit") ? all : limit(limit)
     end
 
     def get_all_tags

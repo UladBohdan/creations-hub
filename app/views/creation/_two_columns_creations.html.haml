@@ -15,7 +15,7 @@
             %br/
           .panel-body
             - if !creation.chapters.any?
-              %i This creation is empty: it has no chapters. We guess, author will add them later.
+              %i= t ".empty_creation"
             - else
               - creation.chapters.each_with_index do |chapter, j|
                 %b= "#{j+1}. "

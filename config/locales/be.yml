@@ -274,6 +274,9 @@ be:
       rating: "Рэйтынг:"
       yout-rating: "Ваш рэйтынг:"
 
+    two_columns_creations:
+      empty_creation: "Крэатыў пусты: ніводнай главы не створана. Мяркуем, яны дададуцца пазней."
+
   comment:
     comments:
       opinions: "Меркаванні:"

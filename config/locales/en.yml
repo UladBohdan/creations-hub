@@ -67,6 +67,9 @@ en:
       rating: "Rating:"
       yout-rating: "Your rating:"
 
+    two_columns_creations:
+      empty_creation: "This creation is empty: it has no chapters. We guess, author will add them later."
+
   comment:
     comments:
       opinions: "Opinions:"
