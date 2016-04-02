@@ -19,19 +19,31 @@
       = link_to creation_path(@creation) do
         %button{:class => "btn btn-default"}= t '.back'
 
-    .col-md-9
+      %br/
+      %br/
+      %div{:style => "text-align: center;", "ng-if" => "trashVisible"}
+        %ul{"dnd-list" => "[]", "dnd-drop" => "removeChapter()", :style => "list-style-type: none;"}
+          %li
+            .fa.fa-trash.fa-5x
+            %br/
+            Drop chapter to remove
+          %li.dndPlaceholder{:style => "display: none;"}
 
+    .col-md-9
       .panel.panel-default
         .panel-heading
           %ul.nav.nav-tabs{"dnd-list" => "chapters", "dnd-inserted" => "updateChapterOrder();"}
-            %li{:role => "presentation", "ng-class" => "currentChapterId == chapter.id ? 'active' : '';", "dnd-draggable" => "chapter", "dnd-effect-allowed" => "move", "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters"}
+            %li{:role => "presentation", "ng-class" => "currentChapterId == chapter.id ? 'active' : '';",
+                "dnd-draggable" => "chapter", "dnd-effect-allowed" => "move",
+                "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters",
+                "dnd-dragstart" => "showTrash(chapter.id)", "dnd-dragend" => "hideTrash()"}
               %a{"ng-click" => "changeWorkingChapter(chapter.id)"}
-                -#%span{:style => "font-size: large; font-weight: bold;"}
+                %span{:style => "font-size: large; font-weight: bold;"}
                   {{chapter.id}}
-                  -#%br/
+                  %br/
                 .chapter-title-small
                   {{chapter.title}}
-            %li.pull-right{:role => "presentation"}
+            %li.pull-right.trash{:role => "presentation"}
               %a{:href => "#", "ng-click" => "removeChapter()"}
                 %i.fa.fa-trash{:style => "color: red;"}
             %li.pull-right{:role => "presentation"}

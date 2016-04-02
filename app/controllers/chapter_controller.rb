@@ -4,7 +4,7 @@ class ChapterController < ApplicationController
   before_action :set_chapter, only: [:read, :destroy]
 
   def create
-    @creation.chapters << Chapter.create!(title: "Title for your new chapter!", text: "**Your new chapter text**", position: params[:position])
+    @creation.chapters << Chapter.create!(title: "NEW", text: "**Your new chapter text**", position: params[:position])
     set_chapters
     render :json => @chapters.to_json
   end
@@ -15,6 +15,8 @@ class ChapterController < ApplicationController
 
   def update
     Chapter.where(id: params[:id]).first.update(text: params[:text], title: params[:title])
+    set_creation
+    set_chapters
     render :json => @chapters.to_json
   end
 

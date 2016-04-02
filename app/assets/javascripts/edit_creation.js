@@ -8,6 +8,10 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.textBeforeEditing = "";
     $scope.titleBeforeEditing = "";
 
+    $scope.trashVisible = false;
+    $scope.toRemove = 0;
+    $scope.tempRemove = "";
+
     $scope.strTags = "";
     $scope.strAllTags = "";
 
@@ -48,6 +52,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             angular.copy(response.data, $scope.chapters);
             sortChapters();
             $scope.currentChapterId = $scope.chapters[0].id;
+            $scope.toRemove = $scope.currentChapterId;
             chooseChapter();
         }, function errorCallback(response) {
             alert("failed:(");
@@ -99,12 +104,13 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.removeChapter = function() {
         if (confirm("Are you sure? This cannot be undone")) {
             $http({
-                url: "/creation/" + $scope.creation_id + "/chapter/" + $scope.currentChapterId,
+                url: "/creation/" + $scope.creation_id + "/chapter/" + $scope.toRemove,
                 format: "json",
                 method: "DELETE"
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
                 $scope.currentChapterId = $scope.chapters[0].id;
+                $scope.toRemove = $scope.currentChapterId;
                 chooseChapter();
             }, function errorCallback(response) {
                 alert("failed:(");
@@ -114,6 +120,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
 
     $scope.changeWorkingChapter = function(id) {
         $scope.currentChapterId = id;
+        $scope.toRemove = $scope.currentChapterId;
         chooseChapter();
     };
 
@@ -122,10 +129,11 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             url: "/creation/" + $scope.creation_id + "/chapter",
             format: "json",
             method: "POST",
-            data: {position: $scope.chapters.length}
+            data: { position: $scope.chapters[$scope.chapters.length-1].position+1 }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
             $scope.currentChapterId = $scope.chapters[$scope.chapters.length-1].id;
+            $scope.toRemove = $scope.currentChapterId;
             chooseChapter();
         }, function errorCallback(response) {
             alert("failed:(");
@@ -147,4 +155,16 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         $scope.textBeforeEditing = $scope.currentChapterText;
         $scope.titleBeforeEditing = $scope.currentChapterTitle;
     }
+
+    $scope.showTrash = function(id) {
+        $scope.toRemove = id;
+        $scope.tempRemove = $scope.currentChapterId;
+        $scope.trashVisible = true;
+    };
+
+    $scope.hideTrash = function() {
+        $scope.toRemove = $scope.tempRemove;
+        $scope.trashVisible = false;
+    };
+
 }]);
