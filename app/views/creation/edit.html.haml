@@ -51,14 +51,14 @@
                 "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters",
                 "dnd-dragstart" => "showTrash(chapter.id)", "dnd-dragend" => "hideTrash()"}
               %a{"ng-click" => "chooseChapter(chapter.id)"}
-                -#%span{:style => "font-size: large; font-weight: bold;"}
+                %span{:style => "font-size: large; font-weight: bold;"}
                   {{chapter.id}}
                   %br/
                 .chapter-title-small
                   {{chapter.title}}
             %li.dndPlaceholder{:role => "presentation"}
               %a{:href => "#"}
-                -#%span{:style => "font-size: large; font-weight: bold;"}
+                %span{:style => "font-size: large; font-weight: bold;"}
                   PH
                   %br/
                 .chapter-title-small{:style => "font-weight: bold;"}
@@ -78,4 +78,4 @@
               .col-sm-3
                 .btn.btn-success.form-control{"ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
                   = t ".update_chapter"
-          %textarea.form-control{"ui-tinymce" => "", "ng-model" => "$parent.currentChapterText", "rows" => "10"}
+          %textarea.form-control{"ui-tinymce" => "tinymceOptions", "ng-model" => "$parent.currentChapterText", "rows" => "10"}

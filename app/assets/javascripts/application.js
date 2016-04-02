@@ -25,5 +25,10 @@
 //= require angular-ui-tinymce/src/tinymce
 
 //= require app
+//= require badge
+//= require dropdowns
+//= require edit_creation
+//= require local_data
+//= require profile_image
+//= require tags
 
-//= require_tree .

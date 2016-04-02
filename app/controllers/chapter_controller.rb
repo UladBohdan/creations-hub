@@ -4,14 +4,12 @@ class ChapterController < ApplicationController
   before_action :set_chapter, only: [:read, :destroy]
 
   def create
-    @creation.chapters << Chapter.create!(title: "NEW", text: "**Your new chapter text**", position: params[:position])
+    @creation.chapters << Chapter.create!(title: "NEW", text: "<p><span style='font-size: 16px; font-family: tahoma;'>Your new chapter text</span></p>", position: params[:position])
     set_chapters
-    puts "CHAPTERS #{@chapters.length}"
     render :json => @chapters.to_json
   end
 
   def index
-    puts "CHAPTERS #{@chapters.length}"
     render :json => @chapters.to_json
   end
 
@@ -30,8 +28,7 @@ class ChapterController < ApplicationController
   end
 
   def read
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-    @markdowned = markdown.render(@chapter.text)
+    @text = @chapter.text
   end
 
   def destroy
