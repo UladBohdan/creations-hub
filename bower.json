@@ -2,6 +2,13 @@
   "name": "creations-hub",
   "dependencies": {
     "normalize-css": "*",
-    "angular-ui-tinymce": "latest"
+    "angular": "1.5.3",
+    "angular-ui-tinymce": "latest",
+    "angular-cookies": "*",
+    "ng-file-upload": "*",
+    "jqcloud2": "^2.0.1",
+    "ng-tags-input": "^3.0.0",
+    "angular-drag-and-drop-lists": "*",
+    "angular-bootstrap": "^1.2.5"
   }
 }

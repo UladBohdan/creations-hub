@@ -1,0 +1,37 @@
+.logo-text {
+    color: darkred;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.profile-image {
+    border-radius: 3px;
+}
+
+.chapter-title-small{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+.left-label {
+    position: fixed;
+    left: 0;
+    font-size: large;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.back-creation {
+    top: 80%;
+}
+
+ul[dnd-list],
+ul[dnd-list] > li {
+    position: relative;
+}
+
+ul[dnd-list] .dndDraggingSource {
+    display: none;
+}
