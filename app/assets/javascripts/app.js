@@ -3,7 +3,8 @@ app = angular.module('CreationsHub', [
     'ngFileUpload',
     'ngTagsInput',
     'angular-jqcloud',
-    'ngCookies'
+    'ngCookies',
+    'dndLists'
 ]);
 
 app.config([

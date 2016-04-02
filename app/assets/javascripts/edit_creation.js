@@ -1,4 +1,4 @@
-app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http, $log) {
+app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) {
 
     $scope.chapters = [];
     $scope.creation_id = "";
@@ -46,12 +46,21 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http, 
             method: "GET"
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
+            sortChapters();
             $scope.currentChapterId = $scope.chapters[0].id;
             chooseChapter();
         }, function errorCallback(response) {
             alert("failed:(");
         });
     };
+
+    function sortChapters() {
+        $scope.chapters.sort(
+            function (a, b) {
+                return a.position - b.position;
+            }
+        );
+    }
 
     $scope.updateChapter = function() {
         $http({
@@ -68,6 +77,41 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http, 
         });
     };
 
+    $scope.updateChapterOrder = function() {
+        var new_order = [];
+        $scope.chapters.forEach(
+            function(chapter, index) {
+                new_order[index] = chapter.id;
+            }
+        );
+        $http({
+            url: "/creation/" + $scope.creation_id + "/chapter/reorder",
+            format: "json",
+            method: "POST",
+            data: { new_order: new_order }
+        }).then( function successCallback(response) {
+            //alert("ok");
+        }, function errorCallback(response) {
+            alert("failed:(");
+        });
+    };
+
+    $scope.removeChapter = function() {
+        if (confirm("Are you sure? This cannot be undone")) {
+            $http({
+                url: "/creation/" + $scope.creation_id + "/chapter/" + $scope.currentChapterId,
+                format: "json",
+                method: "DELETE"
+            }).then( function successCallback(response) {
+                angular.copy(response.data, $scope.chapters);
+                $scope.currentChapterId = $scope.chapters[0].id;
+                chooseChapter();
+            }, function errorCallback(response) {
+                alert("failed:(");
+            });
+        }
+    };
+
     $scope.changeWorkingChapter = function(id) {
         $scope.currentChapterId = id;
         chooseChapter();
@@ -77,7 +121,8 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http, 
         $http({
             url: "/creation/" + $scope.creation_id + "/chapter",
             format: "json",
-            method: "POST"
+            method: "POST",
+            data: {position: $scope.chapters.length}
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
             $scope.currentChapterId = $scope.chapters[$scope.chapters.length-1].id;

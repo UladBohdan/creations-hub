@@ -21,7 +21,11 @@ Rails.application.routes.draw do
         get 'like'
       end
     end
-    resources :chapter
+    resources :chapter do
+      collection do
+        post 'reorder' => 'chapter#reorder'
+      end
+    end
   end
 
   devise_for :users

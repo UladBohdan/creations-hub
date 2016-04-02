@@ -20,19 +20,27 @@
         %button{:class => "btn btn-default"}= t '.back'
 
     .col-md-9
+
       .panel.panel-default
         .panel-heading
-          %ul{:class => "nav nav-tabs", :style => "font-size: large; font-weight: bold;"}
-            %li{"ng-repeat" => "chapter in chapters", :role => "presentation", "ng-class" => "currentChapterId == chapter.id ? 'active' : '';"}
+          %ul.nav.nav-tabs{"dnd-list" => "chapters", "dnd-inserted" => "updateChapterOrder();"}
+            %li{:role => "presentation", "ng-class" => "currentChapterId == chapter.id ? 'active' : '';", "dnd-draggable" => "chapter", "dnd-effect-allowed" => "move", "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters"}
               %a{"ng-click" => "changeWorkingChapter(chapter.id)"}
-                {{chapter.id}}
-            %li{:role => "presentation", :class => "pull-right"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
+                  {{chapter.id}}
+                  -#%br/
+                .chapter-title-small
+                  {{chapter.title}}
+            %li.pull-right{:role => "presentation"}
+              %a{:href => "#", "ng-click" => "removeChapter()"}
+                %i.fa.fa-trash{:style => "color: red;"}
+            %li.pull-right{:role => "presentation"}
               %a{:href => "#", "ng-click" => "addNewChapter()"}
                 %i.fa.fa-plus{:style => "color: #28b62c;"}
             %br/
         .panel-body
-          %input{:input => "text", :class => "form-control", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
-          %textarea{:class => "form-control", :rows => "17", "ng-model" => "currentChapterText"}
+          %input.form-control{:input => "text", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
+          %textarea.form-control{:rows => "17", "ng-model" => "currentChapterText"}
           %i= t '.use_markdown'
           %br/
           %i

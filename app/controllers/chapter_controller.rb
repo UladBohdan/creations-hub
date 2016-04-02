@@ -1,10 +1,10 @@
 class ChapterController < ApplicationController
-  before_action :set_creation, except: :read
-  before_action :set_chapters, except: [:create, :read]
-  before_action :set_chapter, only: :read
+  before_action :set_creation, except: [:read, :destroy]
+  before_action :set_chapters, only: [:index, :update, :reorder]
+  before_action :set_chapter, only: [:read, :destroy]
 
   def create
-    @creation.chapters << Chapter.create!(title: "Title for your new chapter!", text: "**Your new chapter text**")
+    @creation.chapters << Chapter.create!(title: "Title for your new chapter!", text: "**Your new chapter text**", position: params[:position])
     set_chapters
     render :json => @chapters.to_json
   end
@@ -18,9 +18,23 @@ class ChapterController < ApplicationController
     render :json => @chapters.to_json
   end
 
+  def reorder
+    ActiveRecord::Base.transaction do
+      params[:new_order].each_with_index { |id, pos| Chapter.where(id: id).first.update(position: pos) }
+    end
+    render :json => {status: :ok}
+  end
+
   def read
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
     @markdowned = markdown.render(@chapter.text)
+  end
+
+  def destroy
+    @chapter.destroy!
+    set_creation
+    set_chapters
+    render :json => @chapters.to_json
   end
 
   private

@@ -13,7 +13,7 @@ app.controller("LocalDataCtrl", ['$scope', '$location', '$window', '$cookies', f
         var old_lang = $scope.lang;
         $scope.lang = lang;
         if (old_lang != $scope.lang) {
-            $cookies.put("locale", $scope.lang);
+            $cookies.put("locale", $scope.lang, {path: "/"});
             $window.location.href = buildBaseUrl();
         }
     };

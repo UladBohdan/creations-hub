@@ -19,5 +19,6 @@
 //= require ng-file-upload.min
 //= require ng-tags-input.min
 //= require angular-cookies.min
+//= require angular-drag-and-drop-lists.min
 //= require app
 //= require_tree .
