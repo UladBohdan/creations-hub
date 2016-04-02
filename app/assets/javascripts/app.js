@@ -18,7 +18,6 @@ app.controller('NavBarCtrl', ['$scope', function ($scope) {
     $scope.currentUserId = "";
 }]);
 
-
 app.controller("UserCtrl", function ($scope) {
     $scope.mode = "creations";
     $scope.creationsClass = "active";

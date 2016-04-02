@@ -1,6 +1,21 @@
-.container
+.container.page80{"ng-class" => "currentWidth"}
 
-  %text-angular{"ng-model" => "htmlVariable", "ta-toolbar" => "[['h1','h2','h3'],['bold','italics']]"}
+  .panel.panel-default
+    .panel-body
+      .h1.current-chapter= "##{@chapter.position} #{@chapter.title}"
+      - if not @prev_chapter.nil?
+        = link_to read_path(@prev_chapter) do
+          %h4
+            .fa.fa-arrow-left
+            = @prev_chapter.title
+      - if not @next_chapter.nil?
+        = link_to read_path(@next_chapter) do
+          %h4
+            .fa.fa-arrow-right
+            = @next_chapter.title
+  %br/
 
+  %div.read-medium{"ng-class" => "currentState"}
+    = raw @chapter.text
 
-  = raw @text
+  %br/

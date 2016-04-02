@@ -1,5 +1,5 @@
 class ChapterController < ApplicationController
-  before_action :set_creation, except: [:read, :destroy]
+  before_action :set_creation, except: [:destroy, :read]
   before_action :set_chapters, only: [:index, :update, :reorder]
   before_action :set_chapter, only: [:read, :destroy]
 
@@ -28,7 +28,16 @@ class ChapterController < ApplicationController
   end
 
   def read
-    @text = @chapter.text
+    puts "CHAPTER #{@chapter.id}"
+    @creation = Creation.includes(:chapters).where(id: @chapter.creation_id).first
+    puts "CREATION #{@creation.id}"
+    @creation.chapters.sort_by { |chapter| chapter.position }
+    @creation.chapters.each_with_index do |chapter, i|
+      if chapter.id == @chapter.id
+        @prev_chapter = @creation.chapters[i-1]
+        @next_chapter = @creation.chapters[i+1]
+      end
+    end
   end
 
   def destroy
@@ -49,7 +58,7 @@ class ChapterController < ApplicationController
   end
 
   def set_chapter
-    @chapter = Chapter.where(id: params[:id]).first
+    @chapter = Chapter.includes(:creation).where(id: params[:id]).first
   end
 
   def set_chapters

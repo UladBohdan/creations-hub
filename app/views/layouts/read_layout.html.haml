@@ -9,7 +9,7 @@
     = csrf_meta_tags
 
   %body{"ng-controller" => "ReadCtrl"}
-    %nav{:class => "navbar navbar-default", "ng-controller" => "NavBarCtrl"}
+    %nav.navbar.navbar-default{"ng-controller" => "NavBarCtrl"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
         .navbar-header
@@ -19,27 +19,40 @@
                   "data-target" => "#bs-example-navbar-collapse-1",
                   "aria-expanded" => "false",
                   "ng-click" => "isCollapsed = !isCollapsed"}
-            %span{:class => "sr-only"}Toggle navigation
-            %span{:class => "icon-bar"}
-            %span{:class => "icon-bar"}
-            %span{:class => "icon-bar"}
-          %a{:class => "navbar-brand", :href => "#"}
-            %span{:class => "logo-text"}= @chapter.title
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to creation_path(@creation), class: "navbar-brand" do
+            %span{:class => "logo-text"}= @creation.title
 
         -# Collect the nav links, forms, and other content for toggling
         %div{:class => "collapse navbar-collapse",
               :id => "bs-example-navbar-collapse-1",
               "uib-collapse" => "isCollapsed"}
-          %ul{:class => "nav navbar-nav"}
-          %form{:class => "navbar-form navbar-left"}
-            %a{:href => "#"}
-              %button{:type => "button", :class => "btn btn-warning"}Text size
-            %a{:href => "#"}
-              %button{:type => "button", :class => "btn btn-warning"}Text width
-            %a{:href => "#"}
-              %button{:type => "button", :class => "btn btn-warning"}Next chapter
+          %ul.navbar{:class => "nav navbar-nav"}
+
+
 
           %ul{:class => "nav navbar-nav navbar-right", :style => "font-weight: bold;"}
+
+            %li
+              %a{:style => "font-size: ;", :href => "", "ng-click" => "resize('small')"} A
+            %li
+              %a{:style => "font-size: large;", :href => "", "ng-click" => "resize('medium')"} A
+            %li
+              %a{:style => "font-size: x-large;", :href => "", "ng-click" => "resize('large')"} A
+
+            %li
+              %a{:style => "font-size: ;", :href => "", "ng-click" => "changeWidth('50')"} 50%
+            %li
+              %a{:style => "font-size: large;", :href => "", "ng-click" => "changeWidth('80')"} 80%
+            %li
+              %a{:style => "font-size: x-large;", :href => "", "ng-click" => "changeWidth('100')"} 100%
+
+            %li
+              %a{:href => "", :style => "width: 100px;"}
+
 
             %li{"uib-dropdown" => ""}
               %a{:href => "", :id => "lang-dropdown", "uib-dropdown-toggle" => "", :style => "font-size: large;"}

@@ -4,6 +4,10 @@
     font-size: x-large;
 }
 
+.current-chapter {
+    font-weight: bold;
+}
+
 .profile-image {
     border-radius: 3px;
 }
