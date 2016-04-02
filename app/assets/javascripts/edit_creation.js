@@ -19,28 +19,6 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.tags = [];
     $scope.allTags = [];
 
-    $scope.tinymceOptions = {
-        selector: "textarea#content",
-        theme: "modern",
-        //toolbar: "undo redo | code | bold italic | link image anchor | bullist numlist | fontselect |  fontsizeselect",
-        fontsize_formats: "8pt 10pt 12pt 14pt 18pt 24pt 36pt",
-        menubar: false,
-        /*plugins: [
-            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-            "searchreplace wordcount visualblocks visualchars code fullscreen",
-            "insertdatetime media nonbreaking save table contextmenu directionality",
-            "emoticons template paste textcolor"
-        ], */
-        setup : function(editor)
-        {
-            editor.on('init', function()
-            {
-                this.execCommand("fontName", false, "tahoma");
-                this.execCommand("fontSize", false, "22px");
-            });
-        }
-    };
-
     $scope.arrayOfTags = function() {
         var response = [];
         for (var i = 0; i < $scope.tags.length; i++) {

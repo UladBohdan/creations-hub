@@ -78,4 +78,7 @@
               .col-sm-3
                 .btn.btn-success.form-control{"ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
                   = t ".update_chapter"
-          %textarea.form-control{"ui-tinymce" => "tinymceOptions", "ng-model" => "$parent.currentChapterText", "rows" => "10"}
+          %text-angular{"ng-model" => "$parent.currentChapterText",
+                        "ta-toolbar" => "[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre'], ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent']]"}
+
+          -#%textarea.form-control{"ui-tinymce" => "tinymceOptions", "ng-model" => "$parent.currentChapterText", "rows" => "10"}

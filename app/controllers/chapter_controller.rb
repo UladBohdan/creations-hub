@@ -4,7 +4,7 @@ class ChapterController < ApplicationController
   before_action :set_chapter, only: [:read, :destroy]
 
   def create
-    @creation.chapters << Chapter.create!(title: "NEW", text: "<p><span style='font-size: 16px; font-family: tahoma;'>Your new chapter text</span></p>", position: params[:position])
+    @creation.chapters << Chapter.create!(title: "NEW", text: "<h1>Your new chapter text</h1>", position: params[:position])
     set_chapters
     render :json => @chapters.to_json
   end

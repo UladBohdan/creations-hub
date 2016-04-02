@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require jqcloud2/dist/jqcloud.min
-//= require tinymce-dist/tinymce
 
 //= require angular/angular.min
 //= require angular-jqcloud
@@ -22,7 +21,9 @@
 //= require ng-tags-input/ng-tags-input.min
 //= require angular-cookies/angular-cookies.min
 //= require angular-drag-and-drop-lists/angular-drag-and-drop-lists.min
-//= require angular-ui-tinymce/src/tinymce
+//= require textAngular/dist/textAngular-rangy.min
+//= require textAngular/dist/textAngular-sanitize.min
+//= require textAngular/dist/textAngular.min
 
 //= require app
 //= require badge
@@ -31,4 +32,5 @@
 //= require local_data
 //= require profile_image
 //= require tags
+//= require read
 

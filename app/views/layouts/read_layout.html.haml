@@ -8,7 +8,7 @@
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-app" => "CreationsHub"}
+  %body{"ng-controller" => "ReadCtrl"}
     %nav{:class => "navbar navbar-default", "ng-controller" => "NavBarCtrl"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
