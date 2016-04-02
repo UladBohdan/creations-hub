@@ -1,6 +1,24 @@
 .container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; strAllTags = '#{Creation.get_all_tags.to_json}'; strTags = '#{@creation.get_tags.to_json}'; initTags(); receiveChapters(); checkBadgesPending('author');"}
+  .label.label-info.left-label{"ng-click" => "settingsVisible = (settingsVisible ? false : true)"}
+    %span{"ng-if" => "settingsVisible == true"}
+      .fa.fa-arrow-left.fa-2x
+      %small
+        %br/
+        Hide
+    %span{"ng-if" => "settingsVisible == false"}
+      .fa.fa-arrow-right.fa-2x
+      %small
+        %br/
+        Show
+
+  = link_to creation_path(@creation) do
+    .label.label-danger.left-label.back-creation
+      .fa.fa-times.fa-2x
+      %br/
+      Back
+
   .row
-    .col-md-3
+    .col-md-3{"ng-if" => "settingsVisible"}
       = form_for(@creation) do |f|
         %h4= t '.creation_title'
         = f.text_field :title, class: "form-control"
@@ -15,10 +33,6 @@
           = f.submit t('.save'), class: "btn btn-success", "ng-click": "arrayOfTags($query);"
 
 
-      %br/
-      = link_to creation_path(@creation) do
-        %button{:class => "btn btn-default"}= t '.back'
-
       %div{:style => "text-align: center; margin-top: 30px;", "ng-if" => "trashVisible"}
         %ul{"dnd-list" => "[]", "dnd-drop" => "removeChapter()", :style => "list-style-type: none;"}
           %li
@@ -27,7 +41,8 @@
             Drop chapter to remove
           %li.dndPlaceholder{:style => "display: none;"}
 
-    .col-md-9
+
+    %div{"ng-class" => "settingsVisible ? 'col-md-9' : 'col-md-12'"}
       .panel.panel-default
         .panel-heading
           %ul.nav.nav-tabs{"dnd-list" => "chapters", "dnd-inserted" => "updateChapterOrder();"}
@@ -56,13 +71,11 @@
                 %i.fa.fa-plus-square{:style => "color: #28b62c; font-size: large;"}
 
         .panel-body{"ng-if" => "currentChapterId != 0"}
-          %input.form-control{:input => "text", "ng-model" => "$parent.currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
-          %textarea.form-control{:rows => "17", "ng-model" => "$parent.currentChapterText"}
-          %i= t '.use_markdown'
-          %br/
-          %i
-            = t '.get_started_markdown'
-            %a{:href => "https://help.github.com/articles/basic-writing-and-formatting-syntax/"}= t :here
-          %span{:class => "pull-right"}
-            %button{:class => "btn btn-success", :style => "margin-top: 5px;", "ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
-              = t '.update_chapter'
+          %div.form-horizontal
+            .form-group
+              .col-sm-9
+                %input.form-control{:input => "text", "ng-model" => "$parent.currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
+              .col-sm-3
+                .btn.btn-success.form-control{"ng-if" => "currentChapterTitle != titleBeforeEditing || currentChapterText != textBeforeEditing", "ng-click" => "updateChapter()"}
+                  = t ".update_chapter"
+          %textarea.form-control{"ui-tinymce" => "", "ng-model" => "$parent.currentChapterText", "rows" => "10"}

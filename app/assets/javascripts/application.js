@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jqcloud.min
+//= require tinymce-dist/tinymce
+
 //= require angular.min
 //= require angular-jqcloud
 //= require ui-bootstrap-tpls-1.2.4.min
@@ -20,5 +22,6 @@
 //= require ng-tags-input.min
 //= require angular-cookies.min
 //= require angular-drag-and-drop-lists.min
+//= require angular-ui-tinymce/src/tinymce
 //= require app
 //= require_tree .

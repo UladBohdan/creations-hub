@@ -9,6 +9,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.titleBeforeEditing = "";
 
     $scope.trashVisible = false;
+    $scope.settingsVisible = true;
     $scope.toRemove = 0;
     $scope.tempRemove = "";
 
@@ -52,9 +53,9 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             angular.copy(response.data, $scope.chapters);
             sortChapters();
             if (anyChapters()) {
-                chooseChapter($scope.chapters[0].id)
+                $scope.chooseChapter($scope.chapters[0].id)
             } else {
-                chooseChapter(0);
+                $scope.chooseChapter(0);
             }
         }, function errorCallback(response) {
             alert("failed:(");
@@ -78,7 +79,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             data: { text: $scope.currentChapterText, title: $scope.currentChapterTitle }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            chooseChapter($scope.currentChapterId);
+            $scope.chooseChapter($scope.currentChapterId);
         }, function errorCallback(response) {
             alert("failed:(");
         });
@@ -111,7 +112,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
                 method: "DELETE"
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
-                chooseChapter(anyChapters() ? $scope.chapters[0].id : 0);
+                $scope.chooseChapter(anyChapters() ? $scope.chapters[0].id : 0);
             }, function errorCallback(response) {
                 alert("failed:(");
             });
@@ -132,7 +133,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             data: { position: new_position }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            chooseChapter($scope.chapters[$scope.chapters.length-1].id);
+            $scope.chooseChapter($scope.chapters[$scope.chapters.length-1].id);
         }, function errorCallback(response) {
             alert("failed:(");
         });
@@ -147,7 +148,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         return 0;
     }
 
-    function chooseChapter(id) {
+    $scope.chooseChapter = function(id) {
         if (id === undefined) {
             id = $scope.currentChapterId;
         }

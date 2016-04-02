@@ -1,0 +1,7 @@
+{
+  "name": "creations-hub",
+  "dependencies": {
+    "normalize-css": "*",
+    "angular-ui-tinymce": "latest"
+  }
+}

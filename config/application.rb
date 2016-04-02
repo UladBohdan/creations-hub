@@ -9,6 +9,8 @@ Bundler.require(*Rails.groups)
 module CreationsHub
   class Application < Rails::Application
 
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+
     #config.autoload_paths << "#{Rails.root}/app/enumerations"
 
     # Settings in config/environments/* take precedence over those specified here.

@@ -4,7 +4,8 @@ app = angular.module('CreationsHub', [
     'ngTagsInput',
     'angular-jqcloud',
     'ngCookies',
-    'dndLists'
+    'dndLists',
+    'ui.tinymce'
 ]);
 
 app.config([
