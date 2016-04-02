@@ -18,7 +18,7 @@
           = button_tag(t(:remove), :type => "button", :class => "btn btn-danger")
       %br/
       %br/
-      - if @creation.category
+      - if @creation.category.to_i > 0
         %h3
           %b= t "enumerations.category.#{Category.key_for(@creation.category).to_s}"
       - if not @creation.tags.empty?

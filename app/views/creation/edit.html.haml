@@ -19,9 +19,7 @@
       = link_to creation_path(@creation) do
         %button{:class => "btn btn-default"}= t '.back'
 
-      %br/
-      %br/
-      %div{:style => "text-align: center;", "ng-if" => "trashVisible"}
+      %div{:style => "text-align: center; margin-top: 30px;", "ng-if" => "trashVisible"}
         %ul{"dnd-list" => "[]", "dnd-drop" => "removeChapter()", :style => "list-style-type: none;"}
           %li
             .fa.fa-trash.fa-5x
@@ -37,22 +35,29 @@
                 "dnd-draggable" => "chapter", "dnd-effect-allowed" => "move",
                 "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters",
                 "dnd-dragstart" => "showTrash(chapter.id)", "dnd-dragend" => "hideTrash()"}
-              %a{"ng-click" => "changeWorkingChapter(chapter.id)"}
-                %span{:style => "font-size: large; font-weight: bold;"}
+              %a{"ng-click" => "chooseChapter(chapter.id)"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
                   {{chapter.id}}
                   %br/
                 .chapter-title-small
                   {{chapter.title}}
-            %li.pull-right.trash{:role => "presentation"}
+            %li.dndPlaceholder{:role => "presentation"}
+              %a{:href => "#"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
+                  PH
+                  %br/
+                .chapter-title-small{:style => "font-weight: bold;"}
+                  place me here!
+            %li.pull-right.trash{:role => "presentation", "ng-if" => "currentChapterId != 0"}
               %a{:href => "#", "ng-click" => "removeChapter()"}
-                %i.fa.fa-trash{:style => "color: red;"}
+                %i.fa.fa-trash{:style => "color: red; font-size: large;"}
             %li.pull-right{:role => "presentation"}
               %a{:href => "#", "ng-click" => "addNewChapter()"}
-                %i.fa.fa-plus{:style => "color: #28b62c;"}
-            %br/
-        .panel-body
-          %input.form-control{:input => "text", "ng-model" => "currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
-          %textarea.form-control{:rows => "17", "ng-model" => "currentChapterText"}
+                %i.fa.fa-plus-square{:style => "color: #28b62c; font-size: large;"}
+
+        .panel-body{"ng-if" => "currentChapterId != 0"}
+          %input.form-control{:input => "text", "ng-model" => "$parent.currentChapterTitle", :style => "margin-bottom: 5px;", :placeholder => "Title"}
+          %textarea.form-control{:rows => "17", "ng-model" => "$parent.currentChapterText"}
           %i= t '.use_markdown'
           %br/
           %i

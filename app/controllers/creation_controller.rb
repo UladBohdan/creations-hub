@@ -1,6 +1,8 @@
 class CreationController < ApplicationController
   before_action :set_creation, only: [:update, :destroy, :rate, :show]
   before_action :set_creation_to_edit, only: :edit
+  before_action :check_authorized, only: [:new, :rate]
+  before_action :check_user, only: [:destroy, :edit, :update]
 
   def new
     new_creation = Creation.new
@@ -52,6 +54,14 @@ class CreationController < ApplicationController
   end
 
   private
+
+  def check_authorized
+    redirect_to root_url, alert: t(".sign_in_to_process") if cannot? action_name, Creation
+  end
+
+  def check_user
+    redirect_to root_url, alert: t(".no_rights_to_process") if cannot? action_name, @creation
+  end
 
   def filter_params
     params.permit(:limit, :sort, :category)

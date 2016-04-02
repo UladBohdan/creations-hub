@@ -6,10 +6,12 @@ class ChapterController < ApplicationController
   def create
     @creation.chapters << Chapter.create!(title: "NEW", text: "**Your new chapter text**", position: params[:position])
     set_chapters
+    puts "CHAPTERS #{@chapters.length}"
     render :json => @chapters.to_json
   end
 
   def index
+    puts "CHAPTERS #{@chapters.length}"
     render :json => @chapters.to_json
   end
 

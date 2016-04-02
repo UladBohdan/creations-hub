@@ -3,8 +3,8 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     $scope.chapters = [];
     $scope.creation_id = "";
     $scope.currentChapterId = "";
-    $scope.currentChapterText = "";
-    $scope.currentChapterTitle = "";
+    $scope.currentChapterText = '';
+    $scope.currentChapterTitle = '';
     $scope.textBeforeEditing = "";
     $scope.titleBeforeEditing = "";
 
@@ -51,9 +51,11 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
             sortChapters();
-            $scope.currentChapterId = $scope.chapters[0].id;
-            $scope.toRemove = $scope.currentChapterId;
-            chooseChapter();
+            if (anyChapters()) {
+                chooseChapter($scope.chapters[0].id)
+            } else {
+                chooseChapter(0);
+            }
         }, function errorCallback(response) {
             alert("failed:(");
         });
@@ -76,7 +78,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             data: { text: $scope.currentChapterText, title: $scope.currentChapterTitle }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            chooseChapter();
+            chooseChapter($scope.currentChapterId);
         }, function errorCallback(response) {
             alert("failed:(");
         });
@@ -109,32 +111,28 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
                 method: "DELETE"
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
-                $scope.currentChapterId = $scope.chapters[0].id;
-                $scope.toRemove = $scope.currentChapterId;
-                chooseChapter();
+                chooseChapter(anyChapters() ? $scope.chapters[0].id : 0);
             }, function errorCallback(response) {
                 alert("failed:(");
             });
         }
     };
 
-    $scope.changeWorkingChapter = function(id) {
-        $scope.currentChapterId = id;
-        $scope.toRemove = $scope.currentChapterId;
-        chooseChapter();
-    };
-
     $scope.addNewChapter = function() {
+        var new_position = 0;
+        if (anyChapters()) {
+            new_position = $scope.chapters[$scope.chapters.length-1].position+1;
+        } else {
+            new_position = 1;
+        }
         $http({
             url: "/creation/" + $scope.creation_id + "/chapter",
             format: "json",
             method: "POST",
-            data: { position: $scope.chapters[$scope.chapters.length-1].position+1 }
+            data: { position: new_position }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            $scope.currentChapterId = $scope.chapters[$scope.chapters.length-1].id;
-            $scope.toRemove = $scope.currentChapterId;
-            chooseChapter();
+            chooseChapter($scope.chapters[$scope.chapters.length-1].id);
         }, function errorCallback(response) {
             alert("failed:(");
         });
@@ -149,11 +147,20 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         return 0;
     }
 
-    function chooseChapter() {
+    function chooseChapter(id) {
+        if (id === undefined) {
+            id = $scope.currentChapterId;
+        }
+        $scope.currentChapterId = id;
+        $scope.toRemove = $scope.currentChapterId;
         $scope.currentChapterText = findChapterById($scope.currentChapterId).text;
         $scope.currentChapterTitle = findChapterById($scope.currentChapterId).title;
         $scope.textBeforeEditing = $scope.currentChapterText;
         $scope.titleBeforeEditing = $scope.currentChapterTitle;
+    }
+
+    function anyChapters() {
+        return $scope.chapters.length > 0;
     }
 
     $scope.showTrash = function(id) {

@@ -68,9 +68,9 @@
                 %a{:href => "/login"}= t '.sign_in'
 
     - if flash[:notice]
-      .alert.alert-info{:role => "alert", :style => " margin: 10px;"}=notice
+      .alert.alert-info{:role => "alert", :style => "margin: 10px;"}=notice
     - if flash[:alert]
-      .alert.alert-danger{:role => "alert", :style => " margin: 0 auto; width: 70%;"}=alert
+      .alert.alert-danger{:role => "alert", :style => "margin: 10px;"}=alert
 
     %div
       %script{:id => "badge_modal", :type => "text/ng-template"}
