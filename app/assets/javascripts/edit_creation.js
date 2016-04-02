@@ -1,4 +1,4 @@
-app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) {
+app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http, $log) {
 
     $scope.chapters = [];
     $scope.creation_id = "";
@@ -22,8 +22,16 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         document.getElementById("railsTags").value = response;
     };
 
-    $scope.loadTags = function() {
-        return $scope.allTags;
+    $scope.loadTags = function(query) {
+        var tagsToReturn = [];
+        var pattern = new RegExp("^(" + query + ")");
+        $scope.allTags.forEach(
+            function(item) {
+                if (pattern.test(item.text)) {
+                    tagsToReturn.push(item.text);
+                }
+        });
+        return tagsToReturn;
     };
 
     $scope.initTags = function() {
