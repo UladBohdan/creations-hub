@@ -2,14 +2,15 @@
   .panel.panel-default
     .panel-body
       %div{"ng-if" => "emptyResult"}
-        = t(".nothing_found")
+        %p{:style => "font-size: 30px;"}
+          = t(".nothing_found")
       %div{"ng-if" => "!emptyResult"}
         %p{:style => "font-size: 30px;"}
-          = t ".what_we_found", query: "{{searchQuery}}"
+          = t ".what_we_found"
         .container
           .row
             .col-md-2{"ng-repeat" => "item in searchResults"}
-              .panel.panel-default
+              .panel.panel-default{:style => "word-wrap: break-word;"}
                 %div{"ng-switch" => "", "on" => "item.type"}
 
                   %div{"ng-switch-when" => "User"}
@@ -22,25 +23,25 @@
                   %div{"ng-switch-when" => "Comment"}
                     %a{"ng-href" => "/creation/{{item.creation_id}}"}
                       .panel-body
-                        %h4{:style => "font-weight: bold;"} Comment under creation
+                        %h4{:style => "font-weight: bold;"}= t ".comment_under_creation"
                         {{item.text}}
 
                   %div{"ng-switch-when" => "Creation"}
                     %a{"ng-href" => "/creation/{{item.id}}"}
                       .panel-body
-                        %h4{:style => "font-weight: bold;"} Creation '{{item.title}}'
+                        %h4{:style => "font-weight: bold;"}= t ".creation", title: "{{item.title}}"
 
                   %div{"ng-switch-when" => "Chapter"}
                     %a{"ng-href" => "/read/{{item.id}}"}
                       .panel-body
-                        %h4{:style => "font-weight: bold;"} Chapter '{{item.title}}'
+                        %h4{:style => "font-weight: bold;"}= t ".chapter", title: "{{item.title}}"
                         {{item.text}}
 
                   %div{"ng-switch-when" => "Badge", :style => "text-align: center;"}
                     %a{"ng-href" => "/user/{{item.user_id}}"}
                       .panel-body
-                        %h4{:style => "font-weight: bold;"} Badge '{{item.title}}'
-                        level {{item.level}}
+                        %h4{:style => "font-weight: bold;"}= t ".badge", title: "{{item.title}}"
+                        = t ".level", level: "{{item.level}}"
                         %img{:src => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{item.title}}.png", width: "100%"}
                         {{item.description}}
 

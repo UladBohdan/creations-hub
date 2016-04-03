@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   layout :resolve_layout
 
+  def admin_access_denied(exception)
+    redirect_to root_path, alert: t(:no_rights)
+  end
+
   protected
 
   def configure_permitted_parameters

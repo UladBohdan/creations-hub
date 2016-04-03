@@ -5,11 +5,13 @@ class Ability
 
     cannot :manage, :all
     can :read, :all
+    cannot :read, ActiveAdmin::Page
 
     user ||= User.new # guest user (not logged in)
 
     if user.admin?
       can :manage, :all
+      can :read, ActiveAdmin::Page, name: "Dashboard", namespace_name: :admin
     elsif not user.id.nil?
       # authorized
       can :manage, Creation, :user_id => user.id

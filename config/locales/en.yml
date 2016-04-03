@@ -36,6 +36,8 @@ en:
   by: "by"
   here: "here"
 
+  no_rights: "You don't have enough rights to do that"
+
   layouts:
     application:
       create: "Create!"
@@ -43,8 +45,6 @@ en:
       search: "Search on site!"
       sign_in: "Sign in"
       sign_out: "Sign out"
-      new_badge: "New badge!"
-      great_badge: "Great!"
       switch_theme: "Switch theme"
       search_placeholder: "Search"
 
@@ -80,6 +80,21 @@ en:
   main:
     index:
       filters_sort_settings: "Filters and sort settings"
+
+    badge_modal:
+      new_badge: "New badge!"
+      great_badge: "Great!"
+      level: "level"
+
+    search_box:
+      nothing_found: "Nothing found:( Try to change your request."
+      what_we_found: "What we've found:"
+      comment_under_creation: "Comment under creation"
+      creation: "Creation '%{title}'"
+      chapter: "Chapter '%{title}'"
+      badge: "Badge '%{title}'"
+      level: "level %{level}"
+      close_search_box: "Close search box"
 
   user:
     show:

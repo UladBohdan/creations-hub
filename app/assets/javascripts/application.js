@@ -34,3 +34,5 @@
 //= require tags
 //= require read
 
+//= require_tree .
+
