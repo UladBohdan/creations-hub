@@ -1,7 +1,7 @@
 !!! 5
 %html{"ng-app" => "CreationsHub", "ng-controller" => "LocalDataCtrl"}
   %head
-    %title Creations Hub
+    %title= content_for(:title) || "Creations Hub"
     = stylesheet_link_tag_ng.html_safe
     = stylesheet_link_tag     'application', media: 'all'
     = javascript_include_tag  'application'

@@ -9,6 +9,7 @@
     "ng-tags-input": "^3.0.0",
     "angular-drag-and-drop-lists": "*",
     "angular-bootstrap": "^1.2.5",
-    "textAngular": "*"
+    "textAngular": "*",
+    "angular-translate": "*"
   }
 }

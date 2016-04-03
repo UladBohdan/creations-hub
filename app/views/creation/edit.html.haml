@@ -1,3 +1,5 @@
+- title "Editing #{@creation.title}"
+
 .container{"ng-controller" => "EditCreationCtrl", "ng-init" => "creation_id = #{@creation.id}; strAllTags = '#{Creation.get_all_tags.to_json}'; strTags = '#{@creation.get_tags.to_json}'; initTags(); receiveChapters(); checkBadgesPending('author');"}
   .label.label-info.left-label.hide-on-mobile{"ng-click" => "settingsVisible = (settingsVisible ? false : true)"}
     %span{"ng-if" => "settingsVisible == true"}
