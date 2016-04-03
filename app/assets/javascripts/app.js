@@ -77,10 +77,10 @@ app.controller('NavBarBadgeCtrl', ['$scope', '$http', '$uibModal', function ($sc
             if ($scope.newBadge.exists == true) {
                 $scope.open();
             } else {
-                alert("no new badges at the moment");
+               // alert("no new badges at the moment");
             }
         }, function errorCallback(response) {
-            alert("failed:( badge");
+            //alert("failed:( badge");
         });
     };
 

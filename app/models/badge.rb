@@ -12,7 +12,7 @@ class Badge < ActiveRecord::Base
 
     def check_commentator_badge(user, badge)
       5.downto(1) do |i|
-        if user.comments.length >= 5*i && i > badge.level
+        if user.comments.length+1 >= 5*i && i > badge.level
           params = {title: "commentator",
                     level: i,
                     description: "you have #{user.comments.length} comments under creations at the same time! Congrats!"}

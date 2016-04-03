@@ -57,7 +57,7 @@
                 .chapter-title-small
                   {{chapter.title}}
             %li.dndPlaceholder{:role => "presentation"}
-              %a{:href => "#"}
+              %a{:href => "#", :style => "background-color: lightgreen;"}
                 %span{:style => "font-size: large; font-weight: bold;"}
                   PH
                   %br/
@@ -80,5 +80,3 @@
                   = t ".update_chapter"
           %text-angular{"ng-model" => "$parent.currentChapterText",
                         "ta-toolbar" => "[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre'], ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo'],['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent']]"}
-
-          -#%textarea.form-control{"ui-tinymce" => "tinymceOptions", "ng-model" => "$parent.currentChapterText", "rows" => "10"}

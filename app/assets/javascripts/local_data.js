@@ -1,6 +1,12 @@
-app.controller("LocalDataCtrl", ['$scope', '$location', '$window', '$cookies', function($scope, $location, $window, $cookies) {
+app.controller("LocalDataCtrl", ['$scope', '$location', '$window', '$cookies', '$timeout', function($scope, $location, $window, $cookies, $timeout) {
     $scope.style = "";
     $scope.lang = "";
+
+    $scope.flashVisible = true;
+
+    $timeout( function() {
+        $scope.flashVisible = false;
+        $timeout.cancel(); }, 5000);
 
     $scope.switchStyle = function() {
         $scope.style = ($scope.style == "light" ? "dark" : "light");

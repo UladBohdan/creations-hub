@@ -53,7 +53,7 @@
                 %li{:role => "menuitem"}
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('be');"}
                     Беларуская
-                %li{:role => "menuitem", "ng-if" => "lang != 'en'"}
+                %li{:role => "menuitem"}
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('en');"}
                     English
             %li
@@ -71,9 +71,9 @@
     = render "main/search_box"
 
     - if flash[:notice]
-      .alert.alert-info{:role => "alert", :style => "margin: 10px;"}=notice
+      .alert.alert-info{:role => "alert", :style => "margin: 10px;", "ng-if" => "flashVisible"}= notice
     - if flash[:alert]
-      .alert.alert-danger{:role => "alert", :style => "margin: 10px;"}=alert
+      .alert.alert-danger{:role => "alert", :style => "margin: 10px;", "ng-if" => "flashVisible"}= alert
 
     = render "main/badge_modal"
 

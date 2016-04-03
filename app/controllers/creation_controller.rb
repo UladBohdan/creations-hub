@@ -29,7 +29,7 @@ class CreationController < ApplicationController
 
   def destroy
     @creation.destroy
-    redirect_to root_url
+    redirect_to root_url, notice: "Successfully removed"
   end
 
   def index
