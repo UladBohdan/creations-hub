@@ -24,9 +24,10 @@
 //= require textAngular/dist/textAngular-rangy.min
 //= require textAngular/dist/textAngular-sanitize.min
 //= require textAngular/dist/textAngular.min
+//= require angular-translate/angular-translate.min
 
 //= require app
-//= require badge
+//= require translations
 //= require dropdowns
 //= require edit_creation
 //= require local_data

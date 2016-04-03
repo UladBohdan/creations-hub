@@ -2,10 +2,8 @@ app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
     function ($scope, $upload) {
 
         $scope.cloud = "http://res.cloudinary.com/dhgy4yket/image/upload/v1459658412/default_user_image_vlvdyg.png";
-        $scope.message_edit = { en: "File not chosen. Your profile image won't be changed",
-                                be: "Файл не абраны. Выява профіля не зменіцца" };
-        $scope.message_new = { en: "File not chosen. Your profile will be created without profile image",
-                               be: "Файл не абраны. Профіль будзе створаны без выявы" };
+        $scope.message_edit = 'FILE_NOT_CHOSEN_EDIT';
+        $scope.message_new = 'FILE_NOT_CHOSEN_NEW';
         $scope.status = 0;
 
         $scope.uploadFile = function() {
@@ -20,10 +18,8 @@ app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
                 }
             }).success(function (data, status, headers, config) {
                 $scope.cloud = data.url;
-                $scope.message_edit = { en: "Image was successfully uploaded! Update your profile with you current password.",
-                                        be: "Выява была паспяхова загружаная! Абнавіце Ваш профіль з дапамогай пароля." };
-                $scope.message_new = { en: "Image was successfully uploaded!",
-                                       be: "Выява была паспяхова загружаная." };
+                $scope.message_edit = 'UPLOAD_SUCCESS_EDIT';
+                $scope.message_new = 'UPLOAD_SUCCESS_NEW';
                 $scope.status = 1;
             }).error(function (data, status, headers, config) {
                 alert("error:(");

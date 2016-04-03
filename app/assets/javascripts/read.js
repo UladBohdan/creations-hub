@@ -1,5 +1,4 @@
 app.controller('ReadCtrl', ['$scope', function ($scope) {
-    $scope.textToRead = "nothing to read";
 
     $scope.creation = '';
     $scope.chapter = '';

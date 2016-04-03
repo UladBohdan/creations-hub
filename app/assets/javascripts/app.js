@@ -5,7 +5,8 @@ app = angular.module('CreationsHub', [
     'angular-jqcloud',
     'ngCookies',
     'dndLists',
-    'textAngular'
+    'textAngular',
+    'pascalprecht.translate'
 ]);
 
 app.config([

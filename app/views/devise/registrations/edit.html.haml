@@ -15,7 +15,7 @@
               %i{:class => "fa fa-exclamation-triangle"}
             %span{:style => "color: green;", "ng-if" => "status == 1"}
               %i{:class => "fa fa-check-circle"}
-            {{message_edit[lang]}}
+            {{message_edit | translate}}
             = f.text_field :image, "ng-model": "cloud", "hidden": true
             %br/
             %br/

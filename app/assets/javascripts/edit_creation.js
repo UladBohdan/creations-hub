@@ -114,7 +114,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     };
 
     $scope.removeChapter = function() {
-        if (confirm("Are you sure? This cannot be undone")) {
+        if (confirm( "Are you sure? This cannot be undone" )) {
             $http({
                 url: "/creation/" + $scope.creation_id + "/chapter/" + $scope.toRemove,
                 format: "json",

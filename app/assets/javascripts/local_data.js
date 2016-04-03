@@ -1,52 +1,56 @@
-app.controller("LocalDataCtrl", ['$scope', '$location', '$window', '$cookies', '$timeout', function($scope, $location, $window, $cookies, $timeout) {
-    $scope.style = "";
-    $scope.lang = "";
+app.controller("LocalDataCtrl", [
+    '$scope', '$location', '$window', '$cookies', '$timeout', '$translate',
+    function($scope, $location, $window, $cookies, $timeout, $translate) {
 
-    $scope.flashVisible = true;
+        $scope.style = "";
+        $scope.lang = "";
 
-    $timeout( function() {
-        $scope.flashVisible = false;
-        $timeout.cancel(); }, 5000);
+        $scope.flashVisible = true;
 
-    $scope.switchStyle = function() {
-        $scope.style = ($scope.style == "light" ? "dark" : "light");
-        if (storageAvailable()) {
-            localStorage.setItem("Style", $scope.style);
-        }
-    };
+        $timeout( function() {
+            $scope.flashVisible = false;
+            $timeout.cancel(); }, 5000);
 
-    $scope.switchLanguage = function(lang) {
-        var old_lang = $scope.lang;
-        $scope.lang = lang;
-        if (old_lang != $scope.lang) {
-            $cookies.put("locale", $scope.lang, {path: "/"});
+        $scope.switchStyle = function() {
+            $scope.style = ($scope.style == "light" ? "dark" : "light");
             if (storageAvailable()) {
-                localStorage.setItem("language_changed", "true");
+                localStorage.setItem("Style", $scope.style);
             }
-            $window.location.href = buildBaseUrl();
+        };
+
+        $scope.switchLanguage = function(lang) {
+            var old_lang = $scope.lang;
+            $scope.lang = lang;
+            if (old_lang != $scope.lang) {
+                $cookies.put("locale", $scope.lang, {path: "/"});
+                if (storageAvailable()) {
+                    localStorage.setItem("language_changed", "true");
+                }
+                $window.location.href = buildBaseUrl();
+            }
+        };
+
+        function loadLocalData() {
+            if (storageAvailable()) {
+                $scope.style = localStorage.getItem("Style") || "light";
+                $scope.lang = $cookies.get("locale");
+                $translate.use($scope.lang);
+            }
         }
-    };
 
-    function loadLocalData() {
-        if (storageAvailable()) {
-            $scope.style = localStorage.getItem("Style") || "light";
-            $scope.lang = $cookies.get("locale");
+        function storageAvailable() {
+            return !(typeof(Storage) == "undefined");
         }
-    }
 
-    function storageAvailable() {
-        return !(typeof(Storage) == "undefined");
-    }
-
-    function buildBaseUrl() {
-        return $location.protocol() + '://' + $location.host() + ':' + $location.port() + window.location.pathname;
-    }
-
-    $scope.getChapterToRead = function(creation) {
-        if (storageAvailable()) {
-            return localStorage.getItem("creation" + creation);
+        function buildBaseUrl() {
+            return $location.protocol() + '://' + $location.host() + ':' + $location.port() + window.location.pathname;
         }
-    };
 
-    loadLocalData();
+        $scope.getChapterToRead = function(creation) {
+            if (storageAvailable()) {
+                return localStorage.getItem("creation" + creation);
+            }
+        };
+
+        loadLocalData();
 }]);
