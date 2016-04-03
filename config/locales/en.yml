@@ -40,6 +40,7 @@ en:
 
   layouts:
     application:
+      default_application_title: "Creations Hub"
       create: "Create!"
       admin_panel: "Admin panel"
       search: "Search on site!"
@@ -47,6 +48,10 @@ en:
       sign_out: "Sign out"
       switch_theme: "Switch theme"
       search_placeholder: "Search"
+
+    read_layout:
+      default_read_title: "Reading"
+      switch_theme: "Switch theme"
 
   creation:
     show:
@@ -58,14 +63,17 @@ en:
       category: "Category:"
       tags: "Tags:"
       save: "Save general information"
-      back: "Back to creation's overview"
+      back: "Back"
       use_markdown: "Use markdown to format the text."
       get_started_markdown: "You may get started with markdown"
       update_chapter: "Update chapter!"
+      hide: "Hide"
+      show: "Show"
+      drop_remove: "Drop chapter to remove"
 
     rating_block:
       rating: "Rating:"
-      yout-rating: "Your rating:"
+      your-rating: "Your rating:"
 
     two_columns_creations:
       empty_creation: "This creation is empty: it has no chapters. We guess, author will add them later."
@@ -101,6 +109,7 @@ en:
       email: "email"
       badges: "Badges"
       account_settings: "Account settings"
+      you: "(you)"
 
     badges:
       level: "level %{level}"
@@ -109,6 +118,9 @@ en:
   badge:
     author: "Author"
     commentator: "Commentator"
+    newbie: "Newbie"
+    polyglot: "Polyglot"
+    night_reader: "Night reader"
 
   devise:
     sessions:

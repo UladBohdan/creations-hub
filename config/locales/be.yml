@@ -207,6 +207,33 @@ be:
       short: "%d %b %H:%M"
     pm: вечара
 
+  enumerations:
+    category:
+      category: "Катэгорыя"
+      fiction: "Фантастыка"
+      fantasy: "Фэнтэзі"
+      comedy: "Камедыя"
+      science: "Навука"
+      cooking: "Кухарства"
+      programming: "Праграмаванне"
+      others: "Іншае"
+      all: "Усе"
+
+    sort:
+      sort: "Найперш"
+      recently_created: "Нядаўна створаныя"
+      recently_updated: "Нядаўна абноўленыя"
+      most_rated: "Найлепш ацэненыя"
+      any: "Любыя"
+
+    limit:
+      limit: "Колькасць"
+      four: "4"
+      six: "6"
+      ten: "10"
+      no_limit: "Без абмежаванняў"
+
+
   creations: "Крэатывы"
   read: "Чытаць"
   edit: "Рэдагаваць"
@@ -217,34 +244,12 @@ be:
   by: "аўтар: "
   here: "тут"
 
-  enumerations:
-      category:
-        category: "Катэгорыя"
-        fiction: "Фантастыка"
-        fantasy: "Фэнтэзі"
-        comedy: "Камедыя"
-        science: "Навука"
-        cooking: "Кухарства"
-        programming: "Праграмаванне"
-        others: "Іншае"
-        all: "Усе"
+  no_rights: "У Вас недастаткова правоў для гэтага дзеяння"
 
-      sort:
-        sort: "Найперш"
-        recently_created: "Нядаўна створаныя"
-        recently_updated: "Нядаўна абноўленыя"
-        most_rated: "Найлепш ацэненыя"
-        any: "Любыя"
-
-      limit:
-        limit: "Колькасць"
-        four: "4"
-        six: "6"
-        ten: "10"
-        no_limit: "Без абмежаванняў"
 
   layouts:
     application:
+      default_application_title: "Creations Hub"
       create: "Стварыць!"
       admin_panel: "Панэль адміністратара"
       search: "Шукаць на сайце!"
@@ -254,6 +259,10 @@ be:
       great_badge: "Цудоўна!"
       switch_theme: "Пераключыць тэму"
       search_placeholder: "Шукаць"
+
+    read_layout:
+      default_read_title: "Чыталка"
+      switch_theme: "Пераключыць тэму"
 
   creation:
     show:
@@ -269,6 +278,9 @@ be:
       use_markdown: "Выкарыстоўвайце markdown для фарматавання тэкста"
       get_started_markdown: "Вы можаце паглядзець асновы markdown-а"
       update_chapter: "Абнавіць главу!"
+      hide: "Схаваць"
+      show: "Паказаць"
+      drop_remove: "Перамясціце главу каб выдаліць"
 
     rating_block:
       rating: "Рэйтынг:"
@@ -288,11 +300,27 @@ be:
     index:
       filters_sort_settings: "Фільтры і сартыроўкі"
 
+    badge_modal:
+      new_badge: "Новы бэйдж!"
+      great_badge: "Цудоўна!"
+      level: "узровень"
+
+    search_box:
+      nothing_found: "Нічога не знойдзена:( Паспрабуйце ўвесці іншы запрос."
+      what_we_found: "Што мы знайшлі:"
+      comment_under_creation: "Каментар пад крэатывам"
+      creation: "Крэатыў '%{title}'"
+      chapter: "Глава '%{title}'"
+      badge: "Бэйдж '%{title}'"
+      level: "узровень %{level}"
+      close_search_box: "Зачыніць акно пошуку"
+
   user:
     show:
       email: "е-мэйл"
       badges: "Бэйджы"
       account_settings: "Налады акаўнта"
+      you: "(вы)"
 
     badges:
       level: "узровень %{level}"
@@ -301,6 +329,9 @@ be:
   badge:
     author: "Аўтар"
     commentator: "Каментатар"
+    newbie: "Навічок"
+    polyglot: "Паліглот"
+    night_reader: "Чытаю ўночы"
 
   devise:
     sessions:

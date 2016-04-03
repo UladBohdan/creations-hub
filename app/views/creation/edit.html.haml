@@ -6,18 +6,18 @@
       .fa.fa-arrow-left.fa-2x
       %small
         %br/
-        Hide
+        = t ".hide"
     %span{"ng-if" => "settingsVisible == false"}
       .fa.fa-arrow-right.fa-2x
       %small
         %br/
-        Show
+        = t ".show"
 
   = link_to creation_path(@creation) do
     .label.label-danger.left-label.back-creation.hide-on-mobile
       .fa.fa-times.fa-2x
       %br/
-      Back
+      = t ".back"
 
   .row
     .col-md-3{"ng-if" => "settingsVisible"}
@@ -32,7 +32,7 @@
           %auto-complete{"source" => "loadTags($query)"}
         %br/
         .actions
-          = f.submit t('.save'), class: "btn btn-success", "ng-click": "arrayOfTags($query);"
+          = f.submit t(".save"), class: "btn btn-success", "ng-click": "arrayOfTags($query);"
 
 
       %div{:style => "text-align: center; margin-top: 30px;", "ng-if" => "trashVisible"}
@@ -40,7 +40,7 @@
           %li
             .fa.fa-trash.fa-5x
             %br/
-            Drop chapter to remove
+            = t ".drop_remove"
           %li.dndPlaceholder{:style => "display: none;"}
 
 
@@ -53,14 +53,14 @@
                 "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters",
                 "dnd-dragstart" => "showTrash(chapter.id)", "dnd-dragend" => "hideTrash(); updateChapterOrder();"}
               %a{"ng-click" => "chooseChapter(chapter.id)"}
-                %span{:style => "font-size: large; font-weight: bold;"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
                   {{chapter.id}}
                   %br/
                 .chapter-title-small
                   {{chapter.title}}
             %li.dndPlaceholder{:role => "presentation"}
               %a{:href => "#", :style => "background-color: lightgreen;"}
-                %span{:style => "font-size: large; font-weight: bold;"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
                   PH
                   %br/
                 .chapter-title-small{:style => "font-weight: bold;"}

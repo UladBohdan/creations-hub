@@ -1,7 +1,7 @@
 !!! 5
 %html{"ng-app" => "CreationsHub", "ng-controller" => "LocalDataCtrl"}
   %head
-    %title= yield :title
+    %title= content_for(:title) || t(".default_read_title")
     = stylesheet_link_tag_ng.html_safe
     = stylesheet_link_tag     'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag  'application', 'data-turbolinks-track' => true
@@ -65,7 +65,7 @@
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('en');"}
                     English
             %li
-              %a{:href => "#", :title => t('.switch_theme')}
+              %a{:href => "#", :title => t(".switch_theme")}
                 %i.fa.fa-circle{:style => "font-size: x-large;", "ng-click" => "switchStyle();"}
 
     = render "main/badge_modal"

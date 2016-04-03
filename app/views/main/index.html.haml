@@ -1,6 +1,6 @@
 - title "Creations Hub - Main page"
 
-.container{"ng-init" => "checkBadgesPending('newbie'); checkBadgesPending('polyglot');"}
+.container{"ng-init" => "checkBadgesPending('newbie');"}
   .row
     .col-md-9{:id => "main_creations"}
       = render "/creation/two_columns_creations"
@@ -8,7 +8,7 @@
     .col-md-3
       .panel.panel-default
         .panel-heading
-          %h3{:class => "panel-title"}= t '.filters_sort_settings'
+          %h3{:class => "panel-title"}= t ".filters_sort_settings"
         .panel-body
           %div{"ng-controller" => "DropdownCtrl"}
             = render partial: "filter_dropdown",

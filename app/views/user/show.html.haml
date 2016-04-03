@@ -1,16 +1,16 @@
 - title @user.name
 
-.container{"ng-controller" => "UserCtrl"}
+.container{"ng-controller" => "UserCtrl", "ng-init" => "checkBadgesPending('polyglot');"}
   .row
     .col-md-3
       = image_tag @user.image, width: "100%", class: "profile-image"
       %h2
         = @user.name
         - if user_signed_in? && @user.id == current_user.id
-          %small (you)
+          %small= t(".you")
       - if can? :edit, @user
         %h5
-          ="#{t('.email')}: #{@user.email}"
+          ="#{t(".email")}: #{@user.email}"
       %hr
       %ul{:class => "nav nav-pills nav-stacked"}
         %li{:role => "presentation", "ng-class" => "creationsClass"}
@@ -18,13 +18,13 @@
             = t :creations
         %li{:role => "presentation", "ng-class" => "badgesClass"}
           %a{:href => "#", "ng-click" => "mode = 'badges'; switchMode();"}
-            = t '.badges'
+            = t ".badges"
             %span{:class => "badge"}= @badges.length
         - if can? :edit, @user
           %li{:role => "presentation"}
             = link_to edit_user_registration_path do
               %i.fa.fa-cogs
-              = t '.account_settings'
+              = t ".account_settings"
 
     .col-md-9
       %div{"ng-if" => "mode == 'creations'"}
