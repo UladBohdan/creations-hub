@@ -42,7 +42,7 @@
           = t '.chapters_overview'
           %span{:class => "pull-right", :style => "color: lightgray;"}
             = t :last_modified
-        - @creation.chapters.each_with_index do |chapter, i|
+        - @creation.chapters.sort_by { |ch| ch.position }.each_with_index do |chapter, i|
           %h4
             %b= "#{i+1}."
             = link_to read_path(chapter), target: "_blank" do

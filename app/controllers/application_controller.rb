@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def sort_by_position(chapters)
+    chapters.sort_by { |chapter| chapter.position }
+  end
+
   private
 
   def resolve_layout

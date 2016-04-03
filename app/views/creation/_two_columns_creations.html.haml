@@ -17,7 +17,7 @@
             - if !creation.chapters.any?
               %i= t ".empty_creation"
             - else
-              - creation.chapters.each_with_index do |chapter, j|
+              - sort_by_position(creation.chapters).each_with_index do |chapter, j|
                 %b= "#{j+1}. "
                 = link_to read_path(chapter), target: "_blank" do
                   = chapter.title

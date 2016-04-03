@@ -51,7 +51,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             method: "GET"
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            sortChapters();
+            ensurePositionSequence();
             if (anyChapters()) {
                 $scope.chooseChapter($scope.chapters[0].id)
             } else {
@@ -70,6 +70,14 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         );
     }
 
+    function ensurePositionSequence() {
+        sortChapters();
+        $scope.chapters.forEach(
+            function(item, index) {
+                item.position = index + 1;
+        });
+    }
+
     $scope.updateChapter = function() {
         $http({
             url: "/creation/" + $scope.creation_id + "/chapter/"
@@ -79,7 +87,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             data: { text: $scope.currentChapterText, title: $scope.currentChapterTitle }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            sortChapters();
+            ensurePositionSequence();
             $scope.chooseChapter($scope.currentChapterId);
         }, function errorCallback(response) {
             alert("failed:(");
@@ -113,7 +121,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
                 method: "DELETE"
             }).then( function successCallback(response) {
                 angular.copy(response.data, $scope.chapters);
-                sortChapters();
+                ensurePositionSequence();
                 $scope.chooseChapter(anyChapters() ? $scope.chapters[0].id : 0);
             }, function errorCallback(response) {
                 alert("failed:(");
@@ -135,7 +143,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
             data: { position: new_position }
         }).then( function successCallback(response) {
             angular.copy(response.data, $scope.chapters);
-            sortChapters();
+            ensurePositionSequence();
             $scope.chooseChapter($scope.chapters[$scope.chapters.length-1].id);
         }, function errorCallback(response) {
             alert("failed:(");
@@ -161,7 +169,7 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         $scope.currentChapterTitle = findChapterById($scope.currentChapterId).title;
         $scope.textBeforeEditing = $scope.currentChapterText;
         $scope.titleBeforeEditing = $scope.currentChapterTitle;
-    }
+    };
 
     function anyChapters() {
         return $scope.chapters.length > 0;

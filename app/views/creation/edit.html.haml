@@ -45,11 +45,11 @@
     %div{"ng-class" => "settingsVisible ? 'col-md-9' : 'col-md-12'"}
       .panel.panel-default
         .panel-heading
-          %ul.nav.nav-tabs{"dnd-list" => "chapters", "dnd-inserted" => "updateChapterOrder();"}
+          %ul.nav.nav-tabs{"dnd-list" => "chapters"}
             %li{:role => "presentation", "ng-class" => "currentChapterId == chapter.id ? 'active' : '';",
                 "dnd-draggable" => "chapter", "dnd-effect-allowed" => "move",
                 "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters",
-                "dnd-dragstart" => "showTrash(chapter.id)", "dnd-dragend" => "hideTrash()"}
+                "dnd-dragstart" => "showTrash(chapter.id)", "dnd-dragend" => "hideTrash(); updateChapterOrder();"}
               %a{"ng-click" => "chooseChapter(chapter.id)"}
                 %span{:style => "font-size: large; font-weight: bold;"}
                   {{chapter.id}}

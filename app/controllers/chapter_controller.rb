@@ -22,7 +22,7 @@ class ChapterController < ApplicationController
 
   def reorder
     ActiveRecord::Base.transaction do
-      params[:new_order].each_with_index { |id, pos| Chapter.where(id: id).first.update(position: pos) }
+      params[:new_order].each_with_index { |id, pos| Chapter.where(id: id).first.update(position: pos+1) }
     end
     render :json => {status: :ok}
   end
@@ -31,11 +31,12 @@ class ChapterController < ApplicationController
     puts "CHAPTER #{@chapter.id}"
     @creation = Creation.includes(:chapters).where(id: @chapter.creation_id).first
     puts "CREATION #{@creation.id}"
-    @creation.chapters.sort_by { |chapter| chapter.position }
-    @creation.chapters.each_with_index do |chapter, i|
+    puts "SORTED #{sort_by_position(@creation.chapters).map {|t| t.title}}"
+    sorted = sort_by_position(@creation.chapters)
+    sorted.each_with_index do |chapter, i|
       if chapter.id == @chapter.id
-        @prev_chapter = @creation.chapters[i-1]
-        @next_chapter = @creation.chapters[i+1]
+        @prev_chapter = (i>0 ? sorted[i-1] : nil)
+        @next_chapter = sorted[i+1]
       end
     end
   end

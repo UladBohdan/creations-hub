@@ -15,4 +15,8 @@ module ApplicationHelper
     link << %&ng-disabled = "style != 'light'" /> &
   end
 
+  def sort_by_position(chapters)
+    chapters.sort_by { |chapter| chapter.position }
+  end
+
 end
