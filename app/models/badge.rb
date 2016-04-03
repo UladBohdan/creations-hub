@@ -70,7 +70,7 @@ class Badge < ActiveRecord::Base
 
     def check_night_reader_badge(user, badge)
       puts "NIGHT READER"
-      if badge.new_record? && Time.now.hour.between?(20,22)
+      if badge.new_record? && Time.now.hour.between?(0,5)
         params = {title: "night_reader",
                   level: 1,
                   description: "you love reading so much that you read even at night! That's great! We appreciate that!"}

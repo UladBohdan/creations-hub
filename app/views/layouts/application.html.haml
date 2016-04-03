@@ -8,7 +8,7 @@
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-controller" => "NavBarBadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
+  %body{"ng-cloak" => "", "ng-controller" => "NavBarBadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
     %nav{:class => "navbar navbar-default"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
