@@ -1,6 +1,6 @@
 class Creation < ActiveRecord::Base
   include PgSearch
-  multisearchable :against => [:title]
+  multisearchable :against => [:title, :tags]
 
   belongs_to :user
   has_many :chapters, dependent: :destroy
