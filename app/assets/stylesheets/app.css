@@ -27,6 +27,12 @@
     cursor: pointer;
 }
 
+@media screen and (max-width: 1200px) {
+    .hide-on-mobile {
+        visibility: hidden;
+    }
+}
+
 .back-creation {
     top: 80%;
 }
