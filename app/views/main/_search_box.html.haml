@@ -10,10 +10,46 @@
           .row
             .col-md-2{"ng-repeat" => "item in searchResults"}
               .panel.panel-default
-                .panel-heading
-                  {{item.type}}
-                .panel-body
-                  %i {{item.content}}
+                %div{"ng-switch" => "", "on" => "item.type"}
+
+                  %div{"ng-switch-when" => "User"}
+                    %a{"ng-href" => "/user/{{item.id}}"}
+                      .panel-heading
+                        %h4{:style => "font-weight: bold;"} {{item.name}}
+                      .panel-body
+                        %img{:src => "{{item.image}}", :width => "100%"}
+
+                  %div{"ng-switch-when" => "Comment"}
+                    %a{"ng-href" => "/creation/{{item.creation_id}}"}
+                      .panel-body
+                        %h4{:style => "font-weight: bold;"} Comment under creation
+                        {{item.text}}
+
+                  %div{"ng-switch-when" => "Creation"}
+                    %a{"ng-href" => "/creation/{{item.id}}"}
+                      .panel-body
+                        %h4{:style => "font-weight: bold;"} Creation '{{item.title}}'
+
+                  %div{"ng-switch-when" => "Chapter"}
+                    %a{"ng-href" => "/read/{{item.id}}"}
+                      .panel-body
+                        %h4{:style => "font-weight: bold;"} Chapter '{{item.title}}'
+                        {{item.text}}
+
+                  %div{"ng-switch-when" => "Badge", :style => "text-align: center;"}
+                    %a{"ng-href" => "/user/{{item.user_id}}"}
+                      .panel-body
+                        %h4{:style => "font-weight: bold;"} Badge '{{item.title}}'
+                        level {{item.level}}
+                        %img{:src => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{item.title}}.png", width: "100%"}
+                        {{item.description}}
+
+                  %div{"ng-switch-default" => ""}
+                    .panel-heading
+                      %h4{:style => "font-weight: bold;"} {{item.type}}
+                    .panel-body
+                      %i {{item.content}}
+
       .pull-right
         %button.btn.btn-warning{"ng-click" => "closeSearchBox()"}
           = t(".close_search_box")
