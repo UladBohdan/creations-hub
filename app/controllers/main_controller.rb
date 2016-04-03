@@ -2,6 +2,7 @@ class MainController < ApplicationController
 
   def index
     @creations = Creation.get_set_of_creations nil
+    @lang_changed = (params[:lang] == "true")
   end
 
   def search

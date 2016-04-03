@@ -8,7 +8,7 @@
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-controller" => "BadgeCtrl", "ng-controller" => "NavBarCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
+  %body{"ng-controller" => "NavBarBadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
     %nav{:class => "navbar navbar-default"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
@@ -53,7 +53,7 @@
                 %li{:role => "menuitem"}
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('be');"}
                     Беларуская
-                %li{:role => "menuitem"}
+                %li{:role => "menuitem", "ng-if" => "lang != 'en'"}
                   %a{"ng-href" => "", "ng-click" => "switchLanguage('en');"}
                     English
             %li

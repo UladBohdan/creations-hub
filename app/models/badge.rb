@@ -16,7 +16,7 @@ class Badge < ActiveRecord::Base
           params = {title: "commentator",
                     level: i,
                     description: "you have #{user.comments.length} comments under creations at the same time! Congrats!"}
-          if badge.nil?
+          if badge.new_record?
             user.badges.create! params.merge(user_id: user.id)
           else
             badge.update! params.merge(user_id: user.id)
@@ -33,13 +33,49 @@ class Badge < ActiveRecord::Base
           params = {title: "author",
                     level: 5-level,
                     description: "you have created #{user.creations.length} wonderful things! Thanks to your productivity!"}
-          if badge.nil?
+          if badge.new_record?
             user.badges.create! params.merge(user_id: user.id)
           else
             badge.update! params.merge(user_id: user.id)
           end
           return params
         end
+      end
+      {}
+    end
+
+    def check_newbie_badge(user, badge)
+      puts "BADGE #{badge}"
+      if badge.new_record?
+        params = {title: "newbie",
+                  level: 1,
+                  description: "welcome! We want every user to have a badge. This one is for you!"}
+        user.badges.create! params.merge(user_id: user.id)
+        return params
+      end
+      {}
+    end
+
+    def check_polyglot_badge(user, badge)
+      puts "POLYGLOT"
+      if badge.new_record?
+        params = {title: "polyglot",
+                  level: 1,
+                  description: "wow! You've tried all our languages! No doubts - this badge is for you!"}
+        user.badges.create! params.merge(user_id: user.id)
+        return params
+      end
+      {}
+    end
+
+    def check_night_reader_badge(user, badge)
+      puts "NIGHT READER"
+      if badge.new_record? && Time.now.hour.between?(20,22)
+        params = {title: "night_reader",
+                  level: 1,
+                  description: "you love reading so much that you read even at night! That's great! We appreciate that!"}
+        user.badges.create! params.merge(user_id: user.id)
+        return params
       end
       {}
     end

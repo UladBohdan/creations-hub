@@ -14,6 +14,9 @@ app.controller("LocalDataCtrl", ['$scope', '$location', '$window', '$cookies', f
         $scope.lang = lang;
         if (old_lang != $scope.lang) {
             $cookies.put("locale", $scope.lang, {path: "/"});
+            if (storageAvailable()) {
+                localStorage.setItem("language_changed", "true");
+            }
             $window.location.href = buildBaseUrl();
         }
     };

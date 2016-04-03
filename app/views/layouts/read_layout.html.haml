@@ -9,7 +9,7 @@
     = csrf_meta_tags
 
   %body{"ng-controller" => "ReadCtrl"}
-    %nav.navbar.navbar-default{"ng-controller" => "NavBarCtrl"}
+    %nav.navbar.navbar-default{"ng-controller" => "NavBarBadgeCtrl", "ng-init" => "checkBadgesPending('night_reader')"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
         .navbar-header
@@ -67,5 +67,7 @@
             %li
               %a{:href => "#", :title => t('.switch_theme')}
                 %i.fa.fa-circle{:style => "font-size: x-large;", "ng-click" => "switchStyle();"}
+
+    = render "main/badge_modal"
 
     = yield

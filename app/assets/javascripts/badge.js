@@ -1,3 +1,5 @@
+
+/*
 app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $uibModal, $http) {
 
     $scope.newBadge = [];
@@ -17,6 +19,7 @@ app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $u
     };
 
     $scope.checkBadgesPending = function(badgeName) {
+        alert("checking badges " + badgeName);
         $http({
             url: "/badges",
             format: "json",
@@ -27,10 +30,10 @@ app.controller("BadgeCtrl", ['$scope', '$uibModal', '$http', function($scope, $u
             if ($scope.newBadge.exists == true) {
                 $scope.open();
             } else {
-                //alert("no new badges at the moment");
+                alert("no new badges at the moment");
             }
         }, function errorCallback(response) {
-            //alert("failed:( badge");
+            alert("failed:( badge");
         });
     };
 
@@ -43,4 +46,4 @@ app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, newBadg
     $scope.cancel = function () {
         $uibModalInstance.close();
     };
-});
+}); */
