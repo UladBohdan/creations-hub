@@ -12,6 +12,7 @@ class CreationController < ApplicationController
 
   def show
     @comments = @creation.get_ordered_comments
+    @chapters = @creation.chapters.sort_by { |ch| ch.position }
     set_ratings
   end
 

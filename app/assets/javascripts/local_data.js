@@ -42,5 +42,11 @@ app.controller("LocalDataCtrl", ['$scope', '$location', '$window', '$cookies', '
         return $location.protocol() + '://' + $location.host() + ':' + $location.port() + window.location.pathname;
     }
 
+    $scope.getChapterToRead = function(creation) {
+        if (storageAvailable()) {
+            return localStorage.getItem("creation" + creation);
+        }
+    };
+
     loadLocalData();
 }]);

@@ -7,8 +7,8 @@
         = render "rating_block"
       %br
       %br
-      - if can?(:read, @creation) && @creation.chapters.any?
-        = link_to read_path(@creation.chapters.first), target: "_blank" do
+      - if can?(:read, @creation) && @chapters.any?
+        %a{"ng-href" => "/read/{{getChapterToRead(#{@creation.id}) || #{@chapters[0].id}}}", target: "_blank", title: t(".continue_or_begin")}
           = button_tag(t(:read), :type => "button", :class => "btn btn-primary")
       - if can? :edit, @creation
         = link_to edit_creation_url(@creation) do
@@ -37,12 +37,12 @@
         = link_to @creation.user.name, user_path(@creation.user)
 
     .col-md-8
-      - if @creation.chapters.any?
+      - if @chapters.any?
         %h2{:style => "color: gray;"}
           = t '.chapters_overview'
           %span{:class => "pull-right", :style => "color: lightgray;"}
             = t :last_modified
-        - @creation.chapters.sort_by { |ch| ch.position }.each_with_index do |chapter, i|
+        - @chapters.each_with_index do |chapter, i|
           %h4
             %b= "#{i+1}."
             = link_to read_path(chapter), target: "_blank" do
@@ -50,7 +50,7 @@
             %span{:class => "pull-right", :style => "color: lightgray;"}
               %i= l chapter.updated_at, format: :short
       - else
-        %h2{:style => "color: gray;"}= t '.no_chapters'
+        %h2{:style => "color: gray;"}= t ".no_chapters"
       %br/
       %br/
       %div{:id => "comments"}

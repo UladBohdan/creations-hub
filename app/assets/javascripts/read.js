@@ -1,15 +1,17 @@
 app.controller('ReadCtrl', ['$scope', function ($scope) {
     $scope.textToRead = "nothing to read";
 
-    $scope.currentState = '';
-    $scope.currentWidth = '';
+    $scope.creation = '';
+    $scope.chapter = '';
 
     $scope.textSize = '';
     $scope.pageWidth = '';
 
     $scope.changeWidth = function(width) {
         $scope.pageWidth = "page" + width;
-        refreshStyling();
+        if (storageAvailable()) {
+            localStorage.setItem("page_width", $scope.pageWidth);
+        }
     };
 
     $scope.resize = function(size) {
@@ -20,12 +22,21 @@ app.controller('ReadCtrl', ['$scope', function ($scope) {
         } else if (size == "small") {
             $scope.textSize = "read-small";
         }
-        refreshStyling();
+        if (storageAvailable()) {
+            localStorage.setItem("text_size", $scope.textSize);
+        }
     };
 
-    function refreshStyling() {
-        $scope.currentState = $scope.textSize;
-        $scope.currentWidth = $scope.pageWidth;
+    function storageAvailable() {
+        return !(typeof(Storage) == "undefined");
+    }
+
+    $scope.initSettings = function() {
+        if (storageAvailable()) {
+            $scope.textSize = localStorage.getItem("text_size");
+            $scope.pageWidth = localStorage.getItem("page_width");
+            localStorage.setItem("creation" + $scope.creation, $scope.chapter);
+        }
     }
 
 }]);

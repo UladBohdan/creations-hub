@@ -1,4 +1,4 @@
-.container.page80{"ng-class" => "currentWidth"}
+.container{"ng-class" => "pageWidth", "ng-init" => "creation = #{@creation.id}; chapter = #{@chapter.id}; initSettings();"}
 
   .panel.panel-default
     .panel-body
@@ -15,7 +15,7 @@
             = @next_chapter.title
   %br/
 
-  %div.read-medium{"ng-class" => "currentState"}
+  %div{"ng-class" => "textSize"}
     = raw @chapter.text
 
   %br/
