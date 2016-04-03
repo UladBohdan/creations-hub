@@ -1,7 +1,7 @@
 app.controller('ImageUploaderCtrl', ["$scope", 'Upload',
     function ($scope, $upload) {
 
-        $scope.cloud = "";
+        $scope.cloud = "http://res.cloudinary.com/dhgy4yket/image/upload/v1459658412/default_user_image_vlvdyg.png";
         $scope.message_edit = { en: "File not chosen. Your profile image won't be changed",
                                 be: "Файл не абраны. Выява профіля не зменіцца" };
         $scope.message_new = { en: "File not chosen. Your profile will be created without profile image",
