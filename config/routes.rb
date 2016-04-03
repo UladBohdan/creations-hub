@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'user/:id' => 'user#show', as: :user
   get 'read/:id' => 'chapter#read', as: :read
   get 'badges' => 'badge#check', as: :check_badge
+  get 'search' => 'main#search', as: :search
 
   resources :creation do
     member do

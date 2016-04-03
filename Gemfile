@@ -37,6 +37,7 @@ gem 'enumerate_it'
 gem 'cancancan', '~>1.10'
 gem 'font-awesome-sass'
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'pg_search'
 
 gem 'activeadmin'
 gem 'draper'

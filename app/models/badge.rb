@@ -1,4 +1,7 @@
 class Badge < ActiveRecord::Base
+  include PgSearch
+  multisearchable :against => [:title, :description]
+
   belongs_to :user
 
   class << self

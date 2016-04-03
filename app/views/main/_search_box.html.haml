@@ -1,0 +1,19 @@
+%div{:id => "search-results", "ng-if" => "searchBoxVisible"}
+  .panel.panel-default
+    .panel-body
+      %div{"ng-if" => "emptyResult"}
+        = t(".nothing_found")
+      %div{"ng-if" => "!emptyResult"}
+        %p{:style => "font-size: 30px;"}
+          = t ".what_we_found", query: "{{searchQuery}}"
+        .container
+          .row
+            .col-md-2{"ng-repeat" => "item in searchResults"}
+              .panel.panel-default
+                .panel-heading
+                  {{item.type}}
+                .panel-body
+                  %i {{item.content}}
+      .pull-right
+        %button.btn.btn-warning{"ng-click" => "closeSearchBox()"}
+          = t(".close_search_box")

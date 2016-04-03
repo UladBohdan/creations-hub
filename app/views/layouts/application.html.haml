@@ -8,8 +8,8 @@
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-controller" => "BadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
-    %nav{:class => "navbar navbar-default", "ng-controller" => "NavBarCtrl"}
+  %body{"ng-controller" => "BadgeCtrl", "ng-controller" => "NavBarCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
+    %nav{:class => "navbar navbar-default"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display
         .navbar-header
@@ -38,12 +38,13 @@
             - if can? :manage, :all
               = link_to admin_root_path do
                 %button{:type => "button", :class => "btn btn-success"}= t '.admin_panel'
-          %form{:class => "navbar-form navbar-left", :role => "search"}
+          %form.navbar-form.navbar-left{:role => "search"}
             .form-group
-              %input{:type => "text", :class => "form-control", :placeholder => t(".search_placeholder")}
-            %button{:type => "submit", :class => "btn btn-default"}= t '.search'
+              %input.form-control{:type => "text", :placeholder => t(".search_placeholder"), "ng-model" => "searchQuery"}
+              %a{:href => "", "ng-click" => "doSearch()", "ng-if" => "searchQuery"}
+                %button.btn.btn-default= t '.search'
 
-          %ul{:class => "nav navbar-nav navbar-right", :style => "font-weight: bold;"}
+          %ul.nav.navbar-nav.navbar-right{:style => "font-weight: bold;"}
 
             %li{"uib-dropdown" => ""}
               %a{:href => "", :id => "lang-dropdown", "uib-dropdown-toggle" => "", :style => "font-size: large;"}
@@ -66,6 +67,8 @@
             -else
               %li
                 %a{:href => "/login"}= t '.sign_in'
+
+    = render "main/search_box"
 
     - if flash[:notice]
       .alert.alert-info{:role => "alert", :style => "margin: 10px;"}=notice

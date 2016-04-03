@@ -1,4 +1,7 @@
 class Comment < ActiveRecord::Base
+  include PgSearch
+  multisearchable :against => [:text]
+
   belongs_to :user
   belongs_to :creation
   has_many :likes, dependent: :destroy
