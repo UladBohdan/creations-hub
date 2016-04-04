@@ -1,7 +1,8 @@
 class ChapterController < ApplicationController
-  before_action :set_creation, except: [:destroy, :read]
+  before_action :set_creation, except: [:read]
   before_action :set_chapters, only: [:index, :update, :reorder]
-  before_action :set_chapter, only: [:read, :destroy]
+  before_action :set_chapter, only: [:read, :destroy, :update]
+  before_action :check_user, only: [:create, :update, :reorder, :destroy]
 
   def create
     @creation.chapters << Chapter.create!(title: "NEW", text: "<h1>Your new chapter text</h1>", position: params[:position])
@@ -14,7 +15,7 @@ class ChapterController < ApplicationController
   end
 
   def update
-    Chapter.where(id: params[:id]).first.update(text: params[:text], title: params[:title])
+    @chapter.update(text: params[:text], title: params[:title])
     set_creation
     set_chapters
     render :json => @chapters.to_json
@@ -64,6 +65,10 @@ class ChapterController < ApplicationController
 
   def set_chapters
     @chapters = @creation.chapters
+  end
+
+  def check_user
+    redirect_to root_url, alert: t("creation.no_rights_to_process") if cannot? :manage, @creation
   end
 
 end

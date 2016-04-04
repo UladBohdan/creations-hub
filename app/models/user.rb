@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :chapters, :through => :creations
   has_many :badges, dependent: :destroy
-  has_many :ratings
+  has_many :ratings, dependent: :destroy
+  has_many :likes, dependent: :destroy
 
 end

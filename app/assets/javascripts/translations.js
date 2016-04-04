@@ -20,7 +20,13 @@ app.config(['$translateProvider', function ($translateProvider) {
         four: "4",
         six: "6",
         ten: "10",
-        no_limit: "no limit"
+        no_limit: "no limit",
+
+        author: "Author",
+        commentator: "Commentator",
+        newbie: "Newbie",
+        polyglot: "Polyglot",
+        night_reader: "Night reader"
     });
 
     $translateProvider.translations('be', {
@@ -44,7 +50,13 @@ app.config(['$translateProvider', function ($translateProvider) {
         four: "4",
         six: "6",
         ten: "10",
-        no_limit: "Без абмежаванняў"
+        no_limit: "Без абмежаванняў",
+
+        author: "Аўтар",
+        commentator: "Каментатар",
+        newbie: "Навічок",
+        polyglot: "Паліглот",
+        night_reader: "Чытаю ўночы"
     });
 
     $translateProvider.preferredLanguage('en');

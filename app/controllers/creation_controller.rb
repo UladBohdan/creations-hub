@@ -22,15 +22,15 @@ class CreationController < ApplicationController
 
   def update
     if @creation.update! creation_params
-      redirect_to creation_url(@creation), notice: "Creation was successfully updated!"
+      redirect_to creation_url(@creation), notice: t("creation.creation_updated")
     else
-      redirect_to creation_url(@creation), alert: "Creation wasn't updated as something went wrong."
+      redirect_to creation_url(@creation), alert: t("creation.creation_not_updated")
     end
   end
 
   def destroy
     @creation.destroy
-    redirect_to root_url, notice: "Successfully removed"
+    redirect_to root_url, notice: t("creation.successfully_removed")
   end
 
   def index
@@ -57,11 +57,11 @@ class CreationController < ApplicationController
   private
 
   def check_authorized
-    redirect_to root_url, alert: t(".sign_in_to_process") if cannot? action_name, Creation
+    redirect_to root_url, alert: t("creation.sign_in_to_process") if cannot? action_name, Creation
   end
 
   def check_user
-    redirect_to root_url, alert: t(".no_rights_to_process") if cannot? action_name, @creation
+    redirect_to root_url, alert: t("creation.no_rights_to_process") if cannot? action_name, @creation
   end
 
   def filter_params

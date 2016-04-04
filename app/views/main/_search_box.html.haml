@@ -18,7 +18,7 @@
                       .panel-heading
                         %h4{:style => "font-weight: bold;"} {{item.name}}
                       .panel-body
-                        %img{:src => "{{item.image}}", :width => "100%"}
+                        %img{"ng-src" => "'{{item.image}}'", :width => "100%"}
 
                   %div{"ng-switch-when" => "Comment"}
                     %a{"ng-href" => "/creation/{{item.creation_id}}"}
@@ -42,7 +42,7 @@
                       .panel-body
                         %h4{:style => "font-weight: bold;"}= t ".badge", title: "{{item.title}}"
                         = t ".level", level: "{{item.level}}"
-                        %img{:src => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{item.title}}.png", width: "100%"}
+                        %img{"ng-src" => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{item.title}}.png", width: "100%"}
                         {{item.description}}
 
                   %div{"ng-switch-default" => ""}

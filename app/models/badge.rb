@@ -15,7 +15,7 @@ class Badge < ActiveRecord::Base
         if user.comments.length+1 >= 5*i && i > badge.level
           params = {title: "commentator",
                     level: i,
-                    description: "you have #{user.comments.length} comments under creations at the same time! Congrats!"}
+                    description: "you have #{user.comments.length+1} comments under creations at the same time! Congrats!"}
           if badge.new_record?
             user.badges.create! params.merge(user_id: user.id)
           else

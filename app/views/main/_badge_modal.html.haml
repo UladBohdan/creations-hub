@@ -3,7 +3,7 @@
     %div{:style => "text-align: center;"}
       %h1= t ".new_badge"
       %img{:src => "http://res.cloudinary.com/dhgy4yket/image/upload/v1459351257/badges/{{newBadge.title}}.png", width: "200px"}
-      %h3 {{newBadge.title}}
+      %h3= "{{newBadge.title | translate}}"
       %h4= "#{t(".level")} {{newBadge.level}}"
       %h5{:style => "margin-left: 5px; margin-right: 5px;"} {{newBadge.description}}
       %button.btn.btn-warning{:type => "button", :style => "margin-bottom: 10px;", "ng-click" => "cancel()"}= t ".great_badge"

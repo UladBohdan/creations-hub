@@ -265,6 +265,13 @@ be:
       switch_theme: "Пераключыць тэму"
 
   creation:
+
+    sign_in_to_process: "Увайдзіце каб працягнуць"
+    no_rights_to_process: "У Вас не дастаткова правоў, каб працягнуць"
+    successfully_removed: "Паспяхова выдалены"
+    creation_updated: "Крэатыў быў паспяхова абноўлены!"
+    creation_not_updated: "Крэатыў не быў абноўлены, бо нешта пайшло не так"
+
     show:
       chapters_overview: "Агляд главаў"
       no_chapters: "У гэтага крэатыва пакуль што няма главаў"
@@ -274,7 +281,7 @@ be:
       category: "Катэгорыя:"
       tags: "Тэгі:"
       save: "Захаваць агульную інфармацыю"
-      back: "Вярнуцца да агляда крэатыва"
+      back: "Назад"
       use_markdown: "Выкарыстоўвайце markdown для фарматавання тэкста"
       get_started_markdown: "Вы можаце паглядзець асновы markdown-а"
       update_chapter: "Абнавіць главу!"

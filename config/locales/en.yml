@@ -54,6 +54,13 @@ en:
       switch_theme: "Switch theme"
 
   creation:
+
+    sign_in_to_process: "Sign in to process"
+    no_rights_to_process: "You have no rights to process"
+    successfully_removed: "Successfully removed"
+    creation_updated: "Creation was successfully updated!"
+    creation_not_updated: "Creation wasn't updated as something went wrong"
+
     show:
       chapters_overview: "Chapters overview"
       no_chapters: "This creation has no chapters yet."
