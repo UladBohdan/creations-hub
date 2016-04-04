@@ -23,7 +23,7 @@
                   = chapter.title
                 %br/
           .panel-footer
-            - if creation.category.present?
+            - if creation.category.to_i > 0
               %b= t "enumerations.category.#{Category.key_for(creation.category).to_s}"
             %span.pull-right
               %b= l creation.created_at, format: :long

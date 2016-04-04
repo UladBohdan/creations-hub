@@ -1,7 +1,7 @@
 class ChapterController < ApplicationController
   before_action :set_creation, except: [:read]
   before_action :set_chapters, only: [:index, :update, :reorder]
-  before_action :set_chapter, only: [:read, :destroy, :update]
+  before_action :set_chapter, only: [:destroy, :update]
   before_action :check_user, only: [:create, :update, :reorder, :destroy]
 
   def create
@@ -29,10 +29,8 @@ class ChapterController < ApplicationController
   end
 
   def read
-    puts "CHAPTER #{@chapter.id}"
-    @creation = Creation.includes(:chapters).where(id: @chapter.creation_id).first
-    puts "CREATION #{@creation.id}"
-    puts "SORTED #{sort_by_position(@creation.chapters).map {|t| t.title}}"
+    @chapter = Chapter.includes(creation: :chapters).where(id: params[:id]).first
+    @creation = @chapter.creation
     sorted = sort_by_position(@creation.chapters)
     sorted.each_with_index do |chapter, i|
       if chapter.id == @chapter.id

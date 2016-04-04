@@ -291,7 +291,7 @@ be:
 
     rating_block:
       rating: "Рэйтынг:"
-      yout-rating: "Ваш рэйтынг:"
+      your_rating: "Ваш рэйтынг:"
 
     two_columns_creations:
       empty_creation: "Крэатыў пусты: ніводнай главы не створана. Мяркуем, яны дададуцца пазней."
@@ -339,6 +339,9 @@ be:
     newbie: "Навічок"
     polyglot: "Паліглот"
     night_reader: "Чытаю ўночы"
+
+  stars:
+    no_rating_yet: "не ацэненая"
 
   devise:
     sessions:

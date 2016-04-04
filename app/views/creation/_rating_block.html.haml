@@ -1,9 +1,9 @@
 %h4
   = t ".rating"
-  = render partial: "/stars", locals: {number: @average_rating}
+  = render partial: "/stars", locals: {number: (@average_rating || 0)}
 - if can? :rate, Creation
   %h4
-    = t ".your-rating"
+    = t ".your_rating"
     - @your_rating.times do |i|
       = link_to rate_creation_path(@creation, :new_value => i+1), remote: true do
         %i{:class => "fa fa-star", :style => "color: gold; font-size: x-large;"}

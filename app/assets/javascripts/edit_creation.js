@@ -10,8 +10,6 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
 
     $scope.trashVisible = false;
     $scope.settingsVisible = true;
-    $scope.toRemove = 0;
-    $scope.tempRemove = "";
 
     $scope.strTags = "";
     $scope.strAllTags = "";
@@ -129,6 +127,11 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
         }
     };
 
+    $scope.removeChapterDnd = function(event, index, item, external, type, allowedType) {
+        $scope.toRemove = item.id;
+        $scope.removeChapter();
+    };
+
     $scope.addNewChapter = function() {
         var new_position = 0;
         if (anyChapters()) {
@@ -176,14 +179,10 @@ app.controller('EditCreationCtrl', ['$scope', '$http', function ($scope, $http) 
     }
 
     $scope.showTrash = function(id) {
-        $scope.toRemove = id;
-        $scope.tempRemove = $scope.currentChapterId;
         $scope.trashVisible = true;
     };
 
     $scope.hideTrash = function() {
-        $scope.toRemove = $scope.tempRemove;
         $scope.trashVisible = false;
     };
-
 }]);
