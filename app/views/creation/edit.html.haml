@@ -53,14 +53,14 @@
                 "dnd-moved" => "chapters.splice($index, 1)", "ng-repeat" => "chapter in chapters",
                 "dnd-dragstart" => "showTrash()", "dnd-dragend" => "hideTrash(); updateChapterOrder();"}
               %a{"ng-click" => "chooseChapter(chapter.id)"}
-                %span{:style => "font-size: large; font-weight: bold;"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
                   {{chapter.id}}
                   %br/
                 .chapter-title-small
                   {{chapter.title}}
             %li.dndPlaceholder{:role => "presentation"}
               %a{:href => "#", :style => "background-color: lightgreen;"}
-                %span{:style => "font-size: large; font-weight: bold;"}
+                -#%span{:style => "font-size: large; font-weight: bold;"}
                   PH
                   %br/
                 .chapter-title-small{:style => "font-weight: bold;"}
