@@ -92,16 +92,16 @@ app.controller('NavBarBadgeCtrl', ['$scope', '$http', '$uibModal', function ($sc
 
 }]);
 
-app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, newBadge) {
+app.controller('ModalInstanceCtrl', ['$scope', '$uibModalInstance', 'newBadge', function ($scope, $uibModalInstance, newBadge) {
 
     $scope.newBadge = newBadge;
 
     $scope.cancel = function () {
         $uibModalInstance.close();
     };
-});
+}]);
 
-app.controller("UserCtrl", function ($scope) {
+app.controller("UserCtrl", ['$scope', function ($scope) {
     $scope.mode = "creations";
     $scope.creationsClass = "active";
     $scope.badgesClass = "";
@@ -110,4 +110,4 @@ app.controller("UserCtrl", function ($scope) {
         $scope.creationsClass = ($scope.mode == "creations" ? "active" : "");
         $scope.badgesClass = ($scope.mode == "badges" ? "active" : "");
     }
-});
+}]);

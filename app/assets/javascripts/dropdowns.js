@@ -1,4 +1,4 @@
-app.controller('DropdownCtrl', function ($scope) {
+app.controller('DropdownCtrl', ['$scope', function ($scope) {
     $scope.categoryOpened = false;
     $scope.sortOpened = false;
     $scope.limitOpened = false;
@@ -6,4 +6,4 @@ app.controller('DropdownCtrl', function ($scope) {
     $scope.currentSort = "any";
     $scope.currentCategory = "all";
     $scope.currentLimit = "six";
-});
+}]);

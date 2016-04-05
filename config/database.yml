@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: creations_hub_production
-  username: creations_hub
-  password: <%= ENV['CREATIONS_HUB_DATABASE_PASSWORD'] %>
+  username: uladbohdan
+  password: uladbohdan
