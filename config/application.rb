@@ -34,5 +34,7 @@ module CreationsHub
     ActsAsTaggableOn.remove_unused_tags = true
     ActsAsTaggableOn.force_lowercase = true
 
+    config.autoload_paths << Rails.root.join('lib')
+
   end
 end
