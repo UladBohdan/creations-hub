@@ -9,7 +9,7 @@
           = t ".what_we_found"
         .container
           .row
-            .col-md-2{"ng-repeat" => "item in searchResults"}
+            .col-sm-2{"ng-repeat" => "item in searchResults"}
               .panel.panel-default{:style => "word-wrap: break-word;"}
                 %div{"ng-switch" => "", "on" => "item.type"}
 

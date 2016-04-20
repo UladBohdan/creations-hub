@@ -2,13 +2,14 @@
 %html{"ng-app" => "CreationsHub", "ng-controller" => "LocalDataCtrl"}
   %head
     %title= content_for(:title) || t(".default_application_title")
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
     = stylesheet_link_tag_ng.html_safe
     = stylesheet_link_tag     'application', media: 'all'
     = javascript_include_tag  'application'
     = favicon_link_tag "favicon.png"
     = csrf_meta_tags
 
-  %body{"ng-cloak" => "", "ng-controller" => "NavBarBadgeCtrl", "ng-init" => "currentUserId = #{current_user.id if user_signed_in?};"}
+  %body{"ng-cloak" => "", "ng-controller" => "NavBarBadgeCtrl"}
     %nav{:class => "navbar navbar-default"}
       .container-fluid
         -#  Brand and toggle get grouped for better mobile display

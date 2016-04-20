@@ -2,7 +2,7 @@
 
 .container{"ng-controller" => "UserCtrl", "ng-init" => "checkBadgesPending('polyglot');"}
   .row
-    .col-md-3
+    .col-sm-3
       = image_tag @user.image, width: "100%", class: "profile-image"
       %h2
         = @user.name
@@ -26,7 +26,7 @@
               %i.fa.fa-cogs
               = t ".account_settings"
 
-    .col-md-9
+    .col-sm-9
       %div{"ng-if" => "mode == 'creations'"}
         = render "/creation/two_columns_creations"
       %div{"ng-if" => "mode == 'badges'"}

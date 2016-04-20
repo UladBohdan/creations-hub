@@ -16,7 +16,6 @@ app.config([
 
 app.controller('NavBarBadgeCtrl', ['$scope', '$http', '$uibModal', function ($scope, $http, $uibModal) {
     $scope.isCollapsed = true;
-    $scope.currentUserId = "";
 
     $scope.searchQuery = "";
     $scope.searchResults = [];

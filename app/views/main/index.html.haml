@@ -2,10 +2,10 @@
 
 .container{"ng-init" => "checkBadgesPending('newbie');"}
   .row
-    .col-md-9{:id => "main_creations"}
+    .col-sm-9{:id => "main_creations"}
       = render "/creation/two_columns_creations"
 
-    .col-md-3
+    .col-sm-3
       .panel.panel-default
         .panel-heading
           %h3{:class => "panel-title"}= t ".filters_sort_settings"

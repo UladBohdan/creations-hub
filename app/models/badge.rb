@@ -45,7 +45,6 @@ class Badge < ActiveRecord::Base
     end
 
     def check_newbie_badge(user, badge)
-      puts "BADGE #{badge}"
       if badge.new_record?
         params = {title: "newbie",
                   level: 1,
@@ -57,7 +56,6 @@ class Badge < ActiveRecord::Base
     end
 
     def check_polyglot_badge(user, badge)
-      puts "POLYGLOT"
       if badge.new_record?
         params = {title: "polyglot",
                   level: 1,
@@ -69,7 +67,6 @@ class Badge < ActiveRecord::Base
     end
 
     def check_night_reader_badge(user, badge)
-      puts "NIGHT READER"
       if badge.new_record? && Time.now.hour.between?(0,5)
         params = {title: "night_reader",
                   level: 1,
