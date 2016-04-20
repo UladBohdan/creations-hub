@@ -1,5 +1,0 @@
-== Creations Hub
-
-Web site to handle with "Creations" (Books/Blogs/...): to create new ones, to edit them, to read creations created by others.
-
-Implemented using Rails 4.2 and AngularJS 1.5
