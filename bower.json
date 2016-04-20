@@ -11,5 +11,8 @@
     "angular-bootstrap": "^1.2.5",
     "textAngular": "*",
     "angular-translate": "*"
+  },
+  "resolutions": {
+    "angular": "1.5.3"
   }
 }
