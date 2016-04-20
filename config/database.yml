@@ -21,8 +21,8 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
   host: localhost
-  username: uladbohdan
-  password: uladbohdan
+  username: uladbohdan #ENV['PG_USERNAME']
+  password: uladbohdan #ENV['PG_PASSWORD']
 
 development:
   <<: *default
@@ -84,5 +84,3 @@ test:
 production:
   <<: *default
   database: creations_hub_production
-  username: uladbohdan
-  password: uladbohdan
