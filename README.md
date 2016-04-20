@@ -10,7 +10,7 @@ make sure you have Ruby, Rails, bower, PostgreSQL installed on your computer
 
 clone the repository `git clone https://github.com/UladBohdan/creations-hub.git`
 
-go to the directory with repository cloned 'cd creations-hub'
+go to the directory with repository cloned `cd creations-hub`
 
 install all the gems: `bundle`
 
